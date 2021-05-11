@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-
+import PlayGround from './context/PlayGroundState';
 
 ReactDOM.render(
-
-    <App />
+   <PlayGround>
+     <App />
+   </PlayGround>
     ,
   document.getElementById('root')
 );
