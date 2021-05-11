@@ -10,8 +10,8 @@ function LoginPage() {
    return (
        <div>
            <Logo/>
-           <UserInput type="email" value={email} setValue={setEmail} id="Email"/>
-           <UserInput type="password" value={password} setValue={setPassword} id="Password"/>
+           <UserInput type="email" value={email} setValue={setEmail} id="loginEmail" label="Email"/>
+           <UserInput type="password" value={password} setValue={setPassword} id="loginPassword" label="Password"/>
            <Button className="loginButton" text="Login"/>
            <br/>
            <Button className="signUpButton" text="Sign Up"/>

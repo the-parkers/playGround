@@ -10,10 +10,10 @@ function SignUpPage() {
     return (
         <div>
             <Logo/>
-            <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName"/>
-            <UserInput type="text" value={lastName} setValue={setLastName} id="LastName"/>
-            <UserInput type="email" value={email} setValue={setEmail} id="Email"/>
-            <UserInput type="password" value={password} setValue={setPassword} id="Password"/>
+            <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName" label="FirstName"/>
+            <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName"/>
+            <UserInput type="email" value={email} setValue={setEmail} id="Email" label="Email"/>
+            <UserInput type="password" value={password} setValue={setPassword} id="Password" label="Password"/>
             <Button className="loginButton" text="Login"/>
             <Button className="signUpButton" text="Sign Up"/>
         </div>
