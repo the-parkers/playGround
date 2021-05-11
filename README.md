@@ -36,7 +36,7 @@
 From within the root directory: Npm install
 
 ```sh
-<Npm Insall>
+<Npm Install>
 ```
 
 ### Roadmap
