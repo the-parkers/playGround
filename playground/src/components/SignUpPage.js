@@ -15,9 +15,8 @@ function SignUpPage() {
             <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName"/>
             <UserInput type="email" value={email} setValue={setEmail} id="Email" label="Email"/>
             <UserInput type="password" value={password} setValue={setPassword} id="Password" label="Password"/>
-            <Link to={'/'}>
+
                 <Button className="signUpButton" text="Sign Up"/>
-            </Link>
             <br/>
             <span>Already have an account?</span>
             <Link to={'/'}>
