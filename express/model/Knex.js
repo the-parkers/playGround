@@ -1,8 +1,8 @@
 const db = require('../db/db')
 
 
-async function add(obj) {
-    const data = await db('parks').returning('*').insert(obj)
+async function add(obj,table) {
+    const data = await db(table).returning('*').insert(obj)
     return data
 }
 module.exports = {
