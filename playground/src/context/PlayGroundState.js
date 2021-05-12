@@ -1,13 +1,11 @@
 import { useState} from "react"
 import PlayGroundContext from "./PlayGroundContext"
 
-
 function PlayGround(props) {
     const [firstName,setFirstName] = useState("")
     const [lastName,setLastName] = useState("")
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
-  
 
    const value = {
     firstName,
