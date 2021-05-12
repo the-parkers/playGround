@@ -1,4 +1,4 @@
-import { useState} from "react"
+import { useState, useEffect} from "react"
 import PlayGroundContext from "./PlayGroundContext"
 
 
@@ -7,7 +7,12 @@ function PlayGround(props) {
     const [lastName,setLastName] = useState("")
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
-
+ 
+    // useEffect(() => {
+    //     fetch('http://localhost:5000')
+    //     .then(response => response.json())
+    //     .then(data => console.log(data))
+    // },[])
   
 
    const value = {
