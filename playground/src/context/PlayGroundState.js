@@ -1,7 +1,6 @@
 import { useState, useEffect} from "react"
 import PlayGroundContext from "./PlayGroundContext"
 
-
 function PlayGround(props) {
     const [firstName,setFirstName] = useState("")
     const [lastName,setLastName] = useState("")
@@ -13,7 +12,6 @@ function PlayGround(props) {
     //     .then(response => response.json())
     //     .then(data => console.log(data))
     // },[])
-  
 
    const value = {
     firstName,
