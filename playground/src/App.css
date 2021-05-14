@@ -39,7 +39,16 @@
 
 nav {
   background-color: rgb(14, 201, 85);
-  padding: 20px;
+  padding: 5px;
   display: flex;
   justify-content: space-between;
+}
+
+.park_cards{
+  margin: 20px;
+}
+
+.all_parks{
+  display: flex;
+  flex-wrap: wrap;
 }

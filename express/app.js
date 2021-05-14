@@ -15,6 +15,24 @@ fetch('https://www.nycgovparks.org/bigapps/DPR_Basketball_001.json')
     res.sendStatus(200)
 })
 
+app.get('/parks', (req, res) => {
+  fetch('https://data.cityofnewyork.us/api/geospatial/k2ya-ucmv?method=export&format=GeoJSON')
+      .then(response => response.json())
+      .then(json => {
+           json.features.forEach(data => {
+             
+            const {properties,geometry} = data
+            const park_latitude = geometry.coordinates[0][0][0][1]
+            const park_longitude = geometry.coordinates[0][0][0][0]
+            const {zipcode:park_zipcode,location:park_location,url:park_link,name311: park_name,subcategor:subcategory,borough:park_borough} = properties
+            const parkObj = {park_zipcode,park_location,park_link,park_name,subcategory,park_borough,park_latitude,park_longitude}
+            db.add(parkObj,'parks')
+     })
+      }
+    )
+      res.sendStatus(200)
+    })
+
 app.get('/handball', (req, res) => {  
   fetch('https://www.nycgovparks.org/bigapps/DPR_Handball_001.json')
       .then(response => response.json())
