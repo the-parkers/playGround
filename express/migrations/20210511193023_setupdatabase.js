@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
     let initQuery = `CREATE TABLE users (id SERIAL PRIMARY KEY, first_name TEXT, last_name TEXT, user_image Text, email CHAR(50), encrypted_password CHAR(60));
-    CREATE TABLE parks (id SERIAL PRIMARY KEY, park_name TEXT, park_location TEXT,park_latitude TEXT, park_longitude TEXT,type TEXT);
+    CREATE TABLE parks (id SERIAL PRIMARY KEY, park_name TEXT, park_location TEXT,park_latitude TEXT, park_longitude TEXT,subcategory TEXT, park_zipcode TEXT, park_borough TEXT, park_link TEXT);
     CREATE TABLE basketball_courts (id SERIAL PRIMARY KEY, name TEXT, location TEXT, latitude TEXT, longitude TEXT);
     CREATE TABLE handball_courts (id SERIAL PRIMARY KEY, name TEXT, location TEXT, latitude TEXT, longitude TEXT, court_count TEXT);
     CREATE TABLE indoor_pool (id SERIAL PRIMARY KEY, name TEXT, location TEXT,latitude TEXT, longitude TEXT, pool_type TEXT, pool_size TEXT);
