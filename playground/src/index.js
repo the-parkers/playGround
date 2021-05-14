@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom'
 import PlayGround from './context/PlayGroundState';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 ReactDOM.render(

@@ -2,8 +2,8 @@ function Navbar(){
     return (
       <>
         <nav>
-          <a>Homepage</a>
-          <a>Playground</a>
+          <h3>Homepage</h3>
+          <h3>Playground</h3>
         </nav>
       </>
     )
