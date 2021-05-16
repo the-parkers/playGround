@@ -7396,6 +7396,37 @@
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   "version" "1.0.4"
 
+"mobx-persist@^0.4.1":
+  "integrity" "sha512-cPxVuZTY5neesxOV/Z25SF4+/NbC6wfHOe9HT5XoSEkAALNxNE41yDK48peJQ3iK14m0G2ywQRklCXeV3wftnQ=="
+  "resolved" "https://registry.npmjs.org/mobx-persist/-/mobx-persist-0.4.1.tgz"
+  "version" "0.4.1"
+  dependencies:
+    "serializr" "^1.1.11"
+
+"mobx-react-form@^3.1.0":
+  "integrity" "sha512-qe2OFUtuDJ9s9b9SRrKSFN+oe89jH6ekhSqGB2YP/Mym/kor6pbKKXtMZeS2MBS1rmfoc4V+VpaLXv6JrFWmag=="
+  "resolved" "https://registry.npmjs.org/mobx-react-form/-/mobx-react-form-3.1.0.tgz"
+  "version" "3.1.0"
+  dependencies:
+    "lodash" "^4.17.11"
+
+"mobx-react-lite@^3.2.0":
+  "integrity" "sha512-q5+UHIqYCOpBoFm/PElDuOhbcatvTllgRp3M1s+Hp5j0Z6XNgDbgqxawJ0ZAUEyKM8X1zs70PCuhAIzX1f4Q/g=="
+  "resolved" "https://registry.npmjs.org/mobx-react-lite/-/mobx-react-lite-3.2.0.tgz"
+  "version" "3.2.0"
+
+"mobx-react@^7.1.0":
+  "integrity" "sha512-DxvA6VXmnZ+N9f/UTtolWtdRnAAQY2iHWTSPLktfpj8NKlXUe4dabBAjuXrBcZUM8GjLWnxD1ZEjssXq1M0RAw=="
+  "resolved" "https://registry.npmjs.org/mobx-react/-/mobx-react-7.1.0.tgz"
+  "version" "7.1.0"
+  dependencies:
+    "mobx-react-lite" "^3.2.0"
+
+"mobx@^6.0.0", "mobx@^6.1.0", "mobx@^6.3.0":
+  "integrity" "sha512-Aa1+VXsg4WxqJMTQfWoYuJi5UD10VZhiobSmcs5kcmI3BIT0aVtn7DysvCeDADCzl7dnbX+0BTHUj/v7gLlZpQ=="
+  "resolved" "https://registry.npmjs.org/mobx/-/mobx-6.3.0.tgz"
+  "version" "6.3.0"
+
 "move-concurrently@^1.0.1":
   "integrity" "sha1-viwAX9oy4LKa8fBdfEszIUxwH5I="
   "resolved" "https://registry.npmjs.org/move-concurrently/-/move-concurrently-1.0.1.tgz"
@@ -9348,7 +9379,7 @@
   optionalDependencies:
     "fsevents" "^2.1.3"
 
-"react@^17.0.2":
+"react@^16.8.0 || ^17", "react@^17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -10106,6 +10137,11 @@
   "version" "5.0.1"
   dependencies:
     "randombytes" "^2.1.0"
+
+"serializr@^1.1.11":
+  "integrity" "sha512-ImLlkNfNSSv9d7Ah1j/yrPk1FHbRC1zkD7URcgx/8M1eYHGUxGf/Ig/d8ML04ifqN7QesyYKsfLYA4xjAVAR/g=="
+  "resolved" "https://registry.npmjs.org/serializr/-/serializr-1.5.4.tgz"
+  "version" "1.5.4"
 
 "serve-index@^1.9.1":
   "integrity" "sha1-03aNabHn2C5c4FD/9bRTvqEqkjk="
@@ -11365,6 +11401,11 @@
     "convert-source-map" "^1.6.0"
     "source-map" "^0.7.3"
 
+"valid-url@^1.0.9":
+  "integrity" "sha1-HBRHm0DxOXp1eC8RXkCGRHQzogA="
+  "resolved" "https://registry.npmjs.org/valid-url/-/valid-url-1.0.9.tgz"
+  "version" "1.0.9"
+
 "validate-npm-package-license@^3.0.1":
   "integrity" "sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew=="
   "resolved" "https://registry.npmjs.org/validate-npm-package-license/-/validate-npm-package-license-3.0.4.tgz"
@@ -11372,6 +11413,11 @@
   dependencies:
     "spdx-correct" "^3.0.0"
     "spdx-expression-parse" "^3.0.0"
+
+"validatorjs@^3.22.1":
+  "integrity" "sha512-451KiCt/3E8qV/8fOUdO0YkA8zUdQBNVxubg9jvgEB+JAg9IlRKrClzwq2ir2ndj7TWmPYQ7bXFb4BxcyX2iWw=="
+  "resolved" "https://registry.npmjs.org/validatorjs/-/validatorjs-3.22.1.tgz"
+  "version" "3.22.1"
 
 "value-equal@^1.0.1":
   "integrity" "sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw=="
