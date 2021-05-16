@@ -3,7 +3,13 @@ const app = express()
 const fetch = require('node-fetch');
 app.use(express.json())
 const port = 5000
-const db = require('./model/Knex')
+const db = require('./model/Knex');
+
+app.get('/users', (req, res) => {  
+  console.log(req)
+  db.add({email,encrypted_password},'users')
+  res.sendStatus(200)
+})
 
 app.get('/basketball', (req, res) => {  
 fetch('https://www.nycgovparks.org/bigapps/DPR_Basketball_001.json')
