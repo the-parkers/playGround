@@ -4,6 +4,7 @@ import SignUpPage from './components/SignUpPage';
 
 import HomePage from './components/HomePage'
 import Navbar from './components/Navbar'
+import SpecificPark from './components/SpecificPark'
 
 import { Switch, Route } from 'react-router-dom'
 import UserPage from './components/UserPage';
@@ -16,7 +17,8 @@ function App() {
         <Route path='/signUp' component={SignUpPage}/>
         <div>
           <Route component={Navbar}/>
-          <Route path='/home' component={HomePage}/>
+          <Route path='/parks/:parkName' component={SpecificPark}/>
+          <Route exact path='/parks' component={HomePage}/>
           <Route path='/user' component={UserPage}/>
         </div>
       </Switch>

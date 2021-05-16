@@ -4,7 +4,7 @@ function Navbar(){
     return (
       <>
         <nav id={"navbar"}>
-          <Link to={"/home"}>
+          <Link to={"/parks"}>
           <h3>Home</h3>
           </Link>
           <Link to={"/user"}>
