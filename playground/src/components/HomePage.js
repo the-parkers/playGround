@@ -3,9 +3,13 @@ import Parkcard from './ParkCard'
 import PlayGroundContext from '../context/PlayGroundContext'
 
 function HomePage(){
-  let {filteredParks, parkSearch, setParkSearch} = useContext(PlayGroundContext)
-  filteredParks.length = 50
-  navigator.geolocation.getCurrentPosition(console.log, console.log)
+  let {filteredParks, parkSearch, setParkSearch,setPosition} = useContext(PlayGroundContext)
+  filteredParks.length = 100
+  navigator.geolocation.getCurrentPosition((position) => {
+    if(position.coords.latitude && position.coords.longitude){
+      setPosition((prev) => ({...prev,lat:position.coords.latitude,lon:position.coords.longitude}))
+    }
+  })
   return (
     <>
     <h1>Local Playgrounds</h1>

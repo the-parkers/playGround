@@ -15,12 +15,12 @@ function App() {
       <Switch>
         <Route exact path='/' component={LoginPage}/>
         <Route path='/signUp' component={SignUpPage}/>
-        <div>
+        <>
           <Route component={Navbar}/>
           <Route path='/parks/:parkName' component={SpecificPark}/>
           <Route exact path='/parks' component={HomePage}/>
           <Route path='/user' component={UserPage}/>
-        </div>
+        </>
       </Switch>
     </div>
   );
