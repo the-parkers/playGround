@@ -7,7 +7,7 @@ function PlayGround(props) {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [playgrounds, setPlaygrounds] = useState([])
- 
+    const [parkSearch, setParkSearch] = useState("")
     // useEffect(() => {
     //     fetch('http://localhost:5000')
     //     .then(response => response.json())
@@ -15,10 +15,13 @@ function PlayGround(props) {
     // },[])
 
     useEffect(() => {
-      fetch('https://data.cityofnewyork.us/resource/enfh-gkve')
+      fetch('https://data.cityofnewyork.us/api/geospatial/k2ya-ucmv?method=export&format=GeoJSON')
         .then(res => res.json())
-        .then(data => setPlaygrounds(data))
+        .then(data => setPlaygrounds(data.features))
     }, [])
+
+    let filteredParks = []
+    filteredParks = playgrounds.filter(park => park.properties.address !== null && park.properties.name311 !== null && park.properties.name311.toLowerCase().includes(parkSearch.toLowerCase()))
 
    const value = {
     firstName,
@@ -29,7 +32,10 @@ function PlayGround(props) {
     setEmail,
     password,
     setPassword,
-    playgrounds
+    playgrounds, 
+    parkSearch,
+    setParkSearch,
+    filteredParks
    }
     return(
         <PlayGroundContext.Provider value={value}>

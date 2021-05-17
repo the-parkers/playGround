@@ -1,9 +1,15 @@
+import {Link} from 'react-router-dom'
+
 function Navbar(){
     return (
       <>
-        <nav>
-          <h3>Homepage</h3>
-          <h3>Playground</h3>
+        <nav id={"navbar"}>
+          <Link to={"/parks"}>
+          <h3>Home</h3>
+          </Link>
+          <Link to={"/user"}>
+          <img src={"https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png"} alt={"Oh no"} style={{height:"35px"}}></img>
+          </Link>
         </nav>
       </>
     )
