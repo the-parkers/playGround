@@ -150,20 +150,8 @@ app.get('/handball', (req, res) => {
                      const {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = data
                     db.add({title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image},'park_events')
                   }));
+                  res.sendStatus(200)
               })
-
-
-// app.post('/home', (req,res) => {
-//   const {Name: park_name,Location: park_location,lat: park_latitude,lon:park_longitude} = req.body
-//   db.add({park_name,park_location, park_latitude,park_longitude})
-//   .then(response => {
-//     res.status(200).json(response)
-//   })
-//   .catch(err => {
-//     console.log(err)
-//     res.status(500).json({message: err})
-//   })
-// })
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
