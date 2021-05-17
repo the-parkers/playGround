@@ -6,7 +6,8 @@ async function add(obj,table) {
     return data
 }
 async function query(tableName,option) {
-    const data = await db.select(option).from(tableName)
+
+    const data = await db(tableName).where('email', option)
     return data
 }
 module.exports = {

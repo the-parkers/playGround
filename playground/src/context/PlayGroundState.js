@@ -7,6 +7,7 @@ function PlayGround(props) {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [playgrounds, setPlaygrounds] = useState([])
+    
  
     // useEffect(() => {
     //     fetch('http://localhost:5000')
@@ -29,7 +30,8 @@ function PlayGround(props) {
     setEmail,
     password,
     setPassword,
-    playgrounds
+    playgrounds,
+   
    }
     return(
         <PlayGroundContext.Provider value={value}>

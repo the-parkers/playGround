@@ -4,34 +4,43 @@ import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext} from 'react'
 import Button from "./Button"
 import {Link} from 'react-router-dom'
-
+import {form} from 'react-bootstrap/Form'
 function LoginPage() {
     const context = useContext(PlayGroundContext)
     const {email,password,setEmail,setPassword} = context
     function handleSubmit(e) {
         e.preventDefault()
         const formData = {
-            email,
-            password
+           email,
+           password
         }
         const option = {
+            mode:'cors',
+            method: 'POST',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Content-Type': 'application/json'
               },
-            method : 'POST',
-            body : JSON.stringify(formData)
+            body: JSON.stringify(formData)
         }
         fetch("http://localhost:5000/login", option)
+        .then(response => response.json())
+        .then(data => {
+            if(data){
+              console.log('valid credentials')
+            }else {
+                console.log('invalid credentials')
+            }
+        })
     }
     return (
        <div>
             <Logo/>
             <form onSubmit={handleSubmit}>
-                <UserInput type="email" value={email} setValue={setEmail} id="loginEmail" label="Email"/>
-                <UserInput type="password" value={password} setValue={setPassword} id="loginPassword" label="Password"/>
+             
+                <UserInput type="email" value={email} setValue={setEmail} id="loginEmail" label="Email" />
+                <UserInput type="password" value={password} setValue={setPassword} id="loginPassword" label="Password" />
                 <Button className="loginButton" text="Login"/>
+            
             </form>
             <br/>
             <span>Don't have an account?</span>
