@@ -5,6 +5,10 @@ app.use(express.json())
 const port = 5000
 const db = require('./model/Knex')
 
+app.post('/login', (req,res) => {
+  console.log(req.body)
+})
+
 app.get('/basketball', (req, res) => {  
 fetch('https://www.nycgovparks.org/bigapps/DPR_Basketball_001.json')
     .then(response => response.json())
