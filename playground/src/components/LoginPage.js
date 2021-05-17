@@ -4,8 +4,10 @@ import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext} from 'react'
 import Button from "./Button"
 import {Link} from 'react-router-dom'
+import { useHistory } from "react-router-dom"
 import {form} from 'react-bootstrap/Form'
 function LoginPage() {
+    let history = useHistory();
     const context = useContext(PlayGroundContext)
     const {email,password,setEmail,setPassword} = context
     function handleSubmit(e) {
@@ -25,8 +27,9 @@ function LoginPage() {
         fetch("http://localhost:5000/login", option)
         .then(response => response.json())
         .then(data => {
-            if(data){
-              console.log('valid credentials')
+            if(data.Auth){
+                localStorage.setItem("token", data.Token)
+                history.push("/parks")
             }else {
                 console.log('invalid credentials')
             }
