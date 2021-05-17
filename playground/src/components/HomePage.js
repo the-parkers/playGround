@@ -4,7 +4,7 @@ import PlayGroundContext from '../context/PlayGroundContext'
 
 function HomePage(){
   let {filteredParks, parkSearch, setParkSearch} = useContext(PlayGroundContext)
-  filteredParks.length = 12
+  filteredParks.length = 50
   navigator.geolocation.getCurrentPosition(console.log, console.log)
   return (
     <>
