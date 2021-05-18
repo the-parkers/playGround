@@ -1,5 +1,6 @@
 const db = require('../model/Knex')
 const bcrypt = require('bcrypt');
+const fetch = require('node-fetch');
 const saltRounds = 10;
 
 const login =  (req,res) => {
