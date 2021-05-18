@@ -3,7 +3,7 @@ const router = express.Router();
 
 const user = require('../controller/user')
 
-
+router.get('/parksData',user.parksData)
 router.post('/login',user.login)
 router.post('/signUp',user.signUp)
 router.get('/basketball',user.basketball)

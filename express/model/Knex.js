@@ -6,11 +6,16 @@ async function add(obj,table) {
     return data
 }
 async function query(tableName,option) {
-
     const data = await db(tableName).where('email', option)
     return data
 }
+async function select(tableName) {
+    const data = await db.select().table(tableName)
+    return data
+}
+
 module.exports = {
     add,
-    query
+    query,
+    select
 }

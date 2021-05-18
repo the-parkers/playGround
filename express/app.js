@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const fetch = require('node-fetch');
 const cors = require("cors");
 const request = require('./routes/request')
 

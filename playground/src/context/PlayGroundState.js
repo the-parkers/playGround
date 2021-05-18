@@ -8,6 +8,7 @@ function PlayGround(props) {
     const [password,setPassword] = useState("")
     const [playgrounds, setPlaygrounds] = useState([])
     const [parkSearch, setParkSearch] = useState("")
+    const [top100Parks,setTop100Parks] = useState([])
     const [position,setPosition] = useState({})
     // useEffect(() => {
     //     fetch('http://localhost:5000')
@@ -28,7 +29,6 @@ function PlayGround(props) {
     }, [])
 
     function distance(lat1, lon1, lat2, lon2) {
-      console.log(lat1, lon1, lat2, lon2)
       var p = 0.017453292519943295;    // Math.PI / 180
       var c = Math.cos;
       var a = 0.5 - c((lat2 - lat1) * p)/2 + 
@@ -38,22 +38,20 @@ function PlayGround(props) {
       return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
     }
 
+    if(position.lat && position.lon && playgrounds.length > 1 && top100Parks.length === 0) {
+      playgrounds.forEach(parks => {
+        if(parks){
+          const length = distance(position.lat,position.lon,Number(parks.park_latitude),Number(parks.park_longitude))
+          parks.distance = length
+        }
+      })
+      playgrounds.sort((a,b) => a.distance-b.distance)
+      setTop100Parks(playgrounds)
+      // setPlaygrounds(playgrounds)
+    }
 
-    //  const top100Parks = []
-    // console.log(position)
-    // if(position.lat && position.lon && playgrounds.length) {
-    //   console.log(distance(position.lat,position.lon,Number(playgrounds[0].park_latitude),Number(playgrounds[0].park_longitude)))
-    //   playgrounds.forEach(parks => {
-    //     if(parks){
-    //       top100Parks.push
-    //     }
-    //   } )
-    // }
-
-
-    let filteredParks = playgrounds
-    filteredParks = playgrounds.filter(park => park.park_location !== null && park.park_name !== null && park.park_name.toLowerCase().includes(parkSearch.toLowerCase()))
-
+   const filteredParks = top100Parks.filter(park => park.park_location !== null && park.park_name !== null && park.park_name.toLowerCase().includes(parkSearch.toLowerCase()))
+// console.log(filteredParks)
    const value = {
     firstName,
     setFirstName,
@@ -68,7 +66,8 @@ function PlayGround(props) {
     setParkSearch,
     filteredParks,
     position,
-    setPosition
+    setPosition,
+    top100Parks
    }
     return(
         <PlayGroundContext.Provider value={value}>

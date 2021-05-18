@@ -4,10 +4,10 @@ import PlayGroundContext from '../context/PlayGroundContext'
 
 
 function SpecificPark(){
-    let { parkName } = useParams()
+    let { parkId } = useParams()
     let { playgrounds } = useContext(PlayGroundContext)
 
-    const currentPark = playgrounds.find(park => park.park_name === parkName)
+    const currentPark = playgrounds.find(park => park.id === Number(parkId))
     const latitude = currentPark.park_latitude
     const longitude = currentPark.park_longitude
     const myStyle={width:"600px", height:"450px", style:"border:0", allowfullscreen:"", loading:"lazy"}
