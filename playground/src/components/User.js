@@ -6,13 +6,15 @@ function User({src,text}) {
         <div className="profileInfo">
             <div className="image-upload">
             <label htmlFor="file-input" className="fluid">
-               <Image src={src} size='medium' alt={"oh no"} circular id='profileImage' className="left floated"/>
+               <Image src={src} size='small' alt={"oh no"} circular id='profileImage' className="left floated"/>
             </label>
 
             <input id="file-input" type="file" />
             </div>
             <div>
-                <h3>{text}</h3> 
+                <div className="userProfileName">
+                    <h4>{text}</h4> 
+                </div>
                 <Button className="editProfile" text="Edit Profile"/>
             </div>
             
