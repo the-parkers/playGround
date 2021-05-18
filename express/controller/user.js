@@ -176,9 +176,6 @@ const parksData = (req,res) => {
     db.select('parks',req.body.email)
     .then(response => res.status(200).json(response))
 }
-const imageUpload = (req,res) => {
-  console.log(req.files)
-}
 const fixthem = async (req,res) => {
   await fetch('https://www.nycgovparks.org/bigapps/DPR_Basketball_001.json')
   .then(response => response.json())
@@ -200,7 +197,7 @@ const fixthem = async (req,res) => {
               obj.forEach(item => {
                 item.park_name = data.park_name
                 delete item.id
-                // db.add(item,'basketball_courts_name')
+                db.add(item,'basketball_courts_name')
               })
             }
       })
@@ -223,7 +220,7 @@ const fixthem = async (req,res) => {
             obj.forEach(items => {
               items.park_name = result.park_name
               delete items.id
-              // db.add(items,'dog_areas_name')
+              db.add(items,'dog_areas_name')
             })
           }
         }
@@ -247,7 +244,7 @@ const fixthem = async (req,res) => {
             obj.forEach(items => {
               items.park_name = result.park_name
               delete items.id
-              // db.add(items,'bbqing_areas_name')
+              db.add(items,'bbqing_areas_name')
             })
           }
         }
@@ -272,7 +269,7 @@ const fixthem = async (req,res) => {
             obj.forEach(items => {
               items.park_name = result.park_name
               delete items.id
-              // db.add(items,'handball_courts_name')
+              db.add(items,'handball_courts_name')
             })
           }
         }
@@ -300,7 +297,7 @@ const fixthem = async (req,res) => {
               obj.forEach(item => {
                 item.park_name = data.park_name
                 delete item.id
-                // db.add(item,'indoor_pool_name')
+                db.add(item,'indoor_pool_name')
               })
             }
       })
@@ -326,7 +323,7 @@ const fixthem = async (req,res) => {
               obj.forEach(item => {
                 item.park_name = data.park_name
                 delete item.id
-                // db.add(item,'outdoor_pool_name')
+                db.add(item,'outdoor_pool_name')
               })
             }
       })
@@ -374,6 +371,5 @@ const fixthem = async (req,res) => {
      park_events,
      fillDb,
      parksData,
-     imageUpload,
      fixthem
 }
