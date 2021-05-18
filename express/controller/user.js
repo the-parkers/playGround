@@ -176,6 +176,190 @@ const parksData = (req,res) => {
     db.select('parks',req.body.email)
     .then(response => res.status(200).json(response))
 }
+const imageUpload = (req,res) => {
+  console.log(req.files)
+}
+const fixthem = async (req,res) => {
+  await fetch('https://www.nycgovparks.org/bigapps/DPR_Basketball_001.json')
+  .then(response => response.json())
+  .then(json => {
+    json = json.map(result => {
+      const {Name: name,Location: location,lat: latitude,lon: longitude} = result
+      result = {name, location,latitude, longitude}
+      result.latitude=Number(result.latitude).toFixed(3)
+      result.longitude=Number(result.longitude).toFixed(3)
+     return result
+    })
+    db.select('parks')
+    .then(response => {
+      response.forEach(data => {     
+          data.park_latitude = Number(data.park_latitude).toFixed(3)
+          data.park_longitude = Number(data.park_longitude).toFixed(3)
+            const obj = json.filter(item => item.latitude == data.park_latitude && item.longitude == data.park_longitude)
+            if(obj.length) {
+              obj.forEach(item => {
+                item.park_name = data.park_name
+                delete item.id
+                // db.add(item,'basketball_courts_name')
+              })
+            }
+      })
+    })
+  })
+  await fetch('https://www.nycgovparks.org/bigapps/DPR_DogRuns_001.json')
+  .then(response => response.json())
+  .then(json => {
+    json = json.map(result => {
+      const {Name: name,Address: address,DogRuns_Type: dogruns_type} = result
+      result = {name,address,dogruns_type}
+      return result
+    })
+    db.select('parks')
+    .then(response => {
+      response.forEach(result => {
+        if(result.park_name !== 'Park') {
+          const obj = json.filter(item => item.name.includes(result.park_name))
+          if(obj.length) {
+            obj.forEach(items => {
+              items.park_name = result.park_name
+              delete items.id
+              // db.add(items,'dog_areas_name')
+            })
+          }
+        }
+      })
+    })
+  })
+ await fetch('https://www.nycgovparks.org/bigapps/DPR_Barbecue_001.json')
+  .then(response => response.json())
+  .then(json => {
+    json = json.map(result => {
+      const {Name: name,Location: location} = result
+      result = {name,location}
+      return result
+    })
+    db.select('parks')
+    .then(response => {
+      response.forEach(result => {
+        if(result.park_name !== 'Park') {
+          const obj = json.filter(item => item.name.includes(result.park_name))
+          if(obj.length) {
+            obj.forEach(items => {
+              items.park_name = result.park_name
+              delete items.id
+              // db.add(items,'bbqing_areas_name')
+            })
+          }
+        }
+      })
+
+    })
+  })
+  await fetch('https://www.nycgovparks.org/bigapps/DPR_Handball_001.json')
+  .then(response => response.json())
+  .then(json => {
+    json = json.map(result => {
+      const {Name: name,Location: location,lat: latitude,lon: longitude, Num_of_Courts: court_count} = result
+      result = {name,location,latitude,longitude,court_count}
+      return result
+    })
+    db.select('parks')
+    .then(response => {
+      response.forEach(result => {
+        if(result.park_name !== 'Park') {
+          const obj = json.filter(item => item.name.includes(result.park_name))
+          if(obj.length) {
+            obj.forEach(items => {
+              items.park_name = result.park_name
+              delete items.id
+              // db.add(items,'handball_courts_name')
+            })
+          }
+        }
+      })
+
+    })
+  })
+  await fetch('https://www.nycgovparks.org/bigapps/DPR_Pools_indoor_001.json')
+  .then(response => response.json())
+  .then(json => {
+    json = json.map(result => {
+      const {Name: name,Location: location,lat: latitude,lon: longitude, Pools_indoor_Type: pool_type, Size: pool_size} = result
+      result = {name,location,latitude,longitude,pool_type, pool_size}
+      result.latitude=Number(result.latitude).toFixed(3)
+      result.longitude=Number(result.longitude).toFixed(3)
+     return result
+    })
+    db.select('parks')
+    .then(response => {
+      response.forEach(data => {     
+          data.park_latitude = Number(data.park_latitude).toFixed(3)
+          data.park_longitude = Number(data.park_longitude).toFixed(3)
+            const obj = json.filter(item => item.latitude == data.park_latitude && item.longitude == data.park_longitude)
+            if(obj.length) {
+              obj.forEach(item => {
+                item.park_name = data.park_name
+                delete item.id
+                // db.add(item,'indoor_pool_name')
+              })
+            }
+      })
+    })
+  })
+  await fetch('https://www.nycgovparks.org/bigapps/DPR_Pools_outdoor_001.json')
+  .then(response => response.json())
+  .then(json => {
+    json = json.map(result => {
+      const {Name: name,Location: location,lat: latitude,lon: longitude, Pools_outdoor_Type: pool_type, Size: pool_size} = result
+      result = {name,location,latitude,longitude,pool_type, pool_size}
+      result.latitude=Number(result.latitude).toFixed(3)
+      result.longitude=Number(result.longitude).toFixed(3)
+     return result
+    })
+    db.select('parks')
+    .then(response => {
+      response.forEach(data => {     
+          data.park_latitude = Number(data.park_latitude).toFixed(3)
+          data.park_longitude = Number(data.park_longitude).toFixed(3)
+            const obj = json.filter(item => item.latitude == data.park_latitude && item.longitude == data.park_longitude)
+            if(obj.length) {
+              obj.forEach(item => {
+                item.park_name = data.park_name
+                delete item.id
+                // db.add(item,'outdoor_pool_name')
+              })
+            }
+      })
+    })
+  })
+  await fetch('https://www.nycgovparks.org/bigapps/DPR_RunningTracks_001.json')
+  .then(response => response.json())
+  .then(json => {
+    json = json.map(result => {
+      const {Name: name,Location: location,lat: latitude,lon: longitude, Size: size, RunningTracks_Type: track_type} = result
+      result = {name,location,latitude,longitude,size,track_type}
+      return result
+    })
+    db.select('parks')
+    .then(response => {
+      response.forEach(result => {
+        if(result.park_name !== 'Park') {
+          const obj = json.filter(item => item.name.includes(result.park_name))
+          if(obj.length) {
+            obj.forEach(items => {
+              items.park_name = result.park_name
+              delete items.id
+              db.add(items,'running_track_name')
+            })
+          }
+        }
+      })
+
+    })
+  })
+  res.sendStatus(200)
+}
+
   module.exports = {
      login,
      signUp,
@@ -189,5 +373,7 @@ const parksData = (req,res) => {
      dog_areas,
      park_events,
      fillDb,
-     parksData
+     parksData,
+     imageUpload,
+     fixthem
 }
