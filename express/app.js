@@ -7,6 +7,8 @@ const request = require('./routes/request')
 app.use(fileUpload({
   createParentPath: true
 }));
+
+
 app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })); 
