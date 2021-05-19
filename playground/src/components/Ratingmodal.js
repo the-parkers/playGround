@@ -11,11 +11,11 @@ function Ratingmodal(props){
         e.preventDefault()
         setModalShow(!modalShow)
         const formData = {
-            cleanRate,
-            locoRate,
-            amenRate
+            cleanRate: Number(cleanRate),
+            locoRate: Number(locoRate),
+            amenRate: Number(amenRate)
         }
-        // const option = {
+        // const options = {
         //     mode:'cors',
         //     method: 'POST',
         //     headers: {
@@ -30,7 +30,7 @@ function Ratingmodal(props){
         <div>
         <Button onClick={() => setModalShow(!modalShow)}>Give a Rating!</Button>
         <Modal show={modalShow} onHide={()=>{setModalShow(!modalShow)}}>
-            <Modal.Header closeButton>{props.currentPark.park_name}</Modal.Header>
+            <Modal.Header closeButton>New Event at {props.currentPark.park_name}</Modal.Header>
             <form onSubmit={ratingSubmit}>
             <Modal.Body>
                 <h4 for={"cleanliness"}>Cleanliness</h4>
