@@ -38,7 +38,7 @@ function SpecificPark(){
     overAllClean = Math.floor((cleanRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
     overAllLoca = Math.floor((locaRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
     overAllAmen = Math.floor((amenRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)        
-
+    }
     return (
         <div>
             <h1>{currentPark.park_name}</h1>
@@ -50,9 +50,6 @@ function SpecificPark(){
                 <h3>Amenities: {overAllAmen}</h3>
         </div>
     )
-    }else {
-        return null
-    }
 }
 
 export default SpecificPark
