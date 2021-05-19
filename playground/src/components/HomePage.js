@@ -39,7 +39,7 @@ function HomePage(){
     }else {
       history.push('/')
     }
-  },[])
+  },)
 
   return (
     <>
