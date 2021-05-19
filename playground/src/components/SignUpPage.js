@@ -3,9 +3,10 @@ import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext} from 'react'
 import Button from "./Button"
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
 
 function SignUpPage() {
+    let history = useHistory();
      const context = useContext(PlayGroundContext)
      const {email,firstName,lastName,password,setEmail,setFirstName,setLastName,setPassword} = context
      function handleSubmit(e) {
@@ -16,7 +17,6 @@ function SignUpPage() {
            firstName,
            lastName
         }
-        console.log(formData)
         const option = {
            mode:'cors',
            method: 'POST',
@@ -26,6 +26,15 @@ function SignUpPage() {
              body: JSON.stringify(formData)
        }
       fetch("http://localhost:5000/signUp", option)
+      .then(response => response.json())
+      .then(data => {
+          if(data.Message) {
+              alert(data.Message)
+          }else{
+            localStorage.setItem("user",  JSON.stringify({Token:data.Token,User:data.User}))
+            history.push('/parks')
+          }
+      })
     }
     return (
         <div>

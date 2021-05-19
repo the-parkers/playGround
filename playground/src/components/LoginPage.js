@@ -3,9 +3,9 @@ import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext} from 'react'
 import Button from "./Button"
-import {Link} from 'react-router-dom'
-import { useHistory } from "react-router-dom"
-import {form} from 'react-bootstrap/Form'
+import {Link,useHistory} from 'react-router-dom'
+
+// import {form} from 'react-bootstrap/Form'
 function LoginPage() {
     let history = useHistory();
     const context = useContext(PlayGroundContext)
@@ -28,7 +28,7 @@ function LoginPage() {
         .then(response => response.json())
         .then(data => {
             if(data.Auth){
-                localStorage.setItem("token", data.Token)
+                localStorage.setItem("user", JSON.stringify({Token:data.Token,User:data.User}))
                 history.push('/parks')
             }else {
                 console.log('invalid credentials')

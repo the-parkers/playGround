@@ -1,9 +1,11 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import Parkcard from './ParkCard'
 import PlayGroundContext from '../context/PlayGroundContext'
+import { useHistory } from 'react-router'
 
 
 function HomePage(){
+  let history = useHistory()
   let {filteredParks, parkSearch,position, setParkSearch,setPosition} = useContext(PlayGroundContext)
   filteredParks.length = 30
   console.log(filteredParks)
@@ -19,6 +21,27 @@ function HomePage(){
     }
       
   })
+  useEffect(()=> {
+    const user = localStorage.getItem('user')
+    console.log('local',user)
+    if(user) {
+    const options = {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: user
+    }
+    fetch('http://localhost:5000/verifySession',options)
+    .then(response => response.json())
+    .then(data => {
+      if(!data.Auth) {
+        history.push('/')
+      }
+    })
+    }else {
+      history.push('/')
+    }
+  },)
+
   return (
     <>
     <h1>Local Playgrounds</h1>
