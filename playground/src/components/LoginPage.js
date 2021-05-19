@@ -1,7 +1,7 @@
 import Logo from "./Logo"
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
-import {useContext} from 'react'
+import {useContext,useEffect} from 'react'
 import Button from "./Button"
 import {Link,useHistory} from 'react-router-dom'
 
@@ -35,6 +35,27 @@ function LoginPage() {
             }
         })
     }
+    useEffect(()=> {
+        const user = localStorage.getItem('user')
+        if(user) {
+        const options = {
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: user
+        }
+        fetch('http://localhost:5000/verifySession',options)
+        .then(response => response.json())
+        .then(data => {
+          if(!data.Auth) {
+            history.push('/')
+          }else {
+              history.push('/parks')
+          }
+        })
+        }else {
+          history.push('/')
+        }
+      },[history])
     return (
        <div>
             <Logo/>

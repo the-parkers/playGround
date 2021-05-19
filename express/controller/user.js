@@ -373,8 +373,13 @@ const verifySession = (req,res) => {
     if(decoded) {
       db.query('users','id',decoded.id)
       .then(response => {
-        if(response[0].email === User) {
-          res.status(200).json({Auth: true})
+        if(response.length) {
+          if(response[0].email === User) {
+            delete response[0].encrypted_password
+            res.status(200).json({Auth: true,User: response[0]})
+          }
+        }else {
+          res.status(200).json({Auth: false})
         }
       })
     }else {
