@@ -21,7 +21,7 @@ function App() {
           <Route component={Navbar}/>
           <Route exact path='/parks/:parkId' component={SpecificPark}/>
           <Route exact path='/parks' component={HomePage}/>
-          <Route path='/user' component={UserPage}/>
+          <Route path='/users/:id' component={UserPage}/>
           <Route path={["/favorites"]} component={Favorites} />
           <Route path="/events" component={Events} />
         </>

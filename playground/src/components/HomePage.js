@@ -40,7 +40,7 @@ function HomePage(){
     }else {
       history.push('/')
     }
-  },)
+  },[history])
 
   return (
     <>

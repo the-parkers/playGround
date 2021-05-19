@@ -6,6 +6,7 @@ import CommunityEventModal from './CommunityEventModal'
 function SpecificPark(){
     let { parkId } = useParams()
     let { playgrounds } = useContext(PlayGroundContext)
+   if(playgrounds.length) {
     const [rating, setRating] = useState([])
     const currentPark = playgrounds.find(park => park.id === Number(parkId))
     const latitude = currentPark.park_latitude
@@ -51,6 +52,9 @@ function SpecificPark(){
                 <h3>Amenities: {overAllAmen}</h3>
         </div>
     )
+    }else {
+        return null
+    }
 }
 
 export default SpecificPark
