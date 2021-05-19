@@ -5,7 +5,6 @@ import SignUpPage from './components/SignUpPage';
 import HomePage from './components/HomePage'
 import Navbar from './components/Navbar'
 import SpecificPark from './components/SpecificPark'
-
 import { Switch, Route } from 'react-router-dom'
 import UserPage from './components/UserPage';
 
