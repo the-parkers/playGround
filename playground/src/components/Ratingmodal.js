@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {Button, Modal} from 'react-bootstrap'
 
 function Ratingmodal(props){
@@ -10,22 +10,30 @@ function Ratingmodal(props){
     function ratingSubmit(e){
         e.preventDefault()
         setModalShow(!modalShow)
+        const token = JSON.parse(localStorage.getItem("user"))
         const formData = {
-            cleanRate: Number(cleanRate),
-            locoRate: Number(locoRate),
-            amenRate: Number(amenRate)
+            user_id: token.Token,
+            park_id: props.currentPark.id,
+            cleanliness_rating: Number(cleanRate),
+            amenities_rating: Number(amenRate),
+            location_rating: Number(locoRate)
         }
-        // const options = {
-        //     mode:'cors',
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //         },
-        // body: JSON.stringify(formData)
-        // }
-        // fetch()
+        const options = {
+            mode:'cors',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+        body: JSON.stringify(formData)
+        }
+        fetch("http://localhost:5000/ratingSubmit", options)
+        .then(res => res.json())
+        .then(data => console.log(data))
         console.log(formData)
     }
+    useEffect(() => {
+
+    }, [])
     return (
         <div>
         <Button onClick={() => setModalShow(!modalShow)}>Give a Rating!</Button>
