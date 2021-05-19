@@ -1,7 +1,19 @@
 import Button from "./Button"
 import { Image } from 'semantic-ui-react'
 
+
 function User({src,text}) {
+   const handleFileUpload = (e) => {
+        let {files} = e.target
+        files = files[0]
+        const formData = new FormData();
+        formData.append('imageUpload', files)
+        const options = {
+            method: 'POST',
+            body: formData
+        }
+        fetch('http://localhost:5000/imageUpload', options)
+      }
     return (
         <div className="profileInfo">
             <div className="image-upload">
@@ -9,7 +21,7 @@ function User({src,text}) {
                <Image src={src} size='small' alt={"oh no"} circular id='profileImage' className="left floated"/>
             </label>
 
-            <input id="file-input" type="file" />
+            <input id="file-input" type="file" name="profileImage" onChange={handleFileUpload} accept="image/*"/>
             </div>
             <div>
                 <div className="userProfileName">

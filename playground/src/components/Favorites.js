@@ -15,7 +15,7 @@ const style = {
     fontWeight: 900,
 };
 function Favorites(props){
-    console.log(props)
+    // console.log(props)
     const switchTab = () => {
         console.log('click')
     }

@@ -5,8 +5,8 @@ async function add(obj,table) {
     const data = await db(table).returning('*').insert(obj)
     return data
 }
-async function query(tableName,option) {
-    const data = await db(tableName).where('email', option)
+async function query(tableName,condition,option) {
+    const data = await db(tableName).where(condition, option)
     return data
 }
 async function select(tableName) {
