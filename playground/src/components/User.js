@@ -59,13 +59,15 @@ function User({src,text}) {
         <div className="profileInfo">
             <div className="image-upload">
             <label htmlFor="file-input" className="fluid">
-               <Image src={userProfile.user_image} size='medium' alt={"oh no"} circular id='profileImage' className="left floated"/>
+               <Image src={userProfile.user_image} size='small' alt={"oh no"} circular id='profileImage' className="left floated"/>
             </label>
 
             <input id="file-input" type="file" name="profileImage" onChange={handleFileUpload} accept="image/*"/>
             </div>
             <div>
-                <h3>{`${userProfile.first_name} ${userProfile.last_name}`}</h3> 
+                <div className="userProfileName">
+                    <h4>{`${userProfile.first_name} ${userProfile.last_name}`}</h4> 
+                </div>
                 <Button className="editProfile" text="Edit Profile"/>
             </div>
             

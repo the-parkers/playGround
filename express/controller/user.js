@@ -260,7 +260,6 @@ const fixthem = async (req,res) => {
           }
         }
       })
-
     })
   })
   await fetch('https://www.nycgovparks.org/bigapps/DPR_Handball_001.json')
