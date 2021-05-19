@@ -1,8 +1,9 @@
 import Logo from "./Logo"
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
-import {useContext} from 'react'
-import Button from "./Button"
+import {useContext,useEffect} from 'react'
+// import Button from "./Button"
+import { Button } from 'semantic-ui-react'
 import {Link,useHistory} from 'react-router-dom'
 
 // import {form} from 'react-bootstrap/Form'
@@ -35,22 +36,44 @@ function LoginPage() {
             }
         })
     }
+    useEffect(()=> {
+        const user = localStorage.getItem('user')
+        if(user) {
+        const options = {
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: user
+        }
+        fetch('http://localhost:5000/verifySession',options)
+        .then(response => response.json())
+        .then(data => {
+          if(!data.Auth) {
+            history.push('/')
+          }else {
+              history.push('/parks')
+          }
+        })
+        }else {
+          history.push('/')
+        }
+      },[history])
     return (
-       <div>
+    <div className="welcomeImagelogin">
+       <div className="loginPage">
             <Logo/>
             <form onSubmit={handleSubmit}>
              
                 <UserInput type="email" value={email} setValue={setEmail} id="loginEmail" label="Email" />
                 <UserInput type="password" value={password} setValue={setPassword} id="loginPassword" label="Password" />
-                <Button className="loginButton" text="Login"/>
-            
+                <Button className="loginButtonPage" primary>Login</Button>
             </form>
+            {/* <span>Don't have an account?</span> */}
             <br/>
-            <span>Don't have an account?</span>
             <Link to={`/signUp`}>
-                <Button className="signUpButton" text="Create New Account"/>
+                <Button className="signUpButton" secondary text="Create New Account">Create New Account</Button>
             </Link>
        </div>
+    </div>
    )
 }
 

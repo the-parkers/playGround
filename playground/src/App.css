@@ -1,7 +1,46 @@
 .App {
   text-align: center;
+  height: 100%;
+  /* background-image: url('http://bsnscb.com/data/out/144/26988281-park-wallpapers.jpg'); */
 }
 
+.welcomeImage {
+  height: 100%;
+  width: 100%;
+  /* background-image: url('http://bsnscb.com/data/out/144/26988281-park-wallpapers.jpg'); */
+  background: black
+}
+.inputRadius {
+  border-radius: 10px;
+}
+.loginButton {
+  width: 10em;
+}
+.loginPage {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+  justify-content: center;
+  padding: 5em;
+}
+.welcomeImagelogin {
+  height: 100%;
+  width: 100%;
+  background: black;
+  display: flex;
+    justify-content: flex-end;
+}
+.signUpPage {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+  justify-content: center;
+  padding: 5em;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -38,7 +77,8 @@
 }
 
 #navbar {
-  background-color: rgb(14, 201, 85);
+  /* background-color: rgb(14, 201, 85); */
+  border: 2px solid black;
   padding: 5px;
   display: flex;
   justify-content: space-between;
@@ -47,6 +87,9 @@
 
 .park_cards{
   margin: 20px;
+}
+#homeIcon {
+  color: black;
 }
 
 .all_parks{
