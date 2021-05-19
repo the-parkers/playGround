@@ -17,7 +17,7 @@ function App() {
         <Route path='/signUp' component={SignUpPage}/>
         <>
           <Route component={Navbar}/>
-          <Route path='/parks/:parkName' component={SpecificPark}/>
+          <Route exact path='/parks/:parkId' component={SpecificPark}/>
           <Route exact path='/parks' component={HomePage}/>
           <Route path='/user' component={UserPage}/>
         </>

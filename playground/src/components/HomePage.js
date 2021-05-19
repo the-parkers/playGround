@@ -2,13 +2,20 @@ import { useContext } from 'react'
 import Parkcard from './ParkCard'
 import PlayGroundContext from '../context/PlayGroundContext'
 
+
 function HomePage(){
-  let {filteredParks, parkSearch, setParkSearch,setPosition} = useContext(PlayGroundContext)
-  filteredParks.length = 100
+  let {filteredParks, parkSearch,position, setParkSearch,setPosition} = useContext(PlayGroundContext)
+  filteredParks.length = 30
+  console.log(filteredParks)
   navigator.geolocation.getCurrentPosition((position) => {
     if(position.coords.latitude && position.coords.longitude){
       setPosition((prev) => ({...prev,lat:position.coords.latitude,lon:position.coords.longitude}))
     }
+  },()=>{
+    if(!position.lat) {
+      setPosition((prev) => ({...prev,lat:40.8002663,lon:-73.9577346}))
+    }
+      
   })
   return (
     <>
@@ -18,7 +25,7 @@ function HomePage(){
       <div className="all_parks">
         {filteredParks.map((park, i) => {
           return (
-            <Parkcard key={i} Park={park}/>
+            <Parkcard key={i} Park={park} search={setParkSearch}/>
           )
         })}
       </div>  

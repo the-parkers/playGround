@@ -29,7 +29,7 @@ function LoginPage() {
         .then(data => {
             if(data.Auth){
                 localStorage.setItem("token", data.Token)
-                history.push("/parks")
+                history.push('/parks')
             }else {
                 console.log('invalid credentials')
             }

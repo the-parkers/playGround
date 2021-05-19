@@ -2,13 +2,20 @@ const db = require('../model/Knex')
 const bcrypt = require('bcrypt');
 const fetch = require('node-fetch');
 const saltRounds = 10;
+const keys = require('../auth/auth')
+const fetch = require('node-fetch');
+const jwt = require('jsonwebtoken');
+
+
 
 const login =  (req,res) => {
     db.query('users',req.body.email)
     .then(async user => {
         const match = await bcrypt.compare(req.body.password, user[0].encrypted_password);
         if(match) {
-            res.status(202).json(match)
+            const id = user[0].id
+            const token = jwt.sign({id}, keys.key);
+            res.status(202).json({Auth:match,Token: token})
         }else {
             res.status(404).json(match)
         }
@@ -166,7 +173,10 @@ const fillDb = (req, res) => {
       }));
       res.sendStatus(200)
   }
-
+const parksData = (req,res) => {
+    db.select('parks',req.body.email)
+    .then(response => res.status(200).json(response))
+}
   module.exports = {
      login,
      signUp,
@@ -179,5 +189,6 @@ const fillDb = (req, res) => {
      bbqing_areas,
      dog_areas,
      park_events,
-     fillDb
+     fillDb,
+     parksData
 }
