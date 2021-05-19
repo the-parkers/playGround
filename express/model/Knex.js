@@ -13,7 +13,7 @@ async function select(tableName) {
     const data = await db.select().table(tableName)
     return data
 }
-
+ 
 module.exports = {
     add,
     query,

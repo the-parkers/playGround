@@ -6,7 +6,7 @@ module.exports = {
     connection: {
       database: 'playGround',
       user:     'postgres',
-      password: 'rockon40'
+      password: 'Incredible1'
     },
     pool: {
       min: 2,

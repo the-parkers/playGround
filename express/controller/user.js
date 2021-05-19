@@ -1,6 +1,5 @@
 const db = require('../model/Knex')
 const bcrypt = require('bcrypt');
-const fetch = require('node-fetch');
 const saltRounds = 10;
 const keys = require('../auth/auth')
 const fetch = require('node-fetch');
@@ -177,6 +176,7 @@ const parksData = (req,res) => {
     db.select('parks',req.body.email)
     .then(response => res.status(200).json(response))
 }
+
   module.exports = {
      login,
      signUp,
@@ -190,5 +190,5 @@ const parksData = (req,res) => {
      dog_areas,
      park_events,
      fillDb,
-     parksData
+     parksData,
 }
