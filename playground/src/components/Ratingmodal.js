@@ -33,7 +33,7 @@ function Ratingmodal(props){
             <Modal.Header closeButton>New Event at {props.currentPark.park_name}</Modal.Header>
             <form onSubmit={ratingSubmit}>
             <Modal.Body>
-                <h4 for={"cleanliness"}>Cleanliness</h4>
+                <h4 htmlFor={"cleanliness"}>Cleanliness</h4>
                 <input type={"number"} name={"cleanliness"} value={cleanRate} onChange={(e) => {setCleanRate(e.target.value)}} min={"1"} max={"5"} required/>
                 <h4>Location</h4>
                 <input type={"number"} name={"location"} value={locoRate} onChange={(e) => {setLocoRate(e.target.value)}} min={"1"} max={"5"} required/>

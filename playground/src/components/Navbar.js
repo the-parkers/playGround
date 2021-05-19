@@ -1,5 +1,6 @@
 import { useEffect,useState } from 'react'
 import {Link, useHistory} from 'react-router-dom'
+import { Image } from 'semantic-ui-react'
 
 function Navbar(){
   const [userProfile,setUserProfile] = useState({})
@@ -37,7 +38,8 @@ function Navbar(){
           <h3>Home</h3>
           </Link>
           <Link to={`/users/${userProfile.id}`}>
-          <img  src={userProfile.user_image} alt={"Oh no"} style={{height:"35px"}}></img>
+          <Image src={userProfile.user_image} size='mini' alt={"oh no"} circular/>
+          {/* <img  src={userProfile.user_image} alt={"Oh no"} style={{height:"35px"}}></img> */}
           </Link>
         </nav>
       </>
