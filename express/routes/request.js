@@ -15,6 +15,7 @@ router.get('/running_track',user.running_track)
 router.get('/bbqing_areas',user.bbqing_areas)
 router.get('/dog_areas',user.dog_areas)
 router.get('/park_events',user.park_events)
+router.get('/favoritesList',user.favorites)
 router.get('/', user.fillDb)
 
 module.exports = router
