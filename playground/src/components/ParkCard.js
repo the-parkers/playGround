@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card'
 import { useEffect, useState } from 'react'
 
 import {Link} from 'react-router-dom'
-import { Icon } from 'semantic-ui-react'
+import { Icon,Rating } from 'semantic-ui-react'
 function Parkcard(props){
     const {Park ,search} = props
     const [rating, setRating] = useState([])
@@ -42,9 +42,9 @@ function Parkcard(props){
                     <Card.Subtitle>
                         {Park.subcategory}
                         <br/>
-                        <h4>Cleanliness: {overAllClean}</h4>
-                        <h4>Location: {overAllLoca}</h4>
-                        <h4>Amenities: {overAllAmen}</h4>
+                        <h3>Cleanliness: <Rating  size='small' defaultRating={overAllClean} maxRating={5} disabled /></h3>
+                        <h3>Location: <Rating   size='small' defaultRating={overAllLoca} maxRating={5} disabled /></h3>
+                        <h3>Amenities: <Rating  size='small' defaultRating={overAllAmen} maxRating={5} disabled /></h3>
                         <Icon link name='heart outline' onClick={e => e.target.classList.value = 'heart link icon'}/>
                     </Card.Subtitle>
                 </Card.Body>
