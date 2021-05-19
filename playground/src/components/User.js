@@ -1,6 +1,5 @@
-import Button from "./Button"
 import { Image } from 'semantic-ui-react'
-
+import EditProfileModal from './EditProfileModal'
 
 function User({src,text}) {
    const handleFileUpload = (e) => {
@@ -27,7 +26,7 @@ function User({src,text}) {
                 <div className="userProfileName">
                     <h4>{text}</h4> 
                 </div>
-                <Button className="editProfile" text="Edit Profile"/>
+                <EditProfileModal/>
             </div>
             
         </div>
