@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import {Button, Modal} from 'react-bootstrap'
+import { Rating } from 'semantic-ui-react'
 
 function Ratingmodal(props){
     const [modalShow, setModalShow] = useState(false);
@@ -38,15 +39,15 @@ function Ratingmodal(props){
         <div>
         <Button onClick={() => setModalShow(!modalShow)}>Give a Rating!</Button>
         <Modal show={modalShow} onHide={()=>{setModalShow(!modalShow)}}>
-            <Modal.Header closeButton>New Event at {props.currentPark.park_name}</Modal.Header>
+            <Modal.Header closeButton>Rate {props.currentPark.park_name}</Modal.Header>
             <form onSubmit={ratingSubmit}>
             <Modal.Body>
                 <h4 htmlFor={"cleanliness"}>Cleanliness</h4>
-                <input type={"number"} name={"cleanliness"} value={cleanRate} onChange={(e) => {setCleanRate(e.target.value)}} min={"1"} max={"5"} required/>
+                <Rating maxRating={5} required name="cleanliness" clearable value={cleanRate} onRate={(e,ratings) => {setCleanRate(ratings.rating)}}/>
                 <h4>Location</h4>
-                <input type={"number"} name={"location"} value={locoRate} onChange={(e) => {setLocoRate(e.target.value)}} min={"1"} max={"5"} required/>
+                <Rating maxRating={5} required name="location" clearable value={locoRate} onRate={(e,ratings) => {setLocoRate(ratings.rating)}}/>
                 <h4>Amenities</h4>
-                <input type={"number"} name={"amenities"} value={amenRate} onChange={(e) => {setAmenRate(e.target.value)}} min={"1"} max={"5"} required/>
+                <Rating maxRating={5} required name="amenities" clearable value={amenRate} onRate={(e,ratings) => {setAmenRate(ratings.rating)}}/>
             </Modal.Body>
                 <Modal.Footer>
                 <Button type={"submit"}>Submit Rating</Button>
