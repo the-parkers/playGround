@@ -3,9 +3,13 @@ const router = express.Router();
 
 const user = require('../controller/user')
 
+
+router.get('/fixthem', user.fixthem)
+
 router.get('/parksData',user.parksData)
 router.post('/login',user.login)
 router.post('/signUp',user.signUp)
+router.post('/imageUpload', user.imageUpload)
 router.get('/basketball',user.basketball)
 router.get('/parks',user.parks)
 router.get('/handball',user.handball)

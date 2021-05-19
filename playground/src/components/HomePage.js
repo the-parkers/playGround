@@ -9,7 +9,9 @@ function HomePage(){
   console.log(filteredParks)
   navigator.geolocation.getCurrentPosition((position) => {
     if(position.coords.latitude && position.coords.longitude){
+      if(!position.lat) {
       setPosition((prev) => ({...prev,lat:position.coords.latitude,lon:position.coords.longitude}))
+      }
     }
   },()=>{
     if(!position.lat) {
