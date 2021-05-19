@@ -33,13 +33,12 @@ function Navbar(){
   },[history])
     return (
       <>
-        <nav id={"navbar"}>
+        <nav id="navbar">
           <Link to={"/parks"}>
-          <h3>Home</h3>
-          </Link>
-          <Link to={`/users/${userProfile.id}`}>
-          <Image src={userProfile.user_image} size='mini' alt={"oh no"} circular/>
-          {/* <img  src={userProfile.user_image} alt={"Oh no"} style={{height:"35px"}}></img> */}
+              <h3 id="homeIcon">Home</h3>
+              </Link>
+              <Link to={`/users/${userProfile.id}`}>
+              <Image src={userProfile.user_image} size='mini' alt={"oh no"} circular/>
           </Link>
         </nav>
       </>
