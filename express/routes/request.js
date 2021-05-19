@@ -4,8 +4,9 @@ const router = express.Router();
 const user = require('../controller/user')
 const file = require('../controller/file')
 
-router.get('/fixthem', user.fixthem)
 
+router.get('/fixthem', user.fixthem)
+router.post('/verifySession', user.verifySession)
 router.get('/parksData',user.parksData)
 router.post('/login',user.login)
 router.post('/signUp',user.signUp)

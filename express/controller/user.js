@@ -8,13 +8,13 @@ const jwt = require('jsonwebtoken');
 
 
 const login =  (req,res) => {
-    db.query('users',req.body.email)
+    db.query('users','email',req.body.email)
     .then(async user => {
         const match = await bcrypt.compare(req.body.password, user[0].encrypted_password);
         if(match) {
             const id = user[0].id
             const token = jwt.sign({id}, keys.key);
-            res.status(202).json({Auth:match,Token: token})
+            res.status(202).json({Auth:match,Token: token,User: user[0].email})
         }else {
             res.status(404).json(match)
         }
@@ -24,8 +24,19 @@ const signUp = async (req,res) => {
     try {
         await bcrypt.hash(req.body.password, saltRounds).then(async hash => {
             const {email,firstName: first_name,lastName: last_name} = req.body
-            db.add({email,first_name,last_name,encrypted_password: hash,user_image: null},'users')
-            res.sendStatus(200)
+            db.query('users','email',req.body.email)
+            .then(response => {
+              if(!response.length) {
+                  db.add({email,first_name,last_name,encrypted_password: hash,user_image: null},'users')
+                    .then(user => {
+                      const id = user[0].id
+                    const token = jwt.sign({id}, keys.key);
+                    res.status(200).json({Token: token,User: user[0].email})
+                    })
+              }else {
+                res.status(200).json({Message: 'Duplicate Email'})
+              }
+            })
         })
     } catch (error) {
         console.log(error)
@@ -356,7 +367,21 @@ const fixthem = async (req,res) => {
   })
   res.sendStatus(200)
 }
-
+const verifySession = (req,res) => {
+  const {Token,User} = req.body
+  jwt.verify(Token, keys.key, function(err, decoded) {
+    if(decoded) {
+      db.query('users','id',decoded.id)
+      .then(response => {
+        if(response[0].email === User) {
+          res.status(200).json({Auth: true})
+        }
+      })
+    }else {
+      res.status(200).json({Auth: false})
+    } // bar
+  });
+}
   module.exports = {
      login,
      signUp,
@@ -371,5 +396,6 @@ const fixthem = async (req,res) => {
      park_events,
      fillDb,
      parksData,
-     fixthem
+     fixthem,
+     verifySession
 }
