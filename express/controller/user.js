@@ -123,15 +123,15 @@ const dog_areas = (req, res) => {
         }));
         res.sendStatus(200)
     }
-const park_events = (req, res) => {  
-    fetch('https://www.nycgovparks.org/xml/events_300_rss.json')
-        .then(response => response.json())
-        .then(json => json.forEach(data => {
-           const {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = data
-          db.add({title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image},'park_events')
-        }));
-        res.sendStatus(200)
-    }
+// const park_events = (req, res) => {  
+//     fetch('https://www.nycgovparks.org/xml/events_300_rss.json')
+//         .then(response => response.json())
+//         .then(json => json.forEach(data => {
+//            const {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = data
+//           db.add({title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image},'park_events')
+//         }));
+//         res.sendStatus(200)
+//     }
 const fillDb = (req, res) => { 
     fetch('https://www.nycgovparks.org/bigapps/DPR_Basketball_001.json')
       .then(response => response.json())
@@ -175,12 +175,12 @@ const fillDb = (req, res) => {
          const {Name: name,Address: address,DogRuns_Type: dogruns_type} = data
         db.add({name,address,dogruns_type},'dog_areas')
       }));
-      fetch('https://www.nycgovparks.org/xml/events_300_rss.json')
-      .then(response => response.json())
-      .then(json => json.forEach(data => {
-         const {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = data
-        db.add({title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image},'park_events')
-      }));
+      // fetch('https://www.nycgovparks.org/xml/events_300_rss.json')
+      // .then(response => response.json())
+      // .then(json => json.forEach(data => {
+      //    const {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = data
+      //   db.add({title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image},'park_events')
+      // }));
       res.sendStatus(200)
   }
 const parksData = (req,res) => {
@@ -414,7 +414,6 @@ const verifySession = (req,res) => {
      running_track,
      bbqing_areas,
      dog_areas,
-     park_events,
      fillDb,
      parksData,
      fixthem,
