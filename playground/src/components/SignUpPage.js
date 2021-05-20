@@ -2,8 +2,9 @@ import Logo from "./Logo"
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext} from 'react'
-import Button from "./Button"
+// import Button from "./Button"
 import {Link,useHistory} from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
 
 function SignUpPage() {
     let history = useHistory();
@@ -37,21 +38,25 @@ function SignUpPage() {
       })
     }
     return (
-        <div>
-            <Logo/>
-            <form onSubmit={handleSubmit}>
-                <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName" label="FirstName"/>
-                <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName"/>
-                <UserInput type="email" value={email} setValue={setEmail} id="Email" label="Email"/>
-                <UserInput type="password" value={password} setValue={setPassword} id="Password" label="Password"/>
-                <Button className="signUpButton" text="Sign Up"/>
-             </form>
-            <br/>
-            <span>Already have an account?</span>
-            <Link to={'/'}>
-                <Button className="loginButton" text="Login"/>
-            </Link>
+        <div className="welcomeImage">
+            <div className="signUpPage">
+                <Logo/>
+                <form onSubmit={handleSubmit}>
+                    <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName" label="FirstName"/>
+                    <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName"/>
+                    <UserInput type="email" value={email} setValue={setEmail} id="Email" label="Email"/>
+                    <UserInput type="password" value={password} setValue={setPassword} id="Password" label="Password"/>
+                    <Button primary className="signUpButton">Sign Up</Button>
+                </form>
+                <br/>
+
+                {/* <span>Already have an account?</span> */}
+                <Link to={'/'}>
+                <Button secondary  className="loginButton">Login</Button>
+                </Link>
+            </div>
         </div>
+        
     )
 }
 

@@ -3,6 +3,7 @@ import Parkcard from './ParkCard'
 import PlayGroundContext from '../context/PlayGroundContext'
 import { useHistory } from 'react-router'
 
+
 function HomePage(){
   let history = useHistory()
   let {filteredParks, parkSearch,position, setParkSearch,setPosition} = useContext(PlayGroundContext)
@@ -39,7 +40,7 @@ function HomePage(){
     }else {
       history.push('/')
     }
-  },[])
+  },[history])
 
   return (
     <>

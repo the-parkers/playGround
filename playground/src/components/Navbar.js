@@ -1,14 +1,44 @@
-import {Link} from 'react-router-dom'
+import { useEffect,useState } from 'react'
+import {Link, useHistory} from 'react-router-dom'
+import { Image } from 'semantic-ui-react'
 
 function Navbar(){
+  const [userProfile,setUserProfile] = useState({})
+  let history = useHistory()
+  useEffect(()=> {
+    const user = localStorage.getItem('user')
+    if(user) {
+    const options = {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: user
+    }
+    fetch('http://localhost:5000/verifySession',options)
+    .then(response => response.json())
+    .then(data => {
+      if(!data.Auth) {
+        history.push('/')
+      }else {
+        delete data.User.first_name
+        delete data.User.last_name
+        delete data.User.email
+        const content = Buffer.from(data.User.user_image.data)
+        const string64 = content.toString('base64')
+        setUserProfile((prev) => ({...prev,id:data.User.id, user_image: `data:image/png;base64,${string64}`}))
+      }
+    })
+    }else {
+      history.push('/')
+    }
+  },[history])
     return (
       <>
-        <nav id={"navbar"}>
+        <nav id="navbar">
           <Link to={"/parks"}>
-          <h3>Home</h3>
-          </Link>
-          <Link to={"/user"}>
-          <img  src={"https://cdn2.iconfinder.com/data/icons/facebook-51/32/FACEBOOK_LINE-01-512.png"} alt={"Oh no"} style={{height:"35px"}}></img>
+              <h3 id="homeIcon">Home</h3>
+              </Link>
+              <Link to={`/users/${userProfile.id}`}>
+              <Image src={userProfile.user_image} size='mini' alt={"oh no"} circular/>
           </Link>
         </nav>
       </>
