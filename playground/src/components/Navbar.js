@@ -22,9 +22,11 @@ function Navbar(){
         delete data.User.first_name
         delete data.User.last_name
         delete data.User.email
-        const content = Buffer.from(data.User.user_image.data)
-        const string64 = content.toString('base64')
-        setUserProfile((prev) => ({...prev,id:data.User.id, user_image: `data:image/png;base64,${string64}`}))
+        if(data.User.data) {
+          const content = Buffer.from(data.User.user_image.data)
+          const string64 = content.toString('base64')
+          setUserProfile((prev) => ({...prev,id:data.User.id, user_image: `data:image/png;base64,${string64}`}))
+        }
       }
     })
     }else {

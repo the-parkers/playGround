@@ -52,6 +52,20 @@ const basketball = (req, res) => {
         }));
         res.sendStatus(200)
     }
+const favorites = (req, res) => {  
+  console.log(req)
+  // db.query('favorites','email',req.body.email)
+  // .then(async user => {
+  //     const match = await bcrypt.compare(req.body.password, user[0].encrypted_password);
+  //     if(match) {
+  //         const id = user[0].id
+  //         const token = jwt.sign({id}, keys.key);
+  //         res.status(202).json({Auth:match,Token: token})
+  //     }else {
+  //         res.status(404).json(match)
+  //     }
+  // })
+  }
 const parks = (req, res) => {
     fetch('https://data.cityofnewyork.us/api/geospatial/k2ya-ucmv?method=export&format=GeoJSON')
         .then(response => response.json())
@@ -416,6 +430,7 @@ const verifySession = (req,res) => {
      dog_areas,
      fillDb,
      parksData,
+     favorites,
      fixthem,
      verifySession,
      getEvents,
