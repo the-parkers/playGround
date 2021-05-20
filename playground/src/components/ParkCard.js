@@ -30,7 +30,6 @@ function Parkcard(props){
         .then(data => setRating(data))
     }, [])
     const currentParkRating = rating.filter(parks => parks.park_id === Park.id)
-    console.log(currentParkRating)
     const cleanRate = []
     const locaRate = []
     const amenRate = []

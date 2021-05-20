@@ -2,21 +2,30 @@ import Logo from "./Logo"
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext, useState} from 'react'
-// import Button from "./Button"
+import { Form } from 'react-bootstrap'
 import {Link,useHistory} from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 
 function SignUpPage() {
+    const [validated, setValidated] = useState(false);
     let history = useHistory();
      const context = useContext(PlayGroundContext)
      const [file,setFile] = useState([])
      const {email,firstName,lastName,password,setEmail,setFirstName,setLastName,setPassword} = context
      const handleFileUpload = (e) => {
         let {files} = e.target
+        if(files[0]){
+          e.target.labels[0].innerText = files[0].name
+        }
         files = files[0]
         setFile(files)
     }
      function handleSubmit(e) {
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
         e.preventDefault()
         const formData = {
            email,
@@ -24,6 +33,8 @@ function SignUpPage() {
            firstName,
            lastName
         }
+        setValidated(true);
+     if(email !== '' && firstName !== '' && lastName !== '' && password !== '') {
         const formImgData = new FormData();
         formImgData.append('imageUpload', file)
         formImgData.append('formData', JSON.stringify(formData))
@@ -36,31 +47,42 @@ function SignUpPage() {
       .then(response => response.json())
       .then(data => {
           if(data.Message) {
-              alert(data.Message)
+            setEmail('')
+            setValidated(true);
           }else{
+            setValidated(true);
             localStorage.setItem("user",  JSON.stringify({Token:data.Token,User:data.User}))
             history.push('/parks')
           }
       })
     }
+}
     return (
         <div className="welcomeImage">
             <div className="signUpPage">
                 <Logo/>
-                <form onSubmit={handleSubmit}>
-                    <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName" label="FirstName"/>
-                    <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName"/>
-                    <UserInput type="email" value={email} setValue={setEmail} id="Email" label="Email"/>
-                    <UserInput type="password" value={password} setValue={setPassword} id="Password" label="Password"/>
-                    <input id="file-input" type="file" name="profileImage" onChange={handleFileUpload}  accept="image/*"/>
+                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                    <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName" label="FirstName" message="FirstName is required"/>
+                    <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName" message="LastName is required"/>
+                    <UserInput type="email" value={email} setValue={setEmail} id="Email" label="Email" message="Duplicate Email. Your clone was here before you"/>
+                    <UserInput type="password" value={password} setValue={setPassword} id="Password" label="Password" message="Password Needed"/>
+                    <Form.File 
+                        id="file-input"
+                        name="profileImage"
+                        label="Upload Profile Image"
+                        onChange={handleFileUpload}
+                        accept="image/*"
+                        custom
+                    />
+                    {/* <input id="file-input" type="file" name="profileImage" onChange={handleFileUpload}  accept="image/*"/> */}
                     <br/>
                     <Button primary className="signUpButton">Sign Up</Button>
-                </form>
+                </Form>
                 <br/>
 
                 {/* <span>Already have an account?</span> */}
                 <Link to={'/'}>
-                <Button secondary  className="loginButton">Login</Button>
+                <Button secondary  className="loginButton" onClick={() => {setEmail('');setPassword('')}}>Login</Button>
                 </Link>
             </div>
         </div>

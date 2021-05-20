@@ -54,7 +54,7 @@ const basketball = (req, res) => {
         res.sendStatus(200)
     }
 const favorites = (req, res) => {  
-  console.log(req)
+  // console.log(req)
   // db.query('favorites','email',req.body.email)
   // .then(async user => {
   //     const match = await bcrypt.compare(req.body.password, user[0].encrypted_password);

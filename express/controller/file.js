@@ -2,6 +2,7 @@ const db = require('../model/Knex');
 const jwt = require('jsonwebtoken');
 const keys = require('../auth/auth')
 const fetch = require('node-fetch');
+const bcrypt = require('bcrypt');
 
 const imageUpload = (req,res) => {
     if(req.files) {
@@ -73,9 +74,29 @@ const postFavorite = (req,res) => {
         }
     })
 }
-
+const updateProfile = (req,res) => {
+  const {firstName,lastName,email,password,user} = req.body
+  db.query('users','email',user)
+            .then(async response => {
+              const match = await bcrypt.compare(password, response[0].encrypted_password);
+              if(match) {
+                db.query('users','email',email)
+                .then(res => {
+                   if(!res.length) {
+                    console.log('email doesnt exist',res)
+                  }else {
+                    console.log('email exist',res) 
+                  }
+                })
+                res.status(200).json({message: 'make it wrk'})
+              }else {
+                res.status(200).json({Auth:match,message: 'Wrong Password'})
+              }
+            })
+}
 module.exports = {
     imageUpload,
     postFavorite,
-    parkevents
+    parkevents,
+    updateProfile
 }
