@@ -2,7 +2,6 @@ import Logo from "./Logo"
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext, useState} from 'react'
-// import Button from "./Button"
 import {Link,useHistory} from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 

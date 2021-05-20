@@ -16,15 +16,15 @@ function CommunityEventModal(props){
         const token = JSON.parse(localStorage.getItem("user"))
         const formData = {
             user_id: token.Token,
-            parknames:props.currentPark.park_name,
-            park:props.currentPark.id,
+            park_name:props.currentPark.park_name,
+            park_id:props.currentPark.id,
             title,
             description,
             location,
             starttime,
             endtime,
             startdate,
-            buffer
+            image: buffer
         }
         const options = {
             mode:'cors',
@@ -60,6 +60,8 @@ function CommunityEventModal(props){
                 <input type="date"name="startdate" value={startdate} onChange={(e) => {setDate(e.target.value)}} required/>
                 <h4 htmlFor="image">Post an Image</h4>
                 <input type="file" name="image" onChange={(e) => {setBuffer(e.target.files[0])}} accept="image/*"/>
+                <h5>*If you expect for there to be more than 20 people at an event then a permit will be required, you can apply for a permit with the link below</h5>
+                <a href="https://nyceventpermits.nyc.gov/parks/Login.aspx?ReturnUrl=%2fParks%2f">Permit Link</a>
             </Modal.Body>
                 <Modal.Footer>
                     <span>All Good?</span>
