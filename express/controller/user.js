@@ -22,12 +22,13 @@ const login =  (req,res) => {
   }
 const signUp = async (req,res) => {
     try {
-        await bcrypt.hash(req.body.password, saltRounds).then(async hash => {
-            const {email,firstName: first_name,lastName: last_name} = req.body
-            db.query('users','email',req.body.email)
+      const {email,firstName: first_name,lastName: last_name,password} = JSON.parse(req.body.formData)
+        await bcrypt.hash(password, saltRounds).then(async hash => {
+            db.query('users','email',email)
             .then(response => {
               if(!response.length) {
-                  db.add({email,first_name,last_name,encrypted_password: hash,user_image: null},'users')
+                const {imageUpload} = req.files
+                  db.add({email,first_name,last_name,encrypted_password: hash,user_image: imageUpload.data},'users')
                     .then(user => {
                       const id = user[0].id
                     const token = jwt.sign({id}, keys.key);
