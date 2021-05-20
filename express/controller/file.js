@@ -1,6 +1,7 @@
 const db = require('../model/Knex');
 const jwt = require('jsonwebtoken');
-const keys = require('../auth/auth');
+const keys = require('../auth/auth')
+const fetch = require('node-fetch');
 
 const imageUpload = (req,res) => {
     if(req.files) {
@@ -25,6 +26,39 @@ const imageUpload = (req,res) => {
         });
     }
   }
+const parkevents = async (req,res) => {
+  await fetch('https://www.nycgovparks.org/xml/events_300_rss.json')
+  .then(response => response.json())
+  .then(json => {
+      json = json.map(result => {
+        let {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = result
+        coordinates = coordinates.split(' ')
+        const latitude = Number(coordinates[0].slice(0, -1)).toFixed(3);
+        let longitude = Number(coordinates[1]).toFixed(3)
+        if(longitude === 'NaN') {
+          longitude = Number(coordinates[1].slice(0, -1)).toFixed(3);
+        }
+        result = {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,latitude,longitude,image}
+        return result
+      })
+      db.select('parks')
+      .then(response => {
+        response.forEach(data => {     
+            data.park_latitude = Number(data.park_latitude).toFixed(3)
+            data.park_longitude = Number(data.park_longitude).toFixed(3)
+              const obj = json.filter(item => item.latitude == data.park_latitude && item.longitude == data.park_longitude)
+              if(obj.length) {
+                obj.forEach(item => {
+                  item.park_name = data.park_name
+                  
+                  db.add(item,'park_events')
+                })
+              }
+        })
+      })
+  })
+  res.sendStatus(201)
+}
 const postFavorite = (req,res) => {
     console.log(req.body)
     
@@ -42,5 +76,6 @@ const postFavorite = (req,res) => {
 
 module.exports = {
     imageUpload,
-    postFavorite
+    postFavorite,
+    parkevents
 }

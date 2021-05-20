@@ -2,9 +2,7 @@ import Card from 'react-bootstrap/Card'
 import { useEffect, useState } from 'react'
 import { Icon,Rating } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
-// import { Icon } from 'semantic-ui-react'
-// import User from './User'
-
+import User from './User'
 
 function Parkcard(props){
     const {Park ,search} = props
@@ -22,8 +20,8 @@ function Parkcard(props){
             },
             body: JSON.stringify(formData)
         }
-    fetch('http://localhost:5000/postFavorite', options)    
-    } 
+        fetch('http://localhost:5000/postFavorite', options)
+    }
     useEffect(() => {
         fetch('http://localhost:5000/getRatings')
         .then(res => res.json())

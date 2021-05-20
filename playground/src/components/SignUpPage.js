@@ -1,7 +1,7 @@
 import Logo from "./Logo"
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
-import {useContext} from 'react'
+import {useContext, useState} from 'react'
 // import Button from "./Button"
 import {Link,useHistory} from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
@@ -9,7 +9,13 @@ import { Button } from 'semantic-ui-react'
 function SignUpPage() {
     let history = useHistory();
      const context = useContext(PlayGroundContext)
+     const [file,setFile] = useState([])
      const {email,firstName,lastName,password,setEmail,setFirstName,setLastName,setPassword} = context
+     const handleFileUpload = (e) => {
+        let {files} = e.target
+        files = files[0]
+        setFile(files)
+    }
      function handleSubmit(e) {
         e.preventDefault()
         const formData = {
@@ -18,13 +24,13 @@ function SignUpPage() {
            firstName,
            lastName
         }
+        const formImgData = new FormData();
+        formImgData.append('imageUpload', file)
+        formImgData.append('formData', JSON.stringify(formData))
         const option = {
            mode:'cors',
            method: 'POST',
-             headers: {
-               'Content-Type': 'application/json'
-            },
-             body: JSON.stringify(formData)
+             body: formImgData
        }
       fetch("http://localhost:5000/signUp", option)
       .then(response => response.json())
@@ -46,6 +52,8 @@ function SignUpPage() {
                     <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName"/>
                     <UserInput type="email" value={email} setValue={setEmail} id="Email" label="Email"/>
                     <UserInput type="password" value={password} setValue={setPassword} id="Password" label="Password"/>
+                    <input id="file-input" type="file" name="profileImage" onChange={handleFileUpload}  accept="image/*"/>
+                    <br/>
                     <Button primary className="signUpButton">Sign Up</Button>
                 </form>
                 <br/>
