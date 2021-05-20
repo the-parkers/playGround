@@ -34,7 +34,7 @@ function EditProfileModal(){
         }else {
           history.push('/')
         }
-    }, [])
+    }, [history])
     function signOut() {
         localStorage.removeItem("user")
         history.push('/')
@@ -68,9 +68,15 @@ if(email !== '' && firstName !== '' && lastName !== '' && password !== '') {
      fetch("http://localhost:5000/updateProfile", option)
      .then(response => response.json())
      .then(data => { 
-         console.log(data)
          if(data.Auth) {
-            setModalShow(!modalShow)
+             if(data.Duplicate){
+                setEmail('')
+                setValidated(true);
+             }else {
+                setModalShow(!modalShow)
+                localStorage.removeItem("user")
+                 history.push('/')
+             }
          }else {
              setPassword('')
              setValidated(true);
@@ -87,16 +93,16 @@ if(email !== '' && firstName !== '' && lastName !== '' && password !== '') {
          
          <Form noValidate validated={validated} onSubmit={updateProfile}>
             <Modal.Body>
-            <UserInput type="text" value={firstName} setValue={setFirstName} label="First Name" required message=""/>
+            <UserInput type="text" value={firstName} setValue={setFirstName} label="First Name" required message="We all have a name yours is empty"/>
             <hr/>
-            <UserInput type="text" value={lastName} setValue={setLastName}  label="Last Name" message=""/>
+            <UserInput type="text" value={lastName} setValue={setLastName}  label="Last Name" message="Buddy your name can't be empty"/>
             <hr/>
-            <UserInput type="text" value={email} setValue={setEmail}  label="Email" message="Duplicate Email"/>
+            <UserInput type="email" value={email} setValue={setEmail}  label="Email" message="Hi Clone that email is taken, Survival of the quickest out here"/>
             <hr/>
             <UserInput type="password" value={password} setValue={setPassword} label="Verify Password" message="Invalid Credential"/>
             </Modal.Body>
                 <Modal.Footer>
-                <Button variant="danger" type="submit" onClick={signOut}>Sign Out</Button>
+                <Button variant="danger" onClick={signOut}>Sign Out</Button>
                 <Button type={"submit"} >Update Profile</Button>
                 </Modal.Footer>
             </Form>

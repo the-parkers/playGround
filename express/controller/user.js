@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const login =  (req,res) => {
     db.query('users','email',req.body.email)
     .then(async user => {
+      if(user.length) {
         const match = await bcrypt.compare(req.body.password, user[0].encrypted_password);
         if(match) {
             const id = user[0].id
@@ -18,6 +19,9 @@ const login =  (req,res) => {
         }else {
             res.status(404).json(match)
         }
+      }else {
+        res.status(202).json({Auth:false})
+      }
     })
   }
 const signUp = async (req,res) => {
@@ -218,8 +222,10 @@ const eventSubmit = (req,res) => {
   jwt.verify(req.body.user_id, keys.key, function(err, decoded) {
     if(decoded){
       req.body.user_id = decoded.id
+      console.log(req.body)
   db.add(req.body, 'events')
-  .then(response => res.status(200).json(response))}
+  .then(response => res.status(200).json(response))
+}
   })
 }
 const getRatings = (req, res) => {

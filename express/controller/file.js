@@ -75,20 +75,26 @@ const postFavorite = (req,res) => {
     })
 }
 const updateProfile = (req,res) => {
-  const {firstName,lastName,email,password,user} = req.body
+  const {firstName:first_name,lastName:last_name,email,password,user} = req.body
   db.query('users','email',user)
             .then(async response => {
               const match = await bcrypt.compare(password, response[0].encrypted_password);
               if(match) {
                 db.query('users','email',email)
-                .then(res => {
-                   if(!res.length) {
-                    console.log('email doesnt exist',res)
+                .then(result => {
+                   if(!result.length) {
+                     db.updateTo({first_name,last_name,email},'users','id',response[0].id)
+                     .then(nxtData => {
+                       delete nxtData[0].encrypted_password
+                       delete nxtData[0].id
+                       delete nxtData[0].user_image
+                      res.status(200).json({Auth:match,User:nxtData[0]})
+                     })
                   }else {
-                    console.log('email exist',res) 
+                    console.log('email exist',result) 
+                    res.status(200).json({Auth:match,Duplicate:true,message: 'make it wrk'})
                   }
                 })
-                res.status(200).json({message: 'make it wrk'})
               }else {
                 res.status(200).json({Auth:match,message: 'Wrong Password'})
               }

@@ -37,6 +37,8 @@ function LoginPage() {
         .then(data => {
             if(data.Auth){
                 localStorage.setItem("user", JSON.stringify({Token:data.Token,User:data.User}))
+                setEmail('')
+                setPassword('')
                 history.push('/parks')
             }else {
               setEmail('')
