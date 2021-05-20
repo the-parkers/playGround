@@ -2,6 +2,26 @@ import Card from 'react-bootstrap/Card'
 import { useEffect, useState } from 'react'
 
 import {Link} from 'react-router-dom'
+import { Icon } from 'semantic-ui-react'
+import User from './User'
+
+function Parkcard(props){
+    const {Park ,search} = props
+    function postFavorite(e){
+        const user = JSON.parse(localStorage.getItem('user'))
+        const formData = {
+            park_id: Park.id,
+            user_id: user.Token
+        }
+        e.target.classList.value = 'heart link icon'
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        }
+        fetch('http://localhost:5000/postFavorite', options)
 import { Icon,Rating } from 'semantic-ui-react'
 function Parkcard(props){
     const {Park ,search} = props
@@ -42,6 +62,7 @@ function Parkcard(props){
                     <Card.Subtitle>
                         {Park.subcategory}
                         <br/>
+                        <Icon link name='heart outline' onClick={postFavorite}/>
                         <h3>Cleanliness: <Rating  size='small' defaultRating={overAllClean} maxRating={5} disabled /></h3>
                         <h3>Location: <Rating   size='small' defaultRating={overAllLoca} maxRating={5} disabled /></h3>
                         <h3>Amenities: <Rating  size='small' defaultRating={overAllAmen} maxRating={5} disabled /></h3>

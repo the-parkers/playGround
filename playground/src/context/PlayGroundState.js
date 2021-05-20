@@ -10,6 +10,7 @@ function PlayGround(props) {
     const [parkSearch, setParkSearch] = useState("")
     const [top100Parks,setTop100Parks] = useState([])
     const [position,setPosition] = useState({})
+    const [favorite, setFavorites] = useState([])
     // useEffect(() => {
     //     fetch('http://localhost:5000')
     //     .then(response => response.json())
@@ -21,6 +22,14 @@ function PlayGround(props) {
     //     .then(res => res.json())
     //     .then(data => setPlaygrounds(data.features))
     // }, [])
+       useEffect(() => {
+        fetch('http://localhost:5000/favoritesList')
+          .then(res => res.json())
+          .then(data => {
+            console.log(data)
+            setFavorites(data)})
+      }, [])
+
     // useEffect(() => {
     //   fetch('http://localhost:5000/basketBallData')
     //     .then(res => res.json())
@@ -54,7 +63,7 @@ function PlayGround(props) {
       setTop100Parks(playgrounds)
       // setPlaygrounds(playgrounds)
     }
-
+  
    const filteredParks = top100Parks.filter(park => park.park_location !== null && park.park_name !== null && park.park_name.toLowerCase().includes(parkSearch.toLowerCase()))
    const value = {
     firstName,
@@ -71,7 +80,9 @@ function PlayGround(props) {
     filteredParks,
     position,
     setPosition,
-    top100Parks
+    top100Parks,
+    favorite,
+    setFavorites
    }
     return(
         <PlayGroundContext.Provider value={value}>
