@@ -218,8 +218,10 @@ const eventSubmit = (req,res) => {
   jwt.verify(req.body.user_id, keys.key, function(err, decoded) {
     if(decoded){
       req.body.user_id = decoded.id
+      console.log(req.body)
   db.add(req.body, 'events')
-  .then(response => res.status(200).json(response))}
+  .then(response => res.status(200).json(response))
+}
   })
 }
 const getRatings = (req, res) => {
