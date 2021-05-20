@@ -3,37 +3,40 @@ import {Button, Modal} from 'react-bootstrap'
 
 function CommunityEventModal(props){
     const [modalShow, setModalShow] = useState(false);
-    // const [confirm, setConfirm] = useState(false)
     const [title, settitle] = useState("")
     const [description, setDescription] = useState("")
-    const [eventLoco, setEventLoco] = useState("")
-    const [startTime, setStartTime] = useState("")
-    const [endTime, setEndTime] = useState("")
-    const [date, setDate] = useState("")
+    const [location, setEventLoco] = useState("")
+    const [starttime, setStartTime] = useState("")
+    const [endtime, setEndTime] = useState("")
+    const [startdate, setDate] = useState("")
     const [buffer, setBuffer] = useState([])
     function eventSubmit(e){
         e.preventDefault()
         setModalShow(!modalShow)
+        const token = JSON.parse(localStorage.getItem("user"))
         const formData = {
-            // user:,
-            park:props.currentPark.park_name,
+            user_id: token.Token,
+            parknames:props.currentPark.park_name,
+            park:props.currentPark.id,
             title,
             description,
-            eventLoco,
-            startTime,
-            endTime,
-            date,
+            location,
+            starttime,
+            endtime,
+            startdate,
             buffer
         }
-        // const options = {
-        //     mode:'cors',
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //         },
-        // body: JSON.stringify(formData)
-        // }
-        // fetch()
+        const options = {
+            mode:'cors',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+        body: JSON.stringify(formData)
+        }
+        fetch("http://localhost:5000/eventSubmit", options)
+        .then(res => res.json())
+        .then(data => console.log(data))
         console.log(formData)
     }
     return (
@@ -48,13 +51,13 @@ function CommunityEventModal(props){
                 <h4 htmlFor="description">Description of the Event</h4>
                 <textarea name="description" value={description} onChange={(e) => {setDescription(e.target.value)}} required></textarea>
                 <h4 htmlFor="location">Where in the Park</h4>
-                <input type="text" name="location" value={eventLoco} onChange={(e) => {setEventLoco(e.target.value)}} required/>
-                <h4 htmlFor="startTime">Start Time</h4>
-                <input type="time" name="startTime" value={startTime} onChange={(e) => {setStartTime(e.target.value)}} required/>
-                <h4 htmlFor="endTime">End Time</h4>
-                <input type="time" name="endTime" value={endTime} onChange={(e) => {setEndTime(e.target.value)}} required/>
-                <h4 htmlFor="date">Day of The Event</h4>
-                <input type="date"name="date" value={date} onChange={(e) => {setDate(e.target.value)}} required/>
+                <input type="text" name="location" value={location} onChange={(e) => {setEventLoco(e.target.value)}} required/>
+                <h4 htmlFor="starttime">Start Time</h4>
+                <input type="time" name="starttime" value={starttime} onChange={(e) => {setStartTime(e.target.value)}} required/>
+                <h4 htmlFor="endtime">End Time</h4>
+                <input type="time" name="endtime" value={endtime} onChange={(e) => {setEndTime(e.target.value)}} required/>
+                <h4 htmlFor="startdate">Day of The Event</h4>
+                <input type="date"name="startdate" value={startdate} onChange={(e) => {setDate(e.target.value)}} required/>
                 <h4 htmlFor="image">Post an Image</h4>
                 <input type="file" name="image" onChange={(e) => {setBuffer(e.target.files[0])}} accept="image/*"/>
             </Modal.Body>

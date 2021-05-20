@@ -213,6 +213,14 @@ const ratingSubmit = (req,res) => {
   .then(response => res.status(200).json(response))}
   })
 }
+const eventSubmit = (req,res) => {
+  jwt.verify(req.body.user_id, keys.key, function(err, decoded) {
+    if(decoded){
+      req.body.user_id = decoded.id
+  db.add(req.body, 'events')
+  .then(response => res.status(200).json(response))}
+  })
+}
 const getRatings = (req, res) => {
   db.select('ratings')
   .then(response => res.status(200).json(response))
@@ -436,5 +444,6 @@ const verifySession = (req,res) => {
      verifySession,
      getEvents,
      ratingSubmit,
-     getRatings
+     getRatings,
+     eventSubmit
 }

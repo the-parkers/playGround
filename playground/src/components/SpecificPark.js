@@ -26,9 +26,7 @@ function SpecificPark(){
             const latitude = currentPark.park_latitude
             const longitude = currentPark.park_longitude
             const myStyle={width:"600px", height:"450px", style:"border:0", allowfullscreen:"", loading:"lazy"}
-  
             const currentParkRating = rating.filter(parks => parks.park_id === currentPark.id)
-            console.log(currentParkRating)
             const cleanRate = []
             const locaRate = []
             const amenRate = []

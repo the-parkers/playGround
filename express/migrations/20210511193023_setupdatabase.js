@@ -13,7 +13,7 @@ exports.up = function(knex) {
 
     CREATE TABLE favorites (id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), park_id INT REFERENCES parks(id));
     CREATE TABLE ratings (id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), park_id INT REFERENCES parks(id), cleanliness_rating INT, amenities_rating INT, location_rating INT);
-    CREATE TABLE events (id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), park_id INT REFERENCES parks(id), event_time TIME, event_date DATE);
+    CREATE TABLE events (id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), park_id INT REFERENCES parks(id), title TEXT, parknames TEXT, starttime TIME, endtime TIME, event_date DATE, location TEXT);
     `
     return knex.raw(initQuery)
 };
