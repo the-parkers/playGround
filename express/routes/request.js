@@ -27,6 +27,7 @@ router.post('/postFavorite',file.postFavorite)
 router.get('/getEvents',user.getEvents)
 router.post('/ratingSubmit', user.ratingSubmit)
 router.get('/getRatings', user.getRatings)
+router.get('/eventSubmit', user.eventSubmit)
 router.get('/', user.fillDb)
 
 module.exports = router

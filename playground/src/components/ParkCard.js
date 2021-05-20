@@ -1,8 +1,7 @@
 import Card from 'react-bootstrap/Card'
 import { useEffect, useState } from 'react'
-
-import {Link} from 'react-router-dom'
 import { Icon,Rating } from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 import User from './User'
 
 function Parkcard(props){
@@ -14,7 +13,6 @@ function Parkcard(props){
             park_id: Park.id,
             user_id: user.Token
         }
-        e.target.classList.value = 'heart link icon'
         const options = {
             method: 'POST',
             headers: {
@@ -46,11 +44,16 @@ function Parkcard(props){
     overAllLoca = Math.floor((locaRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
     overAllAmen = Math.floor((amenRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)        
     }
+    function test(e){
+        e.target.classList.value = 'heart link icon'
+        postFavorite()
+    }
     return (
-        <Link to={`/parks/${Park.id}`}>
             <Card onClick={e => search('')} className="park_cards" style={{ width: '18rem' }}>
                 <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Logo_of_the_New_York_City_Department_of_Parks_%26_Recreation.svg/1200px-Logo_of_the_New_York_City_Department_of_Parks_%26_Recreation.svg.png" />
+                <Link to={`/parks/${Park.id}`}>
                 <Card.Title onClick={e => search('')}>{Park.park_name}</Card.Title>
+                </Link>
                 <Card.Body>
                     <Card.Text>
                         {Park.park_location}
@@ -58,16 +61,16 @@ function Parkcard(props){
                     <Card.Subtitle>
                         {Park.subcategory}
                         <br/>
-                        <Icon link name='heart outline' onClick={postFavorite}/>
+                        {/* <Icon link name='heart outline' onClick={}/> */}
                         <h3>Cleanliness: <Rating  size='small' defaultRating={overAllClean} maxRating={5} disabled /></h3>
                         <h3>Location: <Rating   size='small' defaultRating={overAllLoca} maxRating={5} disabled /></h3>
                         <h3>Amenities: <Rating  size='small' defaultRating={overAllAmen} maxRating={5} disabled /></h3>
-                        <Icon link name='heart outline' onClick={e => e.target.classList.value = 'heart link icon'}/>
+                        <Icon link name='heart outline' onClick={test} />
                     </Card.Subtitle>
                 </Card.Body>
-            </Card>
-        </Link>    
+            </Card>  
     )
 }
+
 
 export default Parkcard
