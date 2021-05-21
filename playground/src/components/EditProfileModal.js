@@ -74,8 +74,11 @@ if(email !== '' && firstName !== '' && lastName !== '' && password !== '') {
                 setValidated(true);
              }else {
                 setModalShow(!modalShow)
-                localStorage.removeItem("user")
-                 history.push('/')
+                const user = JSON.parse(localStorage.getItem('user'))
+                user.User = email
+                localStorage.setItem('user',JSON.stringify(user))
+                // localStorage.removeItem("user")
+                //  history.push('/')
              }
          }else {
              setPassword('')

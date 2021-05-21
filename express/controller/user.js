@@ -230,7 +230,8 @@ const eventSubmit = (req,res) => {
 }
 const getRatings = (req, res) => {
   db.select('ratings')
-  .then(response => res.status(200).json(response))
+  .then(response => {
+    res.status(200).json(response)})
 }
 
 const fixthem = async (req,res) => {
@@ -419,9 +420,11 @@ const verifySession = (req,res) => {
       db.query('users','id',decoded.id)
       .then(response => {
         if(response.length) {
-          if(response[0].email === User) {
+          if(response[0].email.trim() === User) {
             delete response[0].encrypted_password
             res.status(200).json({Auth: true,User: response[0]})
+          }else {
+            res.status(200).json({Auth: false})
           }
         }else {
           res.status(200).json({Auth: false})
