@@ -61,7 +61,6 @@ function User({src,text}) {
             <label htmlFor="file-input" className="fluid">
                <Image src={userProfile.user_image} size='small' alt={"oh no"} circular id='profileImage' className="left floated"/>
             </label>
-
             <input id="file-input" type="file" name="profileImage" onChange={handleFileUpload} accept="image/*"/>
             </div>
             <div>

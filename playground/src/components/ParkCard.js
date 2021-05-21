@@ -2,7 +2,7 @@ import Card from 'react-bootstrap/Card'
 import { useEffect, useState } from 'react'
 import { Icon,Rating } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
-import User from './User'
+// import User from './User'
 
 function Parkcard(props){
     const {Park ,search} = props
