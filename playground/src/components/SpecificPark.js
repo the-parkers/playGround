@@ -8,26 +8,31 @@ import { Rating } from 'semantic-ui-react'
 
 function SpecificPark(){
     let { parkId } = useParams()
-    let { playgrounds } = useContext(PlayGroundContext)
+    let { playgrounds,bBallCourt,bbqArea,dogAreas,runTracks,handBallCourt,indoorPool,outdoorPool } = useContext(PlayGroundContext)
+    const [parkEvents, setParkEvents] = useState([])
     const [events, setEvents] = useState([])
     const [rating, setRating] = useState([])
     const currentPark = playgrounds.find(park => park.id === Number(parkId))
+
+    // const bBallCheck = bBallCourt.filter(park => park.name === currentPark.park_name).length === 0 ? "X" : "✓"
+    // const bbqAreaCheck = bbqArea.filter(park => park.name === currentPark.park_name).length === 0 ? "X" : "✓"
 
     useEffect(() => {
         fetch('http://localhost:5000/getUserEvents')
             .then(res => res.json())
             .then(data => setEvents(data))
-    })
+    },[])
     useEffect(() => {
         fetch('http://localhost:5000/getEvents')
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => setParkEvents(data))
     },[])
     useEffect(() => {
         fetch('http://localhost:5000/getRatings')
         .then(res => res.json())
         .then(data => setRating(data))
     }, [])
+    
     if(playgrounds.length) {
             const latitude = currentPark.park_latitude
             const longitude = currentPark.park_longitude
@@ -54,8 +59,16 @@ function SpecificPark(){
                 flexDirection: 'column',
                 alignItems: 'center'
             }
-            console.log(events, currentPark)
-            const filteredEvents = events.filter( event => event.park_id === currentPark.id)
+            const allEvents = events.concat(parkEvents)
+            const filteredEvents = allEvents.filter( event => event.park_id === currentPark.id)
+            const bBallCheck = bBallCourt.filter(park => park.name === currentPark.park_name).length === 0 ? "X" : "✓"
+            const bbqAreaCheck = bbqArea.filter(park => park.name === currentPark.park_name).length === 0 ? "X" : "✓"
+            const dogAreaCheck = dogAreas.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
+            const runTrackCheck = runTracks.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
+            const handBallCheck = handBallCourt.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
+            const indoorPoolCheck = indoorPool.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
+            const outdoorPoolCheck = outdoorPool.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
+
             return (
                 <div>
                     <h1>{currentPark.park_name}</h1>
@@ -65,6 +78,13 @@ function SpecificPark(){
                         <h3>Cleanliness: <Rating icon='star' size='large' defaultRating={overAllClean} maxRating={5} disabled /></h3>
                         <h3>Location: <Rating  icon='star' size='large' defaultRating={overAllLoca} maxRating={5} disabled /></h3>
                         <h3>Amenities: <Rating icon='star' size='large' defaultRating={overAllAmen} maxRating={5} disabled /></h3>
+                        <h4>Basketball Courts: {bBallCheck}</h4>
+                        <h4>Bbq Area: {bbqAreaCheck}</h4>
+                        <h4>Dog Area: {dogAreaCheck}</h4>
+                        <h4>Running Track: {runTrackCheck}</h4>
+                        <h4>HandBall Courts: {handBallCheck}</h4>
+                        <h4>Indoor pool: {indoorPoolCheck}</h4>
+                        <h4>Outdoor pool: {outdoorPoolCheck}</h4>
                         <div style={cardHolder}>
                         {filteredEvents.map((event, i) => {
                             return (

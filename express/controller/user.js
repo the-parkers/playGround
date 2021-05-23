@@ -218,6 +218,36 @@ const ratingSubmit = (req,res) => {
   .then(response => res.status(200).json(response))}
   })
 }
+
+const getBballCourt = (req, res) => {
+  db.select('basketball_courts')
+  .then(response => res.status(200).json(response))
+}
+const getBbq = (req, res) => {
+  db.select('bbqing_areas')
+  .then(response => res.status(200).json(response))
+}
+const getDogAreas = (req, res) => {
+  db.select('dog_areas')
+  .then(response => res.status(200).json(response))
+}
+const getRunTracks = (req, res) => {
+  db.select('running_track')
+  .then(response => res.status(200).json(response))
+}
+const getHandBall = (req, res) => {
+  db.select('handball_courts')
+  .then(response => res.status(200).json(response))
+}
+const getIndoorPool = (req, res) => {
+  db.select('indoor_pool')
+  .then(response => res.status(200).json(response))
+}
+const getOutdoorPool = (req, res) => {
+  db.select('outdoor_pool')
+  .then(response => res.status(200).json(response))
+}
+
 const eventSubmit = (req,res) => {
   const user = JSON.parse(req.body.formData)
   jwt.verify(user.user_id, keys.key, function(err, decoded) {
@@ -454,5 +484,12 @@ const verifySession = (req,res) => {
      ratingSubmit,
      getRatings,
      eventSubmit,
-     getUserEvents
+     getUserEvents,
+     getBballCourt,
+     getBbq,
+     getDogAreas,
+     getRunTracks,
+     getHandBall,
+     getIndoorPool,
+     getOutdoorPool
 }

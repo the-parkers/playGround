@@ -77,10 +77,8 @@ const postFavorite = (req,res) => {
 //   .then(response => res.status(200).json(response))
 // }
 
-
 module.exports = {
     imageUpload,
     postFavorite,
     parkevents,
-    // getUserEvents
 }
