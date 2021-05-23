@@ -13,9 +13,17 @@ async function select(tableName) {
     const data = await db.select().table(tableName)
     return data
 }
+async function join(user_id) {
+    const data = await db('favorites')
+  .join('parks', 'favorites.park_id', '=', 'parks.id')
+  .where('favorites.user_id', user_id)
+  .select('*')
+  return data
+}
 
 module.exports = {
     add,
     query,
-    select
+    select,
+    join
 }
