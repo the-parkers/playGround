@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const login =  (req,res) => {
     db.query('users','email',req.body.email)
     .then(async user => {
+      if(user.length) {
         const match = await bcrypt.compare(req.body.password, user[0].encrypted_password);
         if(match) {
             const id = user[0].id
@@ -18,16 +19,20 @@ const login =  (req,res) => {
         }else {
             res.status(404).json(match)
         }
+      }else {
+        res.status(202).json({Auth:false})
+      }
     })
   }
 const signUp = async (req,res) => {
     try {
-        await bcrypt.hash(req.body.password, saltRounds).then(async hash => {
-            const {email,firstName: first_name,lastName: last_name} = req.body
-            db.query('users','email',req.body.email)
+      const {email,firstName: first_name,lastName: last_name,password} = JSON.parse(req.body.formData)
+        await bcrypt.hash(password, saltRounds).then(async hash => {
+            db.query('users','email',email)
             .then(response => {
               if(!response.length) {
-                  db.add({email,first_name,last_name,encrypted_password: hash,user_image: null},'users')
+                const {imageUpload} = req.files
+                  db.add({email,first_name,last_name,encrypted_password: hash,user_image: imageUpload.data},'users')
                     .then(user => {
                       const id = user[0].id
                     const token = jwt.sign({id}, keys.key);
@@ -52,7 +57,20 @@ const basketball = (req, res) => {
         }));
         res.sendStatus(200)
     }
-
+const favorites = (req, res) => {  
+  // console.log(req)
+  // db.query('favorites','email',req.body.email)
+  // .then(async user => {
+  //     const match = await bcrypt.compare(req.body.password, user[0].encrypted_password);
+  //     if(match) {
+  //         const id = user[0].id
+  //         const token = jwt.sign({id}, keys.key);
+  //         res.status(202).json({Auth:match,Token: token})
+  //     }else {
+  //         res.status(404).json(match)
+  //     }
+  // })
+  }
 const parks = (req, res) => {
     fetch('https://data.cityofnewyork.us/api/geospatial/k2ya-ucmv?method=export&format=GeoJSON')
         .then(response => response.json())
@@ -124,15 +142,15 @@ const dog_areas = (req, res) => {
         }));
         res.sendStatus(200)
     }
-const park_events = (req, res) => {  
-    fetch('https://www.nycgovparks.org/xml/events_300_rss.json')
-        .then(response => response.json())
-        .then(json => json.forEach(data => {
-           const {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = data
-          db.add({title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image},'park_events')
-        }));
-        res.sendStatus(200)
-    }
+// const park_events = (req, res) => {  
+//     fetch('https://www.nycgovparks.org/xml/events_300_rss.json')
+//         .then(response => response.json())
+//         .then(json => json.forEach(data => {
+//            const {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = data
+//           db.add({title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image},'park_events')
+//         }));
+//         res.sendStatus(200)
+//     }
 const fillDb = (req, res) => { 
     fetch('https://www.nycgovparks.org/bigapps/DPR_Basketball_001.json')
       .then(response => response.json())
@@ -176,12 +194,12 @@ const fillDb = (req, res) => {
          const {Name: name,Address: address,DogRuns_Type: dogruns_type} = data
         db.add({name,address,dogruns_type},'dog_areas')
       }));
-      fetch('https://www.nycgovparks.org/xml/events_300_rss.json')
-      .then(response => response.json())
-      .then(json => json.forEach(data => {
-         const {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = data
-        db.add({title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image},'park_events')
-      }));
+      // fetch('https://www.nycgovparks.org/xml/events_300_rss.json')
+      // .then(response => response.json())
+      // .then(json => json.forEach(data => {
+      //    const {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = data
+      //   db.add({title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image},'park_events')
+      // }));
       res.sendStatus(200)
   }
 const parksData = (req,res) => {
@@ -200,9 +218,20 @@ const ratingSubmit = (req,res) => {
   .then(response => res.status(200).json(response))}
   })
 }
+const eventSubmit = (req,res) => {
+  jwt.verify(req.body.user_id, keys.key, function(err, decoded) {
+    if(decoded){
+      req.body.user_id = decoded.id
+      console.log(req.body)
+  db.add(req.body, 'events')
+  .then(response => res.status(200).json(response))
+}
+  })
+}
 const getRatings = (req, res) => {
   db.select('ratings')
-  .then(response => res.status(200).json(response))
+  .then(response => {
+    res.status(200).json(response)})
 }
 
 const fixthem = async (req,res) => {
@@ -391,9 +420,11 @@ const verifySession = (req,res) => {
       db.query('users','id',decoded.id)
       .then(response => {
         if(response.length) {
-          if(response[0].email === User) {
+          if(response[0].email.trim() === User) {
             delete response[0].encrypted_password
             res.status(200).json({Auth: true,User: response[0]})
+          }else {
+            res.status(200).json({Auth: false})
           }
         }else {
           res.status(200).json({Auth: false})
@@ -415,12 +446,13 @@ const verifySession = (req,res) => {
      running_track,
      bbqing_areas,
      dog_areas,
-     park_events,
      fillDb,
      parksData,
+     favorites,
      fixthem,
      verifySession,
      getEvents,
      ratingSubmit,
-     getRatings
+     getRatings,
+     eventSubmit
 }

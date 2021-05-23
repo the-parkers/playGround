@@ -1,6 +1,8 @@
 const db = require('../model/Knex');
 const jwt = require('jsonwebtoken');
-const keys = require('../auth/auth');
+const keys = require('../auth/auth')
+const fetch = require('node-fetch');
+const bcrypt = require('bcrypt');
 
 const imageUpload = (req,res) => {
     if(req.files) {
@@ -25,8 +27,41 @@ const imageUpload = (req,res) => {
         });
     }
   }
+const parkevents = async (req,res) => {
+  await fetch('https://www.nycgovparks.org/xml/events_300_rss.json')
+  .then(response => response.json())
+  .then(json => {
+      json = json.map(result => {
+        let {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,image} = result
+        coordinates = coordinates.split(' ')
+        const latitude = Number(coordinates[0].slice(0, -1)).toFixed(3);
+        let longitude = Number(coordinates[1]).toFixed(3)
+        if(longitude === 'NaN') {
+          longitude = Number(coordinates[1].slice(0, -1)).toFixed(3);
+        }
+        result = {title,description,parknames,startdate,enddate,starttime,endtime,location,coordinates,latitude,longitude,image}
+        return result
+      })
+      db.select('parks')
+      .then(response => {
+        response.forEach(data => {     
+            data.park_latitude = Number(data.park_latitude).toFixed(3)
+            data.park_longitude = Number(data.park_longitude).toFixed(3)
+              const obj = json.filter(item => item.latitude == data.park_latitude && item.longitude == data.park_longitude)
+              if(obj.length) {
+                obj.forEach(item => {
+                  item.park_name = data.park_name
+                  
+                  db.add(item,'park_events')
+                })
+              }
+        })
+      })
+  })
+  res.sendStatus(201)
+}
 const postFavorite = (req,res) => {
-    // console.log(req.body)
+    console.log(req.body)
     
     if(!req.body)res.sendStatus(404);
     jwt.verify(req.body.user_id, keys.key, function(err, decoded) {
@@ -65,9 +100,36 @@ const favorites = (req,res) => {
     //     }
     // })
     // }
-
+const updateProfile = (req,res) => {
+  const {firstName:first_name,lastName:last_name,email,password,user} = req.body
+  db.query('users','email',user)
+            .then(async response => {
+              const match = await bcrypt.compare(password, response[0].encrypted_password);
+              if(match) {
+                db.query('users','email',email)
+                .then(result => {
+                   if(!result.length) {
+                     db.updateTo({first_name,last_name,email},'users','id',response[0].id)
+                     .then(nxtData => {
+                       delete nxtData[0].encrypted_password
+                       delete nxtData[0].id
+                       delete nxtData[0].user_image
+                      res.status(200).json({Auth:match,User:nxtData[0]})
+                     })
+                  }else {
+                    console.log('email exist',result) 
+                    res.status(200).json({Auth:match,Duplicate:true,message: 'make it wrk'})
+                  }
+                })
+              }else {
+                res.status(200).json({Auth:match,message: 'Wrong Password'})
+              }
+            })
+}
 module.exports = {
     imageUpload,
     postFavorite,
+    parkevents,
+    updateProfile,
     favorites
 }

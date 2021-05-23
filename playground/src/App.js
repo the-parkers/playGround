@@ -8,10 +8,10 @@ import SpecificPark from './components/SpecificPark'
 import { Switch, Route } from 'react-router-dom'
 import UserPage from './components/UserPage';
 
-import Favorites from "./components/Favorites";
-import Events from "./components/Events"
-import { useContext } from "react"
-import PlayGroundContext from "./context/PlayGroundContext"
+// import Favorites from "./components/Favorites";
+// import Events from "./components/Events"
+// import { useContext } from "react"
+// import PlayGroundContext from "./context/PlayGroundContext"
 
 
 function App() {

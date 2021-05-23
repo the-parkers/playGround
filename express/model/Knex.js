@@ -27,7 +27,10 @@ async function update(tableName,userId,obj) {
     .returning('*')
     return data
 }
-
+async function updateTo(obj,table,column,location) {
+    const data = await db(table).update(obj).where(column, location).returning('*')
+    return data
+}
 
 
 
@@ -37,5 +40,6 @@ module.exports = {
     query,
     select,
     join,
-    update
+    update,
+    updateTo
 }

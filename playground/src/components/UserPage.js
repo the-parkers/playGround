@@ -1,9 +1,9 @@
 import Button from "./Button"
 import User from "./User"
-import { Route, Switch } from "react-router";
-import Favorites from "./Favorites";
-import Events from "./Events"
-import {Link} from 'react-router-dom'
+// import { Route, Switch } from "react-router";
+// import Favorites from "./Favorites";
+// import Events from "./Events"
+// import {Link} from 'react-router-dom'
 import {useState} from 'react'
 
 const style = {

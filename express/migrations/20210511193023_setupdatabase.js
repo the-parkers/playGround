@@ -9,11 +9,11 @@ exports.up = function(knex) {
     CREATE TABLE running_track (id SERIAL PRIMARY KEY, name TEXT, location TEXT, latitude TEXT, longitude TEXT, size TEXT, track_type TEXT);
     CREATE TABLE bbqing_areas (id SERIAL PRIMARY KEY, Name TEXT, location TEXT);
     CREATE TABLE dog_areas (id SERIAL PRIMARY KEY, Name TEXT, Address TEXT, DogRuns_Type TEXT);
-    CREATE TABLE park_events (id SERIAL PRIMARY KEY, title TEXT, description TEXT, parknames TEXT, startdate TEXT, enddate TEXT, starttime TEXT, endtime TEXT, location TEXT, coordinates TEXT, image TEXT);
+    CREATE TABLE park_events (id SERIAL PRIMARY KEY, title TEXT, description TEXT, parknames TEXT, startdate TEXT, enddate TEXT, starttime TEXT, endtime TEXT, location TEXT, coordinates TEXT, image TEXT,latitude TEXT, longitude TEXT,park_name TEXT);
 
     CREATE TABLE favorites (id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), park_id INT REFERENCES parks(id));
     CREATE TABLE ratings (id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), park_id INT REFERENCES parks(id), cleanliness_rating INT, amenities_rating INT, location_rating INT);
-    CREATE TABLE events (id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), park_id INT REFERENCES parks(id), event_time TIME, event_date DATE);
+    CREATE TABLE events (id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), park_id INT REFERENCES parks(id), title TEXT, park_name TEXT, description TEXT, starttime TIME, endtime TIME, startdate DATE, location TEXT, image BYTEA);
     `
     return knex.raw(initQuery)
 };
