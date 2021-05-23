@@ -22,7 +22,6 @@ function HomePage(){
   })
   useEffect(()=> {
     const user = localStorage.getItem('user')
-    console.log('local',user)
     if(user) {
     const options = {
       method: 'post',

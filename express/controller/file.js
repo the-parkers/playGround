@@ -2,6 +2,7 @@ const db = require('../model/Knex');
 const jwt = require('jsonwebtoken');
 const keys = require('../auth/auth')
 const fetch = require('node-fetch');
+const bcrypt = require('bcrypt');
 
 const imageUpload = (req,res) => {
     if(req.files) {
@@ -72,13 +73,36 @@ const postFavorite = (req,res) => {
         }
     })
 }
-// const getUserEvents = (req,res) => {
-//   db.select('events')
-//   .then(response => res.status(200).json(response))
-// }
+
+const updateProfile = (req,res) => {
+  const {firstName:first_name,lastName:last_name,email,password,user} = req.body
+  db.query('users','email',user)
+            .then(async response => {
+              const match = await bcrypt.compare(password, response[0].encrypted_password);
+              if(match) {
+                db.query('users','email',email)
+                .then(result => {
+                   if(!result.length) {
+                     db.updateTo({first_name,last_name,email},'users','id',response[0].id)
+                     .then(nxtData => {
+                       delete nxtData[0].encrypted_password
+                       delete nxtData[0].id
+                       delete nxtData[0].user_image
+                      res.status(200).json({Auth:match,User:nxtData[0]})
+                     })
+                  }else {
+                    console.log('email exist',result) 
+                    res.status(200).json({Auth:match,Duplicate:true,message: 'make it wrk'})
+                  }
+                })
+              }else {
+                res.status(200).json({Auth:match,message: 'Wrong Password'})
+              }
+            })
+}
 
 module.exports = {
     imageUpload,
     postFavorite,
-    parkevents,
+    parkevents
 }

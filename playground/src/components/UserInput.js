@@ -1,9 +1,21 @@
-function UserOptions({type,value,setValue,id,label}) {
+import { Form } from 'react-bootstrap'
+function UserOptions({type,value,setValue,id,label,message}) {
     return (
         
         <div className="form-floating">
-            <input  type={type} value={value} className="form-control inputRadius" onChange={e => setValue(e.target.value)} id={id} required/>
-            <label htmlFor={id}>{label}</label>
+
+             <Form.Control
+            required
+            type={type}
+            id={id}
+            placeholder={label}
+            value={value}
+            onChange={e => setValue(e.target.value)}
+          />
+          <Form.Control.Feedback type="invalid">
+                {message}
+            </Form.Control.Feedback>
+
         </div>
     )
 }

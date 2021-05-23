@@ -25,7 +25,7 @@ function Parkcard(props){
     useEffect(() => {
         fetch('http://localhost:5000/getRatings')
         .then(res => res.json())
-        .then(data => setRating(data))
+        .then(data => {setRating(data)})
     }, [])
     const currentParkRating = rating.filter(parks => parks.park_id === Park.id)
     const cleanRate = []
@@ -42,12 +42,20 @@ function Parkcard(props){
     if(cleanRate.length !== 0){
     overAllClean = Math.floor((cleanRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
     overAllLoca = Math.floor((locaRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
-    overAllAmen = Math.floor((amenRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)        
+    overAllAmen = Math.floor((amenRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)   
+    
+    // useEffect(() => {
+        
+       
+    // }, [])
     }
+    
     function test(e){
         e.target.classList.value = 'heart link icon'
         postFavorite()
     }
+    
+    
     return (
             <Card onClick={e => search('')} className="park_cards" style={{ width: '18rem' }}>
                 <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Logo_of_the_New_York_City_Department_of_Parks_%26_Recreation.svg/1200px-Logo_of_the_New_York_City_Department_of_Parks_%26_Recreation.svg.png" />
