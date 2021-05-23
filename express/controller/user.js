@@ -188,6 +188,23 @@ const parksData = (req,res) => {
     db.select('parks',req.body.email)
     .then(response => res.status(200).json(response))
 }
+const getEvents = (req,res) => {
+  db.select('park_events')
+  .then(response => res.status(200).json(response))
+}
+const ratingSubmit = (req,res) => {
+  jwt.verify(req.body.user_id, keys.key, function(err, decoded) {
+    if(decoded){
+      req.body.user_id = decoded.id
+  db.add(req.body, 'ratings')
+  .then(response => res.status(200).json(response))}
+  })
+}
+const getRatings = (req, res) => {
+  db.select('ratings')
+  .then(response => res.status(200).json(response))
+}
+
 const fixthem = async (req,res) => {
   await fetch('https://www.nycgovparks.org/bigapps/DPR_Basketball_001.json')
   .then(response => response.json())
@@ -261,7 +278,6 @@ const fixthem = async (req,res) => {
           }
         }
       })
-
     })
   })
   await fetch('https://www.nycgovparks.org/bigapps/DPR_Handball_001.json')
@@ -374,8 +390,13 @@ const verifySession = (req,res) => {
     if(decoded) {
       db.query('users','id',decoded.id)
       .then(response => {
-        if(response[0].email === User) {
-          res.status(200).json({Auth: true})
+        if(response.length) {
+          if(response[0].email === User) {
+            delete response[0].encrypted_password
+            res.status(200).json({Auth: true,User: response[0]})
+          }
+        }else {
+          res.status(200).json({Auth: false})
         }
       })
     }else {
@@ -398,5 +419,8 @@ const verifySession = (req,res) => {
      fillDb,
      parksData,
      fixthem,
-     verifySession
+     verifySession,
+     getEvents,
+     ratingSubmit,
+     getRatings
 }

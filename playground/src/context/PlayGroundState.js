@@ -31,7 +31,13 @@ function PlayGround(props) {
       //       setFavorites(data)})
       // }, [])
 
-       useEffect(() => {
+    // useEffect(() => {
+    //   fetch('http://localhost:5000/basketBallData')
+    //     .then(res => res.json())
+    //     .then(data => console.log("basketball", data))
+    // }, [])
+
+    useEffect(() => {
       fetch('http://localhost:5000/parksData')
         .then(res => res.json())
         .then(data => setPlaygrounds(data))
@@ -60,7 +66,6 @@ function PlayGround(props) {
     }
   
    const filteredParks = top100Parks.filter(park => park.park_location !== null && park.park_name !== null && park.park_name.toLowerCase().includes(parkSearch.toLowerCase()))
-// console.log(filteredParks)
    const value = {
     firstName,
     setFirstName,
