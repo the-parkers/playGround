@@ -14,14 +14,17 @@ function SpecificPark(){
     const [rating, setRating] = useState([])
     const currentPark = playgrounds.find(park => park.id === Number(parkId))
 
-    // const bBallCheck = bBallCourt.filter(park => park.name === currentPark.park_name).length === 0 ? "X" : "✓"
-    // const bbqAreaCheck = bbqArea.filter(park => park.name === currentPark.park_name).length === 0 ? "X" : "✓"
 
     useEffect(() => {
         fetch('http://localhost:5000/getUserEvents')
             .then(res => res.json())
             .then(data => setEvents(data))
     },[])
+    useEffect(() => {
+        fetch('http://localhost:5000/getUserEvents')
+            .then(res => res.json())
+            .then(data => setEvents(data))
+    })
     useEffect(() => {
         fetch('http://localhost:5000/getEvents')
             .then(res => res.json())
