@@ -7,6 +7,7 @@ const file = require('../controller/file')
 
 router.get('/fixthem', user.fixthem)
 router.post('/verifySession', user.verifySession)
+router.post('/updateProfile', file.updateProfile)
 router.get('/parkevents', file.parkevents)
 router.get('/parksData',user.parksData)
 router.post('/login',user.login)
