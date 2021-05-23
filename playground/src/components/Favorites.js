@@ -1,9 +1,9 @@
 import User                   from './User';
 import {Link}                 from 'react-router-dom';
 import Button                 from "./Button";
-import { useContext }         from 'react';
-// import Parkcard               from './ParkCard';
-import PlayGroundContext      from '../context/PlayGroundContext';
+// import { useContext }         from 'react';
+// // import Parkcard               from './ParkCard';
+// import PlayGroundContext      from '../context/PlayGroundContext';
 
 const style = {
     background: 'lightgrey',
@@ -19,8 +19,8 @@ function Favorites(props){
     const switchTab = () => {
         console.log('click')
     }
-    const context = useContext(PlayGroundContext)
-    let {favorite, setFavorites} = context
+    // const context = useContext(PlayGroundContext)
+    // let {favorite, setFavorites} = context
 
     return (
       <>

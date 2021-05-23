@@ -28,6 +28,7 @@ router.get('/getEvents',user.getEvents)
 router.post('/ratingSubmit', user.ratingSubmit)
 router.get('/getRatings', user.getRatings)
 router.post('/eventSubmit', user.eventSubmit)
+router.get('/getUserEvents', user.getUserEvents)
 router.get('/', user.fillDb)
 
 module.exports = router

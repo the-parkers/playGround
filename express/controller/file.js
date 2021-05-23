@@ -62,7 +62,6 @@ const parkevents = async (req,res) => {
 }
 const postFavorite = (req,res) => {
     console.log(req.body)
-    
     if(!req.body)res.sendStatus(404);
     jwt.verify(req.body.user_id, keys.key, function(err, decoded) {
         if(decoded) {
@@ -74,6 +73,7 @@ const postFavorite = (req,res) => {
         }
     })
 }
+
 const updateProfile = (req,res) => {
   const {firstName:first_name,lastName:last_name,email,password,user} = req.body
   db.query('users','email',user)
@@ -100,9 +100,9 @@ const updateProfile = (req,res) => {
               }
             })
 }
+
 module.exports = {
     imageUpload,
     postFavorite,
-    parkevents,
-    updateProfile
+    parkevents
 }
