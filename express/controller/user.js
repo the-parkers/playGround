@@ -456,7 +456,7 @@ const verifySession = (req,res) => {
       db.query('users','id',decoded.id)
       .then(response => {
         if(response.length) {
-          if(response[0].email.trim() === User) {
+          if(response[0].email.trim() === User.trim()) {
             delete response[0].encrypted_password
             res.status(200).json({Auth: true,User: response[0]})
           }else {
