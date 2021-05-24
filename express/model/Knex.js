@@ -13,6 +13,13 @@ async function select(tableName) {
     const data = await db.select().table(tableName)
     return data
 }
+async function join(user_id) {
+    const data = await db('favorites')
+  .join('parks', 'favorites.park_id', '=', 'parks.id')
+  .where('favorites.user_id', user_id)
+  .select('*')
+  return data
+}
 async function update(tableName,userId,obj) {
     const data = await db(tableName)
     .where({ id: userId })
@@ -25,6 +32,10 @@ async function updateTo(obj,table,column,location) {
     return data
 }
 
+async function deleteFav(obj) {
+    const data = await db("favorites").where('park_id' , obj.park_id).del()
+    return data
+}
 
 
 
@@ -32,6 +43,8 @@ module.exports = {
     add,
     query,
     select,
+    join,
     update,
-    updateTo
+    updateTo,
+    deleteFav
 }

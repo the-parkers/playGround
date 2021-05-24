@@ -5,9 +5,12 @@ import { useHistory } from 'react-router'
 // import { Dropdown } from 'semantic-ui-react'
 
 function HomePage(){
+  const context = useContext(PlayGroundContext)
+  const {userFavorites} = context
+
   let history = useHistory()
   let {filteredParks, parkSearch,position, setParkSearch,setPosition} = useContext(PlayGroundContext)
-  filteredParks.length = 30
+  filteredParks.length = 20
   console.log(filteredParks)
   navigator.geolocation.getCurrentPosition((position) => {
     if(position.coords.latitude && position.coords.longitude){
@@ -63,7 +66,7 @@ function HomePage(){
       <div className="all_parks">
         {filteredParks.map((park, i) => {
           return (
-            <Parkcard key={i} Park={park} search={setParkSearch}/>
+            <Parkcard key={i} Park={park} search={setParkSearch} userFavs={userFavorites}/>
           )
         })}
       </div>  

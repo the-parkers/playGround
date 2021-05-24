@@ -1,5 +1,4 @@
 import User                   from './User';
-import {Link}                 from 'react-router-dom';
 import Button                 from "./Button";
 // import { useContext }         from 'react';
 // // import Parkcard               from './ParkCard';
@@ -15,22 +14,33 @@ const style = {
     fontWeight: 900,
 };
 function Favorites(props){
-    // console.log(props)
     const switchTab = () => {
         console.log('click')
     }
+    // function getUserFavorites(e) {
+    //     const user = localStorage.getItem('user')
+    //     const options = {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: user
+    //     }
+    //     fetch('http://localhost:5000/favoritesList', options)
+    //     .then(response => response.json())
+    //     .then(data => { 
+    //         console.log(data)
+    //     })}
+    // useEffect(getUserFavorites);
+    // console.log(props)
     // const context = useContext(PlayGroundContext)
     // let {favorite, setFavorites} = context
 
     return (
       <>
         <User src="https://semantic-ui.com/images/avatar/small/jenny.jpg" text="Test User"/>
-        <Link to={`/favorites`}>
             <Button text="Favorites" className="favoriteTab" click={switchTab}/>
-        </Link>
-        <Link to={`/events`}>
             <Button text="Events" className="eventsTab" click={switchTab}/>
-        </Link>
         <div style={style}>
             <h1>My Favorite Parks</h1>
             {/* UI list of parks, each park on a card, each park card links to park profile page, *park homepage should have ability to ❤️ a park*, ❤️ feature as well (when pressed on favs section removes the card from the favorites section)  */}
