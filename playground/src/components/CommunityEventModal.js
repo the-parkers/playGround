@@ -10,6 +10,11 @@ function CommunityEventModal(props){
     const [endtime, setEndTime] = useState("")
     const [startdate, setDate] = useState("")
     const [buffer, setBuffer] = useState([])
+    const handleBufferUpload = (e) => {
+        let {files} = e.target
+        files = files[0]
+        setBuffer(files)
+    }
     function eventSubmit(e){
         e.preventDefault()
         setModalShow(!modalShow)
@@ -23,21 +28,19 @@ function CommunityEventModal(props){
             location,
             starttime,
             endtime,
-            startdate,
-            image: buffer
+            startdate
         }
+        const formImgData = new FormData();
+        formImgData.append('imageUpload', buffer)
+        formImgData.append('formData', JSON.stringify(formData))
         const options = {
             mode:'cors',
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-                },
-        body: JSON.stringify(formData)
+            body: formImgData
         }
         fetch("http://localhost:5000/eventSubmit", options)
         .then(res => res.json())
         .then(data => console.log(data))
-        console.log(formData)
     }
     return (
         <div>
@@ -59,9 +62,9 @@ function CommunityEventModal(props){
                 <h4 htmlFor="startdate">Day of The Event</h4>
                 <input type="date"name="startdate" value={startdate} onChange={(e) => {setDate(e.target.value)}} required/>
                 <h4 htmlFor="image">Post an Image</h4>
-                <input type="file" name="image" onChange={(e) => {setBuffer(e.target.files[0])}} accept="image/*"/>
+                <input type="file" name="image" onChange={handleBufferUpload} accept="image/*"/>
                 <h5>*If you expect for there to be more than 20 people at an event then a permit will be required, you can apply for a permit with the link below</h5>
-                <a href="https://nyceventpermits.nyc.gov/parks/Login.aspx?ReturnUrl=%2fParks%2f">Permit Link</a>
+                <a href="https://nyceventpermits.nyc.gov/parks/Login.aspx?ReturnUrl=%2fParks%2f" target="_blank" rel="noopener noreferrer">Permit Link</a>
             </Modal.Body>
                 <Modal.Footer>
                     <span>All Good?</span>

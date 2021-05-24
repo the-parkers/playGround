@@ -210,6 +210,10 @@ const getEvents = (req,res) => {
   db.select('park_events')
   .then(response => res.status(200).json(response))
 }
+const getUserEvents = (req,res) => {
+  db.select('events')
+  .then(response => res.status(200).json(response))
+}
 const ratingSubmit = (req,res) => {
   jwt.verify(req.body.user_id, keys.key, function(err, decoded) {
     if(decoded){
@@ -218,12 +222,44 @@ const ratingSubmit = (req,res) => {
   .then(response => res.status(200).json(response))}
   })
 }
+
+const getBballCourt = (req, res) => {
+  db.select('basketball_courts')
+  .then(response => res.status(200).json(response))
+}
+const getBbq = (req, res) => {
+  db.select('bbqing_areas')
+  .then(response => res.status(200).json(response))
+}
+const getDogAreas = (req, res) => {
+  db.select('dog_areas')
+  .then(response => res.status(200).json(response))
+}
+const getRunTracks = (req, res) => {
+  db.select('running_track')
+  .then(response => res.status(200).json(response))
+}
+const getHandBall = (req, res) => {
+  db.select('handball_courts')
+  .then(response => res.status(200).json(response))
+}
+const getIndoorPool = (req, res) => {
+  db.select('indoor_pool')
+  .then(response => res.status(200).json(response))
+}
+const getOutdoorPool = (req, res) => {
+  db.select('outdoor_pool')
+  .then(response => res.status(200).json(response))
+}
+
 const eventSubmit = (req,res) => {
-  jwt.verify(req.body.user_id, keys.key, function(err, decoded) {
+  const user = JSON.parse(req.body.formData)
+  jwt.verify(user.user_id, keys.key, function(err, decoded) {
     if(decoded){
       req.body.user_id = decoded.id
-      console.log(req.body)
-  db.add(req.body, 'events')
+      user.image = req.files.imageUpload.data
+      user.user_id = decoded.id
+  db.add(user, 'events')
   .then(response => res.status(200).json(response))
 }
   })
@@ -454,5 +490,13 @@ const verifySession = (req,res) => {
      getEvents,
      ratingSubmit,
      getRatings,
-     eventSubmit
+     eventSubmit,
+     getUserEvents,
+     getBballCourt,
+     getBbq,
+     getDogAreas,
+     getRunTracks,
+     getHandBall,
+     getIndoorPool,
+     getOutdoorPool
 }
