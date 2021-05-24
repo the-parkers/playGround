@@ -35,8 +35,6 @@ router.get('/getBbq', user.getBbq)
 router.get('/getDogAreas', user.getDogAreas)
 router.get('/getRunTracks', user.getRunTracks)
 router.get('/getHandBall', user.getHandBall)
-router.get('/getIndoorPool', user.getIndoorPool)
-router.get('/getOutdoorPool', user.getOutdoorPool)
 router.get('/', user.fillDb)
 
 module.exports = router
