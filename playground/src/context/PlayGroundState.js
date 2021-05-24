@@ -18,7 +18,14 @@ function PlayGround(props) {
   const [handBallCourt, setHandBallCourt] = useState([])
   const [indoorPool, setIndoorPool] = useState([])
   const [outdoorPool, setOutdoorPool] = useState([])
+  const [userFavorites, setUserFavorites] = useState([])
+  const [events, setEvents] = useState([])
 
+  useEffect(() => {
+    fetch('http://localhost:5000/getUserEvents')
+        .then(res => res.json())
+        .then(data => setEvents(data))
+},[])
 
   useEffect(() => {
     fetch('http://localhost:5000/getBballCourt')
@@ -91,6 +98,24 @@ function PlayGround(props) {
       setTop100Parks(playgrounds)
 
     }
+    
+
+      useEffect(() => {
+          const user = localStorage.getItem('user')
+          const options = {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: user
+          }
+          fetch('http://localhost:5000/favoritesList', options)
+          .then(response => response.json())
+          .then(data => { 
+             setUserFavorites(data)
+          })
+    },[])
+
    const filteredParks = top100Parks.filter(park => park.park_location !== null && park.park_name !== null && park.park_name.toLowerCase().includes(parkSearch.toLowerCase()))
    const value = {
     firstName,
@@ -116,7 +141,11 @@ function PlayGround(props) {
     runTracks,
     handBallCourt,
     indoorPool,
-    outdoorPool
+    outdoorPool,
+    userFavorites, 
+    setUserFavorites,
+    events,
+    setEvents
    }
     return(
         <PlayGroundContext.Provider value={value}>

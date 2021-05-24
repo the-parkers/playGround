@@ -26,15 +26,7 @@ function App() {
           <Route component={Navbar}/>
           <Route exact path='/parks/:parkId' component={SpecificPark}/>
           <Route exact path='/parks' component={HomePage}/>
-          <Route path='/user' render={props =>
-  <div>
-    <UserPage />
-    {/* <Favorites /> */}
-  </div>
-}/>
-
-          {/* <Route path={"/favorites"} component={Favorites} />
-          <Route path="/events" component={Events} /> */}
+          <Route path='/users/:id'  component={UserPage}/>
         </>
       </Switch>
     </div>

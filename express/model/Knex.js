@@ -32,6 +32,10 @@ async function updateTo(obj,table,column,location) {
     return data
 }
 
+async function deleteFav(obj) {
+    const data = await db("favorites").where('park_id' , obj.park_id).del()
+    return data
+}
 
 
 
@@ -41,5 +45,6 @@ module.exports = {
     select,
     join,
     update,
-    updateTo
+    updateTo,
+    deleteFav
 }

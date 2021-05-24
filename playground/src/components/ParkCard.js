@@ -1,8 +1,8 @@
 import { Icon,Rating } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
-import { useEffect, useState } from 'react'
-// import User from './User'
+import {  useEffect, useState } from 'react'
+
 
 
 // function Parkcard(props){
@@ -26,8 +26,25 @@ import { useEffect, useState } from 'react'
 // import User from './User'
 
 function Parkcard(props){
-    const {Park ,search} = props
+    const {Park ,search, userFavs} = props
     const [rating, setRating] = useState([])
+    const favs = userFavs.filter(favorite => 
+        favorite.park_id === Park.id
+        )
+    let iconHeart = false;
+    if(favs.length) {
+        iconHeart = true;
+    } 
+    function deleteFavorite(obj){
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj[0])
+        }
+        fetch('http://localhost:5000/deleteFavorite', options)
+    }
     function postFavorite(e){
         const user = JSON.parse(localStorage.getItem('user'))
         const formData = {
@@ -64,9 +81,16 @@ function Parkcard(props){
     overAllLoca = Math.floor((locaRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
     overAllAmen = Math.floor((amenRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)       
     
+    
+
     function test(e){
-        e.target.classList.value = 'heart link icon'
-        postFavorite()
+        if(e.target.classList.value === "heart outline link icon"){
+                postFavorite()
+                e.target.classList.value = "heart link icon"
+        } else {
+            deleteFavorite(favs)
+            e.target.classList.value =  "heart outline link icon"
+        }
     }
     if(rating.length !== 0){
 
@@ -88,7 +112,7 @@ function Parkcard(props){
                             <h4>Cleanliness: <Rating  size='small' defaultRating={overAllClean} maxRating={5} disabled /></h4>
                             <h4>Location: <Rating   size='small' defaultRating={overAllLoca} maxRating={5} disabled /></h4>
                             <h4>Amenities: <Rating  size='small' defaultRating={overAllAmen} maxRating={5} disabled /></h4>
-                            <Icon link name='heart outline' onClick={test} />
+                            <Icon link name = {(iconHeart ? 'heart': 'heart outline')} onClick={test}  />
                         </Card.Subtitle>
                     </Card.Body>
                 </Card>  

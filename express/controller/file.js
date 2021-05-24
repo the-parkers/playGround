@@ -60,6 +60,9 @@ const parkevents = async (req,res) => {
   })
   res.sendStatus(201)
 }
+const deleteFavorite = (req,res) => {
+  db.deleteFav(req.body)
+}
 const postFavorite = (req,res) => {
     console.log(req.body)
     if(!req.body)res.sendStatus(404);
@@ -75,6 +78,7 @@ const postFavorite = (req,res) => {
 }
 
 const favorites = (req,res) => {
+  
     jwt.verify(req.body.Token, keys.key, function(err, decoded) {
         if(decoded) {
                db.join(decoded.id)
@@ -131,5 +135,6 @@ module.exports = {
     postFavorite,
     parkevents,
     updateProfile,
-    favorites
+    favorites,
+    deleteFavorite
 }

@@ -4,7 +4,11 @@ import User from "./User"
 // import Favorites from "./Favorites";
 // import Events from "./Events"
 // import {Link} from 'react-router-dom'
-import {useState} from 'react'
+import {useContext, useState, useEffect} from 'react';
+import PlayGroundContext from '../context/PlayGroundContext'
+import { Card } from 'semantic-ui-react';
+import EventCard from './EventCard'
+
 
 const style = {
     background: 'lightgrey',
@@ -15,14 +19,18 @@ const style = {
     marginRight: "auto",
     fontWeight: 900,
 };
-function UserPage() {
-    const [favEvents, setFavEvents] = useState(true)
-    const switchTab = () => {
-        console.log(favEvents)
-        // if(favEvents === ){
 
-        // }
-        setFavEvents(!favEvents) 
+function UserPage() {
+    const context = useContext(PlayGroundContext)
+    const {userFavorites, events} = context
+        console.log(events)
+    const [favEvents, setFavEvents] = useState(true)
+    const switchTab = (e) => {
+        if(e.target.className === "eventsTab"){
+            setFavEvents(false) 
+        } else {
+            setFavEvents(true)
+        } 
     }
     
     return (
@@ -31,14 +39,40 @@ function UserPage() {
                 <Button text="Favorites" className="favoriteTab" click={switchTab}/> 
                 <Button text="Events" className="eventsTab" click={switchTab}/>
             <div>
-                
-                {/* <Switch>
-                    <Route path={["/favorites"]} component={Favorites} />
-                    <Route path="/events" component={Events} />
-                </Switch> */}
             </div>
             <div style={style}>
-            {favEvents ? <h1>My Favorite Parks</h1> : <h1>Events Section</h1>}
+            {favEvents ? 
+            <>
+            <h1>My Favorite Parks</h1> 
+            <Card.Group centered>
+            {userFavorites.map((favs) => {
+               return  <Card key= {favs.id}>
+                 <Card.Content header= {favs.park_name}  
+                 description={favs.park_location}
+                 meta={favs.park_borough}
+                  />
+
+                 <Card.Content extra>
+                     {favs.park_zipcode}
+                     <hr/> {favs.subcategory}
+                   {/* <Icon name='user' />4 Friends */}
+                 </Card.Content>
+               </Card>
+            })}
+            </Card.Group>
+            </>
+            : 
+            <>
+            <h1>Events Section</h1>
+            <Card.Group centered>
+            {events.map((event, i) => {
+            
+            return <EventCard key={i} event={event}/> 
+            }       
+            )}
+            </Card.Group>
+            </>
+            }
         </div>
         </div>
     )

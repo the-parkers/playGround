@@ -10,16 +10,13 @@ function SpecificPark(){
     let { parkId } = useParams()
     let { playgrounds,bBallCourt,bbqArea,dogAreas,runTracks,handBallCourt,indoorPool,outdoorPool } = useContext(PlayGroundContext)
     const [parkEvents, setParkEvents] = useState([])
-    const [events, setEvents] = useState([])
+    
     const [rating, setRating] = useState([])
     const currentPark = playgrounds.find(park => park.id === Number(parkId))
+    const context = useContext(PlayGroundContext)
+    const {events} = context
 
-
-    useEffect(() => {
-        fetch('http://localhost:5000/getUserEvents')
-            .then(res => res.json())
-            .then(data => setEvents(data))
-    },[])
+    
     useEffect(() => {
         fetch('http://localhost:5000/getUserEvents')
             .then(res => res.json())
