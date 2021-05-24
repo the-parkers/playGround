@@ -8,6 +8,7 @@ function HomePage(){
   let history = useHistory()
   let {filteredParks, parkSearch,position, setParkSearch,setPosition} = useContext(PlayGroundContext)
   filteredParks.length = 30
+  console.log(filteredParks)
   navigator.geolocation.getCurrentPosition((position) => {
     if(position.coords.latitude && position.coords.longitude){
       if(!position.lat) {
