@@ -8,6 +8,7 @@ function HomePage(){
   let history = useHistory()
   let {filteredParks, parkSearch,position, setParkSearch,setPosition} = useContext(PlayGroundContext)
   filteredParks.length = 30
+  console.log(filteredParks)
   navigator.geolocation.getCurrentPosition((position) => {
     if(position.coords.latitude && position.coords.longitude){
       if(!position.lat) {
@@ -18,7 +19,6 @@ function HomePage(){
     if(!position.lat) {
       setPosition((prev) => ({...prev,lat:40.8002663,lon:-73.9577346}))
     }
-      
   })
   useEffect(()=> {
     const user = localStorage.getItem('user')
