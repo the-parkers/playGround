@@ -47,6 +47,7 @@ function Parkcard(props){
         e.target.classList.value = 'heart link icon'
         postFavorite()
     }
+    console.log(rating)
     if(rating.length !== 0){
 
         return (
