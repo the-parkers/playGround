@@ -36,7 +36,7 @@ function SpecificPark(){
         .then(data => setRating(data))
     }, [])
     
-    if(playgrounds.length) {
+    if(playgrounds.length && rating.length) {
             const latitude = currentPark.park_latitude
             const longitude = currentPark.park_longitude
             const myStyle={width:"600px", height:"450px", style:"border:0", allowfullscreen:"", loading:"lazy"}
@@ -52,10 +52,13 @@ function SpecificPark(){
             let overAllClean = 5
             let overAllLoca = 5
             let overAllAmen = 5
+            let average = 0
             if(cleanRate.length !== 0){
             overAllClean = Math.floor((cleanRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
             overAllLoca = Math.floor((locaRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
-            overAllAmen = Math.floor((amenRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)        
+            overAllAmen = Math.floor((amenRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length) 
+            average = Math.floor(overAllAmen + overAllLoca + overAllClean / 3)
+            console.log(average)
             }
             const cardHolder = {
                 display: 'flex',
@@ -71,7 +74,6 @@ function SpecificPark(){
             const handBallCheck = handBallCourt.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
             const indoorPoolCheck = indoorPool.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
             const outdoorPoolCheck = outdoorPool.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
-
             return (
                 <div>
                     <h1>{currentPark.park_name}</h1>

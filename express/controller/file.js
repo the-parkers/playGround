@@ -104,5 +104,6 @@ const updateProfile = (req,res) => {
 module.exports = {
     imageUpload,
     postFavorite,
-    parkevents
+    parkevents,
+    updateProfile
 }
