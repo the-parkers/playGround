@@ -8,18 +8,15 @@ import { Rating } from 'semantic-ui-react'
 
 function SpecificPark(){
     let { parkId } = useParams()
-    let { playgrounds,bBallCourt,bbqArea,dogAreas,runTracks,handBallCourt,indoorPool,outdoorPool } = useContext(PlayGroundContext)
+    let { playgrounds,bBallCourt,bbqArea,dogAreas,runTracks,handBallCourt } = useContext(PlayGroundContext)
     const [parkEvents, setParkEvents] = useState([])
-    const [events, setEvents] = useState([])
+    
     const [rating, setRating] = useState([])
     const currentPark = playgrounds.find(park => park.id === Number(parkId))
+    const context = useContext(PlayGroundContext)
+    const {events} = context
 
-
-    useEffect(() => {
-        fetch('http://localhost:5000/getUserEvents')
-            .then(res => res.json())
-            .then(data => setEvents(data))
-    },[])
+    
     useEffect(() => {
         fetch('http://localhost:5000/getUserEvents')
             .then(res => res.json())
@@ -69,8 +66,6 @@ function SpecificPark(){
             const dogAreaCheck = dogAreas.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
             const runTrackCheck = runTracks.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
             const handBallCheck = handBallCourt.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
-            const indoorPoolCheck = indoorPool.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
-            const outdoorPoolCheck = outdoorPool.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
             return (
                 <div>
                     <h1>{currentPark.park_name}</h1>
@@ -85,8 +80,6 @@ function SpecificPark(){
                         <h4>Dog Area: {dogAreaCheck}</h4>
                         <h4>Running Track: {runTrackCheck}</h4>
                         <h4>HandBall Courts: {handBallCheck}</h4>
-                        <h4>Indoor pool: {indoorPoolCheck}</h4>
-                        <h4>Outdoor pool: {outdoorPoolCheck}</h4>
                         <div style={cardHolder}>
                         {filteredEvents.map((event, i) => {
                             return (
