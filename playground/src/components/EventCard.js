@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card'
 
 function EventCard(props){
     const {event} = props
+    console.log(event)
     const {starttime, endtime} = event
         let time = starttime.split(":")
         let hours = Number(time[0])
@@ -34,10 +35,11 @@ function EventCard(props){
     if(event.startdate.length > 15){
     date = date.substring(0, date.length - 14)        
     }
+    let image = ""
     if(event.image){
-    const content = Buffer.from(event.image.data)
+    const content = Buffer.from(event.image)
     const string64 = content.toString('base64')
-    event.image = `data:image/png;base64,${string64}`
+    image = `data:image/png;base64,${string64}`
     }
     return (
     <div style={{ display: 'flex', margin:'10px'}}>
@@ -50,7 +52,7 @@ function EventCard(props){
             <h4>{event.description}</h4>
             </div>
         </Card>    
-        <img style={{ height: '15rem'}}src={event.image} alt=""/>
+        <img style={{ height: '15rem'}}src={image} alt=""/>
         </div>
     )
 }

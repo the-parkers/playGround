@@ -257,7 +257,11 @@ const eventSubmit = (req,res) => {
   jwt.verify(user.user_id, keys.key, function(err, decoded) {
     if(decoded){
       req.body.user_id = decoded.id
-      user.image = req.files.imageUpload.data
+      if(req.files){
+        user.image = req.files.imageUpload.data
+      } else {
+        user.image = null
+      }
       user.user_id = decoded.id
   db.add(user, 'events')
   .then(response => res.status(200).json(response))
@@ -468,7 +472,7 @@ const verifySession = (req,res) => {
       })
     }else {
       res.status(200).json({Auth: false})
-    } // bar
+    }
   });
 }
   module.exports = {

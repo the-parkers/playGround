@@ -19,7 +19,6 @@ function HomePage(){
     if(!position.lat) {
       setPosition((prev) => ({...prev,lat:40.8002663,lon:-73.9577346}))
     }
-      
   })
   useEffect(()=> {
     const user = localStorage.getItem('user')

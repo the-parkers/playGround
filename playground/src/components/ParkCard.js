@@ -39,7 +39,6 @@ function Parkcard(props){
     let overAllClean = 5
     let overAllLoca = 5
     let overAllAmen = 5
-    if(rating.length !== 0){
     overAllClean = Math.floor((cleanRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
     overAllLoca = Math.floor((locaRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
     overAllAmen = Math.floor((amenRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)       
@@ -48,8 +47,8 @@ function Parkcard(props){
         e.target.classList.value = 'heart link icon'
         postFavorite()
     }
-    
-    
+    if(rating.length !== 0){
+
         return (
                 <Card onClick={e => search('')} className="park_cards" style={{ width: '18rem' }}>
                     <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Logo_of_the_New_York_City_Department_of_Parks_%26_Recreation.svg/1200px-Logo_of_the_New_York_City_Department_of_Parks_%26_Recreation.svg.png" />
@@ -73,7 +72,7 @@ function Parkcard(props){
                 </Card>  
         )
     }else{
-       return null
+        return null
 }
 }
 

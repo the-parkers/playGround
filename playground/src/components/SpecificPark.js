@@ -23,8 +23,8 @@ function SpecificPark(){
     useEffect(() => {
         fetch('http://localhost:5000/getUserEvents')
             .then(res => res.json())
-            .then(data => setEvents(data))
-    })
+            .then(data => console.log(data))
+    },[])
     useEffect(() => {
         fetch('http://localhost:5000/getEvents')
             .then(res => res.json())
@@ -52,13 +52,10 @@ function SpecificPark(){
             let overAllClean = 5
             let overAllLoca = 5
             let overAllAmen = 5
-            let average = 0
             if(cleanRate.length !== 0){
             overAllClean = Math.floor((cleanRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
             overAllLoca = Math.floor((locaRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
-            overAllAmen = Math.floor((amenRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length) 
-            average = Math.floor(overAllAmen + overAllLoca + overAllClean / 3)
-            console.log(average)
+            overAllAmen = Math.floor((amenRate.reduce((acc,cur) => acc + cur, 0)) / currentParkRating.length)
             }
             const cardHolder = {
                 display: 'flex',
