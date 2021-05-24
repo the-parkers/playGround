@@ -31,6 +31,7 @@ function HomePage(){
     fetch('http://localhost:5000/verifySession',options)
     .then(response => response.json())
     .then(data => {
+      console.log(data)
       if(!data.Auth) {
         history.push('/')
       }
