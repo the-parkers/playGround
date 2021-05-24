@@ -1,4 +1,3 @@
-import Logo from "./Logo"
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext, useState} from 'react'
@@ -60,7 +59,7 @@ function SignUpPage() {
     return (
         <div className="welcomeImage">
             <div className="signUpPage">
-                <Logo/>
+              <h1>What are you waitng for? The parks are waiting!</h1>
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                     <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName" label="FirstName" message="FirstName is required"/>
                     <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName" message="LastName is required"/>
@@ -85,6 +84,7 @@ function SignUpPage() {
                 <Button secondary  className="loginButton" onClick={() => {setEmail('');setPassword('')}}>Login</Button>
                 </Link>
             </div>
+            <img id="singUpImage" alt="Sorry, something went wrong" src="https://i.pinimg.com/originals/80/b5/ca/80b5caed5b7c02665546ac9827a33698.jpg"/>
         </div>
         
     )

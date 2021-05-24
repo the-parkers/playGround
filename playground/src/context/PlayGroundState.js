@@ -27,6 +27,7 @@ function PlayGround(props) {
         .then(data => setEvents(data))
 },[])
 
+
   useEffect(() => {
     fetch('http://localhost:5000/getBballCourt')
     .then(response => response.json())
@@ -51,16 +52,6 @@ function PlayGround(props) {
     fetch('http://localhost:5000/getHandBall')
     .then(response => response.json())
     .then(data => setHandBallCourt(data))
-  },[])  
-  useEffect(() => {
-    fetch('http://localhost:5000/getIndoorPool')
-    .then(response => response.json())
-    .then(data => setIndoorPool(data))
-  },[]) 
-  useEffect(() => {
-    fetch('http://localhost:5000/getOutdoorPool')
-    .then(response => response.json())
-    .then(data => setOutdoorPool(data))
   },[])
 
   useEffect(() => {

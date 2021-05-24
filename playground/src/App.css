@@ -3,10 +3,14 @@
   height: 100%;
   /* background-image: url('http://bsnscb.com/data/out/144/26988281-park-wallpapers.jpg'); */
 }
-
+#signUpImage{
+  width:50%
+}
 .welcomeImage {
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
   /* background-image: url('http://bsnscb.com/data/out/144/26988281-park-wallpapers.jpg'); */
   background: black
 }
@@ -21,7 +25,7 @@
   width: 50%;
   flex-direction: column;
   height: 100%;
-  background: white;
+  background: #9DD9D2;
   justify-content: center;
   padding: 5em;
 }
@@ -34,12 +38,13 @@
 }
 .signUpPage {
   display: flex;
-  width: 50%;
+  width: 55%;
   flex-direction: column;
   height: 100%;
   background: white;
   justify-content: center;
   padding: 5em;
+  background: #7CDF64;
 }
 .App-logo {
   height: 40vmin;
@@ -151,4 +156,11 @@
   margin-bottom: 10px;
   text-align:center;
   padding: 9px;
+}
+.form-floating{
+  margin: 15px
+}
+
+#file-input{
+  margin: 15px
 }

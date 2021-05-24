@@ -45,10 +45,10 @@ function EventCard(props){
     <div style={{ display: 'flex', margin:'10px'}}>
         <Card style={{ width: '30rem' }}>
             <div>
-            <Card.Title>{event.title}</Card.Title>
+            <h3>{event.title}</h3>
             <Card.Text>Times: {timeValue} - {timeValues}</Card.Text>
             <Card.Text>Date: {date}</Card.Text>
-            <h3>Where: {event.location}</h3>
+            <Card.Text>Where: {event.location}</Card.Text>
             <h4>{event.description}</h4>
             </div>
         </Card>    
