@@ -1,4 +1,4 @@
-import Logo from "./Logo"
+// import Logo from "./Logo"
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext,useEffect,useState} from 'react'
@@ -71,10 +71,10 @@ function LoginPage() {
       },[history])
     return (
     <div className="welcomeImagelogin">
+      <img alt="Sorry something went wrong" src="https://image.freepik.com/free-vector/playground-logo_129735-143.jpg"/>
        <div className="loginPage">
-            <Logo/>
+            <h1>Lets bring communities back!</h1>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
-             
                 <UserInput type="email" value={email} setValue={setEmail} id="loginEmail" label="Email" message="invalid credentials"/>
                 <UserInput type="password" value={password} setValue={setPassword} id="loginPassword" label="Password" message="invalid credentials"/>
                 <Button className="loginButtonPage" primary>Login</Button>

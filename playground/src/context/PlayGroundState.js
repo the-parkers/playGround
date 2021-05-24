@@ -16,9 +16,6 @@ function PlayGround(props) {
   const [dogAreas, setdogAreas] = useState([])
   const [runTracks, setRunTracks] = useState([])
   const [handBallCourt, setHandBallCourt] = useState([])
-  const [indoorPool, setIndoorPool] = useState([])
-  const [outdoorPool, setOutdoorPool] = useState([])
-
 
   useEffect(() => {
     fetch('http://localhost:5000/getBballCourt')
@@ -44,16 +41,6 @@ function PlayGround(props) {
     fetch('http://localhost:5000/getHandBall')
     .then(response => response.json())
     .then(data => setHandBallCourt(data))
-  },[])  
-  useEffect(() => {
-    fetch('http://localhost:5000/getIndoorPool')
-    .then(response => response.json())
-    .then(data => setIndoorPool(data))
-  },[]) 
-  useEffect(() => {
-    fetch('http://localhost:5000/getOutdoorPool')
-    .then(response => response.json())
-    .then(data => setOutdoorPool(data))
   },[])
 
   useEffect(() => {
@@ -114,9 +101,7 @@ function PlayGround(props) {
     bbqArea,
     dogAreas,
     runTracks,
-    handBallCourt,
-    indoorPool,
-    outdoorPool
+    handBallCourt
    }
     return(
         <PlayGroundContext.Provider value={value}>
