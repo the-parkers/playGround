@@ -16,8 +16,6 @@ function PlayGround(props) {
   const [dogAreas, setdogAreas] = useState([])
   const [runTracks, setRunTracks] = useState([])
   const [handBallCourt, setHandBallCourt] = useState([])
-  const [indoorPool, setIndoorPool] = useState([])
-  const [outdoorPool, setOutdoorPool] = useState([])
   const [userFavorites, setUserFavorites] = useState([])
   const [events, setEvents] = useState([])
 
@@ -131,8 +129,6 @@ function PlayGround(props) {
     dogAreas,
     runTracks,
     handBallCourt,
-    indoorPool,
-    outdoorPool,
     userFavorites, 
     setUserFavorites,
     events,
