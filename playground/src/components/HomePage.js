@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react'
 import Parkcard from './ParkCard'
 import PlayGroundContext from '../context/PlayGroundContext'
 import { useHistory } from 'react-router'
-// import { Dropdown } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
 function HomePage(){
   const context = useContext(PlayGroundContext)
@@ -62,13 +62,15 @@ function HomePage(){
         <input value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
         {/* <Dropdown clearable options={options} selection onChange={filter}/> */}
     </div>
-      
+      <br/>
       <div className="all_parks">
+      <Card.Group centered>
         {filteredParks.map((park, i) => {
           return (
             <Parkcard key={i} Park={park} search={setParkSearch} userFavs={userFavorites}/>
           )
         })}
+        </Card.Group>
       </div>  
     </>
   )
