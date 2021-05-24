@@ -243,14 +243,6 @@ const getHandBall = (req, res) => {
   db.select('handball_courts')
   .then(response => res.status(200).json(response))
 }
-const getIndoorPool = (req, res) => {
-  db.select('indoor_pool')
-  .then(response => res.status(200).json(response))
-}
-const getOutdoorPool = (req, res) => {
-  db.select('outdoor_pool')
-  .then(response => res.status(200).json(response))
-}
 
 const eventSubmit = (req,res) => {
   const user = JSON.parse(req.body.formData)
@@ -500,7 +492,5 @@ const verifySession = (req,res) => {
      getBbq,
      getDogAreas,
      getRunTracks,
-     getHandBall,
-     getIndoorPool,
-     getOutdoorPool
+     getHandBall
 }
