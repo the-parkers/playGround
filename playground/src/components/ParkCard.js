@@ -92,7 +92,7 @@ function Parkcard(props){
             e.target.classList.value =  "heart outline link icon"
         }
     }
-    console.log(rating)
+    // console.log(rating)
     if(rating.length !== 0){
 
         return (
@@ -102,11 +102,12 @@ function Parkcard(props){
                     <Card.Title onClick={e => search('')}>{Park.park_name}</Card.Title>
                     </Link>
                     <Card.Body>
-                        <Card.Text>
-                            {Park.park_location}
+                        <Card.Text> 
+                           {Park.location ?  Park.location : Park.park_location}
                         </Card.Text>
                         <Card.Subtitle>
                             {Park.subcategory} {`${Park.distance.toFixed(1)} KM`}
+                            {Park.dogruns_type ? ` DogRunType: ${Park.dogruns_type}` : Park.track_type ? ` TrackType: ${Park.track_type} TrackSize: ${Park.size}` : Park.court_count ? ` CourtCount: ${Park.court_count}`: Park.pool_size ? ` PoolSize: ${Park.pool_size} PoolType: ${Park.pool_type}` : null}
                             <hr/>
                              {/* <Icon link name='heart outline' onClick={postFavorite}/> */}
                             {/* <Icon link name='heart outline' onClick={}/> */}

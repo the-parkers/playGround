@@ -8,6 +8,7 @@ function Ratingmodal(props){
     const [cleanRate, setCleanRate] = useState(1)
     const [locoRate, setLocoRate] = useState(1)
     const [amenRate, setAmenRate] = useState(1)
+    const [ratings,setRating] = useState([])
     function ratingSubmit(e){
         e.preventDefault()
         setModalShow(!modalShow)
@@ -33,8 +34,16 @@ function Ratingmodal(props){
         console.log(formData)
     }
     useEffect(() => {
-
+        fetch('http://localhost:5000/getRatings')
+        .then(res => res.json())
+        .then(data => {setRating(data)})
     }, [])
+    if(ratings.length) {
+        const filter = ratings.filter(rate => rate.park_id === props.currentPark.id)
+        
+        console.log(filter)
+    }
+    console.log(ratings,props.currentPark.id)
     return (
         <div>
         <Button onClick={() => setModalShow(!modalShow)}>Give a Rating!</Button>

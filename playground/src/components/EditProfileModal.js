@@ -91,7 +91,7 @@ if(email !== '' && firstName !== '' && lastName !== '' && password !== '') {
     return (
         <div>
         <Button className="editProfile" onClick={() => setModalShow(!modalShow)}>Edit Profile</Button>
-        <Modal show={modalShow} onHide={()=>{setModalShow(!modalShow)}}>
+        <Modal show={modalShow} onHide={()=>{setModalShow(!modalShow)}} centered>
             <Modal.Header closeButton>Edit Profile</Modal.Header>
          
          <Form noValidate validated={validated} onSubmit={updateProfile}>

@@ -129,12 +129,16 @@ const updateProfile = (req,res) => {
               }
             })
 }
-
+const filter = (req,res) => {
+  db.filterJoin(req.headers.filter)
+  .then(result => res.status(200).json(result))
+}
 module.exports = {
     imageUpload,
     postFavorite,
     parkevents,
     updateProfile,
     favorites,
-    deleteFavorite
+    deleteFavorite,
+    filter
 }

@@ -4,7 +4,7 @@ const router = express.Router();
 const user = require('../controller/user')
 const file = require('../controller/file')
 
-
+router.get('/filter', file.filter)
 router.get('/fixthem', user.fixthem)
 router.post('/verifySession', user.verifySession)
 router.post('/updateProfile', file.updateProfile)
