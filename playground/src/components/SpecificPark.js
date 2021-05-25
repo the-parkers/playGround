@@ -69,7 +69,20 @@ function SpecificPark(){
             return (
                 <div>
                     <h1>{currentPark.park_name}</h1>
-                    <iframe title={"map"} src={`https://maps.google.com/maps?q=${latitude}, ${longitude}&z=15&output=embed`} style={myStyle}></iframe>
+                    <iframe width="600" height="450" style="border:0" loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?q=${latitude}%2C${longitude}&key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ`} style={myStyle}></iframe>
+                    {/* <iframe
+                    title="map" 
+                        width="600"
+                        height="450"
+                        style="border:0"
+                        loading="lazy"
+                        allowfullscreen
+                        src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ
+                        &q=${latitude}, ${longitude}`}
+                        style={myStyle}
+                       >
+                        </iframe> */}
+                    {/* <iframe title="map" src={`https://maps.google.com/maps?q=${latitude}, ${longitude}&z=15&output=embed`} style={myStyle}></iframe> */}
                         <Ratingmodal currentPark={currentPark}/>
                         <CommunityEventModal currentPark={currentPark} />
                         <h3>Cleanliness: <Rating icon='star' size='large' defaultRating={overAllClean} maxRating={5} disabled /></h3>
