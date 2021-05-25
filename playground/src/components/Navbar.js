@@ -1,6 +1,6 @@
 import { useEffect,useState } from 'react'
 import {Link, useHistory} from 'react-router-dom'
-import { Image } from 'semantic-ui-react'
+import { Image, Menu, Segment } from 'semantic-ui-react'
 
 function Navbar(){
   const [userProfile,setUserProfile] = useState({})
@@ -32,16 +32,39 @@ function Navbar(){
       history.push('/')
     }
   },[history])
+  const [nav,setNav] = useState('home')
+  const handleItemClick = (e, { name }) => setNav({ activeItem: name })
     return (
       <>
-        <nav id="navbar">
+        {/* <nav id="navbar">
           <Link to={"/parks"}>
               <h3 id="homeIcon">Home</h3>
               </Link>
               <Link to={`/users/${userProfile.id}`}>
               <Image src={userProfile.user_image} size='mini' alt={"oh no"} circular/>
           </Link>
-        </nav>
+        </nav> */}
+        <Segment size='tiny' inverted>
+        <Menu size='big' inverted pointing secondary>
+        <Link to={"/parks"}>
+          <Menu.Item
+            name='home'
+            active={setNav === 'home'}
+            onClick={handleItemClick}
+          />
+          </Link>
+          <Menu.Menu position='right'>
+            <Link to={`/users/${userProfile.id}`}>
+          <Menu.Item>
+          <Menu.Item
+            onClick={handleItemClick}
+            />
+          <Image src={userProfile.user_image} size='mini' alt={"oh no"} circular/>
+          </Menu.Item>
+            </Link>
+        </Menu.Menu>
+        </Menu>
+      </Segment>
       </>
     )
 }
