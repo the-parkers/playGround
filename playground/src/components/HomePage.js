@@ -64,8 +64,9 @@ function HomePage(){
   
     return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
   }
+  let style = "backgroundImage=url('https://images.unsplash.com/photo-1520236351980-16fbcb68e0e6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2018&q=80')"
   const filter = (event,semantic) => {
-    console.log(event)
+    console.log(event.target)
     if(semantic.value === 1) {
       const options = {
         method: 'get',
@@ -81,6 +82,8 @@ function HomePage(){
           return data
         })
         setFilteredParks(data.sort((a,b) => a.distance - b.distance))
+        event.target.ownerDocument.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1551543731-30849deefb0e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80')"
+        event.target.ownerDocument.body.style.color = "white"
       })
     }else if(semantic.value === 2) {
       const options = {
@@ -97,6 +100,7 @@ function HomePage(){
           return data
         })
         setFilteredParks(data.sort((a,b) => a.distance - b.distance))
+        document.getElementsByClassName("backgroundImage")[0].style.backgroundImage="url('')"
       })
     }else if(semantic.value === 3) { 
       const options = {
@@ -189,11 +193,13 @@ function HomePage(){
   }
   return (
     <>
-    <iframe title="unique" src="https://www.google.com/maps/d/u/0/embed?mid=1dsENHUDTkxHavdRkj32MzivBxLYl9fI3&z=13" width="800" height="480"></iframe>
-    <h1>Local Playgrounds</h1>
-    <div>
+    <div className="backgroundImage">
+      <iframe title="unique" src="https://www.google.com/maps/d/u/0/embed?mid=1dsENHUDTkxHavdRkj32MzivBxLYl9fI3&z=13" width="800" height="480"></iframe>
+      <h1>Local Playgrounds</h1>
+      <div>
         <input value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
         <Dropdown clearable options={options} selection onChange={filter}/>
+      </div>
     </div>
       <br/>
       <div className="all_parks">

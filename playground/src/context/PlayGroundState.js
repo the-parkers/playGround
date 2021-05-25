@@ -53,13 +53,13 @@ function PlayGround(props) {
     .then(data => setHandBallCourt(data))
   },[])
 
-  useEffect(() => {
-    fetch('http://localhost:5000/favoritesList')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      setFavorites(data)})
-  }, [])
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/favoritesList')
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data)
+  //     setFavorites(data)})
+  // }, [])
 
   useEffect(() => {
     fetch('http://localhost:5000/parksData')
