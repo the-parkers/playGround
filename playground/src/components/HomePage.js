@@ -9,7 +9,7 @@ function HomePage(){
   const {userFavorites} = context
 
   let history = useHistory()
-  let {filteredParks, parkSearch,position, setParkSearch,setPosition,setFilteredParks,runTracks,handBallCourt,originalPark} = useContext(PlayGroundContext)
+  let {filteredParks, parkSearch,position, setParkSearch,setPosition,setFilteredParks,originalPark} = useContext(PlayGroundContext)
   filteredParks.length = 20
   // console.log(filteredParks)
   navigator.geolocation.getCurrentPosition((position) => {

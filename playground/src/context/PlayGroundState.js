@@ -10,7 +10,7 @@ function PlayGround(props) {
   const [parkSearch, setParkSearch] = useState("")
   const [top100Parks,setTop100Parks] = useState([])
   const [position,setPosition] = useState({})
-  const [favorite, setFavorites] = useState([])
+  // const [favorite, setFavorites] = useState([])
   const [bBallCourt, setBasketBalls] = useState([])
   const [bbqArea, setBbqAreas] = useState([])
   const [dogAreas, setdogAreas] = useState([])
@@ -53,13 +53,13 @@ function PlayGround(props) {
     .then(data => setHandBallCourt(data))
   },[])
 
-  useEffect(() => {
-    fetch('http://localhost:5000/favoritesList')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      setFavorites(data)})
-  }, [])
+  // useEffect(() => {
+  //   fetch('http://localhost:5000/favoritesList')
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data)
+  //     setFavorites(data)})
+  // }, [])
 
   useEffect(() => {
     fetch('http://localhost:5000/parksData')
@@ -129,8 +129,8 @@ function PlayGround(props) {
     position,
     setPosition,
     top100Parks,
-    favorite,
-    setFavorites,
+    // favorite,
+    // setFavorites,
     bBallCourt,
     bbqArea,
     dogAreas,

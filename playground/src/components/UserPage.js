@@ -4,7 +4,7 @@ import User from "./User"
 // import Favorites from "./Favorites";
 // import Events from "./Events"
 // import {Link} from 'react-router-dom'
-import {useContext, useState, useEffect} from 'react';
+import {useContext, useState} from 'react';
 import PlayGroundContext from '../context/PlayGroundContext'
 import { Card } from 'semantic-ui-react';
 import EventCard from './EventCard'
