@@ -102,7 +102,7 @@ function Parkcard(props){
 &markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
 &markers=color:red%7Clabel:C%7C40.718217,-73.998284
 &key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ`} /> */}
-
+{/* <img src={`https://api.mapbox.com/styles/v1/mapbox/light-v10/static/-74.14227319856263,40.54219614399445/500x300?access_token=pk.eyJ1IjoibWFpbjEwMDEiLCJhIjoiY2twNXY3M2M2MDBrNjJ0bnB6bnQwMDFodSJ9.IopWpHMsK0E82qltV8SOew" alt="Map of the Edmund Pettus Bridge in Selma, Alabama, with a black 'L' marker positioned in the middle of the bridge.`}/> */}
                     <iframe width="250" title='cardMap' height="300" style={{border:0}} loading="quick" allowfullscreen src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ&center=${Park.park_latitude},${Park.park_longitude}&zoom=18&maptype=satellite`}></iframe>
                     <Link to={`/parks/${Park.id}`}>
                     <Card.Title onClick={e => search('')}>{Park.park_name}</Card.Title>
