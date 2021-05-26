@@ -3,8 +3,18 @@
   height: 100%;
   font-family: poppins
 }
+/* #mapid { height: 280px; } */
 #signUpImage{
   width:50%
+}
+.mapdiv {
+  display: flex;
+  justify-content: center;
+}
+.leaflet-container {
+   width: 1000px;
+   height: 800px;
+   border-radius: 20px
 }
 .welcomeImage {
   height: 100%;
