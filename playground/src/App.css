@@ -3,8 +3,18 @@
   height: 100%;
   /* background-image: url('http://bsnscb.com/data/out/144/26988281-park-wallpapers.jpg'); */
 }
+/* #mapid { height: 280px; } */
 #signUpImage{
   width:50%
+}
+.mapdiv {
+  display: flex;
+  justify-content: center;
+}
+.leaflet-container {
+  width: 800px;
+   height: 480px;
+   border-radius: 20px
 }
 .welcomeImage {
   height: 100%;
