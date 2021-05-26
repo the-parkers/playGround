@@ -60,13 +60,13 @@ function LoginPage() {
         .then(response => response.json())
         .then(data => {
           if(!data.Auth) {
-            history.push('/')
+            history.push('/login')
           }else {
               history.push('/parks')
           }
         })
         }else {
-          history.push('/')
+          history.push('/login')
         }
       },[history])
     return (
