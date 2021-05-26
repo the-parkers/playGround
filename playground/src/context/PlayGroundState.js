@@ -23,8 +23,9 @@ function PlayGround(props) {
   const [handBallCourt, setHandBallCourt] = useState([])
   const [userFavorites, setUserFavorites] = useState([])
   const [events, setEvents] = useState([])
-  const [filteredParks,setFilteredParks] = useState([])
-  const [originalPark,setOriginalPark] = useState([])
+  const [filteredParks,setFilteredParks] = useState({parksData: [],type: parkIcons})
+  const [originalPark,setOriginalPark] = useState({parksData: [],type: parkIcons})
+
   const [parkEvents, setParkEvents] = useState([])
 
   useEffect(() => {

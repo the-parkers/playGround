@@ -82,7 +82,7 @@ function SpecificPark(){
                             </div>
                         </div>
                         <div>
-                            <iframe className="specificParkMap" title={"map"} src={`https://maps.google.com/maps?q=${latitude}, ${longitude}&z=15&output=embed`} style={myStyle}></iframe>
+                        <iframe title="map" width="600" height="450" style={myStyle} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?q=${latitude}%2C${longitude}&key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ&zoom=19`} ></iframe>
                         </div>
                     </div>
                         <br/>
