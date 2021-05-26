@@ -173,7 +173,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-header
+#nav
 {
   position: absolute;
   top: 0;
@@ -181,11 +181,11 @@ header
   width: 100%;
   padding: 40px 100px;
   z-index: 1000;
-  display: flex;
+  display: inline-flex;
   justify-content: space-between;
   align-items: center;
 }
-header .logo
+#nav .logo
 {
   color: #fff;
   text-transform: uppercase;
@@ -226,9 +226,23 @@ header .logo
 }
 .showcase.active
 {
-  right: 300px;
+  right: 250px;
 }
-
+.showcase.active ul.social
+{
+  transition: 0.9s;
+  margin-left: 300px;
+}
+.showcase.active div#nav .logo
+{
+  transition: 0.9s;
+  margin-left: 300px;
+}
+.showcase.active div.text
+{
+  transition: 0.9s;
+  margin-left: 300px;
+}
 .showcase video
 {
   position: absolute;
@@ -247,12 +261,14 @@ header .logo
   width: 100%;
   height: 100%;
   background: #03a9f4;
+  /* background: #03a8f4b2; */
   mix-blend-mode: overlay;
 }
 .text
 {
   position: relative;
   z-index: 10;
+  text-align: left;
 }
 
 .text h2
@@ -296,6 +312,7 @@ header .logo
 .text a:hover
 {
   letter-spacing: 6px;
+  text-decoration: none;
 }
 .social
 {
@@ -306,11 +323,16 @@ header .logo
   justify-content: center;
   align-items: center;
 }
+.social img{
+  width: 40px;
+  height: 44px;
+}
 .social li
 {
+  width: 60px;
   list-style: none;
 }
-.social li a
+.social li .a
 {
   display: inline-block;
   margin-right: 20px;
@@ -332,6 +354,7 @@ header .logo
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: black;
 }
 .menu ul
 {
@@ -340,14 +363,15 @@ header .logo
 .menu ul li
 {
   list-style: none;
+  text-align: left;
 }
-.menu ul li a
+.menu ul li .a
 {
   text-decoration: none;
   font-size: 24px;
-  color: #111;
+  color: #fff;
 }
-.menu ul li a:hover
+.menu ul li .a:hover
 {
   color: #03a9f4; 
 }
@@ -367,8 +391,33 @@ header .logo
   {
     font-size: 2em;
   }
+  .showcase.active
+{
+  right: 200px;
 }
-nav {
-  display: flex;
-  justify-content: space-between;
+.showcase.active ul.social
+{
+  transition: 0.9s;
+  margin-left: 225px;
+}
+.showcase.active div#nav .logo
+{
+  transition: 0.9s;
+  margin-left: 125px;
+}
+.toggle.active
+{
+  transition: 0.9s;
+  margin-right: -100px;
+}
+.showcase.active div.text
+{
+  transition: 0.9s;
+  margin-left: 200px;
+}
+.menu ul
+{
+  position: relative;
+  margin-left: 120px;
+}
 }
