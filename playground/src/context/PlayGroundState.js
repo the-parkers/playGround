@@ -3,7 +3,7 @@ import PlayGroundContext from "./PlayGroundContext"
 import { Icon } from "leaflet";
 
 function PlayGround(props) {
-  const parkIcons = new Icon({
+  const parkIcons =  new Icon({
     iconUrl: 'https://cdn1.iconfinder.com/data/icons/map-objects/154/map-object-tree-park-forest-point-place-512.png',
     iconSize: [40,40],
 })

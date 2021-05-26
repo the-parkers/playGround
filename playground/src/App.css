@@ -12,8 +12,8 @@
   justify-content: center;
 }
 .leaflet-container {
-  width: 800px;
-   height: 480px;
+   width: 1000px;
+   height: 800px;
    border-radius: 20px
 }
 .welcomeImage {
