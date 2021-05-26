@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   height: 100%;
-  /* background-image: url('http://bsnscb.com/data/out/144/26988281-park-wallpapers.jpg'); */
+  font-family: poppins
 }
 /* #mapid { height: 280px; } */
 #signUpImage{
@@ -21,7 +21,6 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  /* background-image: url('http://bsnscb.com/data/out/144/26988281-park-wallpapers.jpg'); */
   background: black
 }
 .inputRadius {
@@ -134,16 +133,6 @@
   border-style: solid;
 }
 
-.favoriteTab {
-  background-color: lightgrey;
-  width: 650px;
-  height: 50px;
-  border-radius: 12px;
-  font-size: 25px;
-  font-weight: 320;
-  border: '4px solid black',
-}
-
 .eventsTab {
   background-color: lightgrey;
   width: 650px;
@@ -173,4 +162,41 @@
 
 #file-input{
   margin: 15px
+}
+
+.specificParkMap{
+  filter: drop-shadow(0 0 0.2rem black);
+
+}
+.firstHolder{
+  margin-left: 415px;
+    display: flex
+}
+.secondHolder{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px
+}
+
+.amenities{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tabs{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.favoriteTab{
+  font-size: 20px;
+}
+
+.userEventsTab{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }

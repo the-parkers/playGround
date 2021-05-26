@@ -4,7 +4,8 @@ import User from "./User"
 // import Favorites from "./Favorites";
 // import Events from "./Events"
 // import {Link} from 'react-router-dom'
-import {useContext, useState} from 'react';
+import {Tabs, Tab} from 'react-bootstrap'
+import {useContext, useState, useEffect} from 'react';
 import PlayGroundContext from '../context/PlayGroundContext'
 import { Card } from 'semantic-ui-react';
 import EventCard from './EventCard'
@@ -36,14 +37,9 @@ function UserPage() {
     return (
         <div>
             <User src="https://semantic-ui.com/images/avatar/small/jenny.jpg" text="Test User"/>
-                <Button text="Favorites" className="favoriteTab" click={switchTab}/> 
-                <Button text="Events" className="eventsTab" click={switchTab}/>
-            <div>
-            </div>
-            <div style={style}>
-            {favEvents ? 
-            <>
-            <h1>My Favorite Parks</h1> 
+        <Tabs className="tabs" defaultActiveKey="Favorited Parks" id="uncontrolled-tab-example">
+  <Tab className="favoriteTab" eventKey="Favorited Parks" title="Favorited Parks">
+      <br/>
             <Card.Group centered>
             {userFavorites.map((favs) => {
                return  <Card key= {favs.id}>
@@ -58,22 +54,21 @@ function UserPage() {
                    {/* <Icon name='user' />4 Friends */}
                  </Card.Content>
                </Card>
-            })}
-            </Card.Group>
-            </>
-            : 
-            <>
-            <h1>Events Section</h1>
+                           })}
+                           </Card.Group>
+  </Tab>
+  <Tab className="userEventsTab" eventKey="Your Events" title="Your Events">
+  <>
             <Card.Group centered>
             {events.map((event, i) => {
-            
             return <EventCard key={i} event={event}/> 
             }       
             )}
             </Card.Group>
             </>
-            }
-        </div>
+  </Tab>
+
+</Tabs>
         </div>
     )
 }
