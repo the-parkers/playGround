@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import {Button, Modal} from 'react-bootstrap'
+import { useContext } from 'react'
+import PlayGroundContext from '../context/PlayGroundContext'
 
 function CommunityEventModal(props){
     const [modalShow, setModalShow] = useState(false);
+    let { setEvents } = useContext(PlayGroundContext)
     const [title, settitle] = useState("")
     const [description, setDescription] = useState("")
     const [location, setEventLoco] = useState("")
@@ -17,6 +20,7 @@ function CommunityEventModal(props){
     }
     function eventSubmit(e){
         e.preventDefault()
+        
         setModalShow(!modalShow)
         const token = JSON.parse(localStorage.getItem("user"))
         const formData = {
@@ -40,11 +44,10 @@ function CommunityEventModal(props){
         }
         fetch("http://localhost:5000/eventSubmit", options)
         .then(res => res.json())
-        .then(data => console.log(data))
-    }
+        .then(data => {setEvents((prev) => [...prev, data[0]])})}
     return (
         <div>
-        <Button onClick={() => setModalShow(!modalShow)}>New Community Event!</Button>
+        <Button onClick={()=>setModalShow(!modalShow)}>New Community Event!</Button>
         <Modal show={modalShow} onHide={()=>{setModalShow(!modalShow)}}>
             <Modal.Header closeButton>{props.currentPark.park_name}</Modal.Header>
             <form onSubmit={eventSubmit}>

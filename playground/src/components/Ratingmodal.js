@@ -40,8 +40,6 @@ function Ratingmodal(props){
     }, [])
     if(ratings.length) {
         const filter = ratings.filter(rate => rate.park_id === props.currentPark.id)
-        
-        console.log(filter)
     }
     console.log(ratings,props.currentPark.id)
     return (

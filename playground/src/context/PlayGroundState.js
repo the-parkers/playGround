@@ -20,12 +20,13 @@ function PlayGround(props) {
   const [events, setEvents] = useState([])
   const [filteredParks,setFilteredParks] = useState([])
   const [originalPark,setOriginalPark] = useState([])
+  const [parkEvents, setParkEvents] = useState([])
+
   useEffect(() => {
     fetch('http://localhost:5000/getUserEvents')
         .then(res => res.json())
         .then(data => setEvents(data))
 },[])
-
 
   useEffect(() => {
     fetch('http://localhost:5000/getBballCourt')
@@ -140,7 +141,10 @@ function PlayGround(props) {
     setUserFavorites,
     events,
     setEvents,
-    originalPark
+    originalPark,
+    parkEvents,
+    setParkEvents,
+    setEvents
    }
     return(
         <PlayGroundContext.Provider value={value}>
