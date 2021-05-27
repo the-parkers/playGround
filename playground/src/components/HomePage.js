@@ -5,6 +5,8 @@ import { useHistory } from 'react-router'
 import { Card, Dropdown } from 'semantic-ui-react'
 import Map from './Map'
 import { Icon } from "leaflet";
+import { Navbar } from 'react-bootstrap';
+
 
 function HomePage(){
   const basketBallIcon = new Icon({
@@ -35,6 +37,7 @@ const dogIcon = new Icon({
   iconUrl: '/dog.png',
   iconSize: [30,40],
 })
+
   const context = useContext(PlayGroundContext)
   const {userFavorites} = context
 
@@ -222,11 +225,9 @@ const dogIcon = new Icon({
     <div className='mapdiv'>
     <Map/>
     </div>
-   
-
-    <h1>Local Playgrounds</h1>
-    <div>
-        <input value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
+    <h1>Local Parks</h1>
+    <div id='homeInput'>
+        <input id="homeInputBox"value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
         <Dropdown clearable options={options} selection onChange={filter}/>
     </div>
       <br/>
@@ -234,7 +235,7 @@ const dogIcon = new Icon({
       <Card.Group centered>
         {filteredParks.parksData.map((park, i) => {
           return (
-            <Parkcard key={i} Park={park} search={setParkSearch} userFavs={userFavorites}/>
+            <Parkcard key={i} Park={park} search={setParkSearch} userFavs={userFavorites} type={filteredParks.type} />
           )
         })}
         </Card.Group>

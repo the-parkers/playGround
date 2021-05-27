@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {Button, Modal} from 'react-bootstrap'
 import { Rating } from 'semantic-ui-react'
 
 function Ratingmodal(props){
     const [modalShow, setModalShow] = useState(false);
-    // const [confirm, setConfirm] = useState(false)
     const [cleanRate, setCleanRate] = useState(1)
     const [locoRate, setLocoRate] = useState(1)
     const [amenRate, setAmenRate] = useState(1)
-    const [ratings,setRating] = useState([])
+    
     function ratingSubmit(e){
         e.preventDefault()
         setModalShow(!modalShow)
@@ -33,15 +32,8 @@ function Ratingmodal(props){
         .then(data => console.log(data))
         console.log(formData)
     }
-    useEffect(() => {
-        fetch('http://localhost:5000/getRatings')
-        .then(res => res.json())
-        .then(data => {setRating(data)})
-    }, [])
-    if(ratings.length) {
-        const filter = ratings.filter(rate => rate.park_id === props.currentPark.id)
-    }
-    console.log(ratings,props.currentPark.id)
+
+
     return (
         <div>
         <Button onClick={() => setModalShow(!modalShow)}>Give a Rating!</Button>

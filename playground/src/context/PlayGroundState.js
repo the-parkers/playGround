@@ -15,7 +15,6 @@ function PlayGround(props) {
   const [parkSearch, setParkSearch] = useState("")
   const [top100Parks,setTop100Parks] = useState([])
   const [position,setPosition] = useState({})
-  // const [favorite, setFavorites] = useState([])
   const [bBallCourt, setBasketBalls] = useState([])
   const [bbqArea, setBbqAreas] = useState([])
   const [dogAreas, setdogAreas] = useState([])
@@ -25,8 +24,7 @@ function PlayGround(props) {
   const [events, setEvents] = useState([])
   const [filteredParks,setFilteredParks] = useState({parksData: [],type: parkIcons})
   const [originalPark,setOriginalPark] = useState({parksData: [],type: parkIcons})
-
-  const [parkEvents, setParkEvents] = useState([])
+  const [parkEvents, setParkEvents] = useState({type: parkIcons})
 
   useEffect(() => {
     fetch('http://localhost:5000/getUserEvents')
@@ -151,8 +149,7 @@ function PlayGround(props) {
     setEvents,
     originalPark,
     parkEvents,
-    setParkEvents,
-    setEvents
+    setParkEvents
    }
     return(
         <PlayGroundContext.Provider value={value}>

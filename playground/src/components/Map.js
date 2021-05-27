@@ -15,7 +15,7 @@ function Maps() {
     const {filteredParks,position} = context
 if(position.lat) {
      return ( 
-    <MapContainer center={[position.lat, position.lon]} zoom={14} key='mapData'>
+    <MapContainer center={[position.lat, position.lon]} zoom={13} key='mapData'>
         <TileLayer 
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
@@ -23,14 +23,9 @@ if(position.lat) {
                 <Popup>
                 You are here
                 </Popup>
-   
-                
           </Marker>
-       
         {
-
            filteredParks.parksData.map(park => {
-
                return <Marker Key={park.id} position={[park.park_latitude, park.park_longitude]} icon={filteredParks.type}>
                 <Popup>
                     <div>
@@ -46,21 +41,17 @@ if(position.lat) {
                         </span>
                         <hr/>
                         <a href={park.park_link} target='_Blank' rel="noreferrer">Park Link</a>
-                        
-
                     </div>
                 </Popup>
                 {/* onClick={() => {
                     setActivePark()
                 }} */}
-                
           </Marker>
             })
         }
     </MapContainer>
     )}else { return null
  }
-    
 }
 
 export default Maps

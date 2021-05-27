@@ -1,6 +1,6 @@
 // import Navbar from './Navbar'
-import { Navbar } from 'react-bootstrap';
-import {Link, Route} from 'react-router-dom';
+
+import {Link} from 'react-router-dom';
 
 
 
@@ -31,10 +31,10 @@ function LandingPage() {
                 <div className="text">
                     <h2>Lets bring</h2> 
                     <h3>communities back!</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.</p>
+                    <p>Covid-19 crippled the world. Everything had come to a sudden stop for over a year. Now that Covid-19 has goten better 
+                        the world is now opening back up but for some it may be difficult to now rejoin our communities. Playground is there to make 
+                        the stress and worries of all of it slide away.
+                    </p>
                     <a href="/login">Explore</a>
                 </div>
                 <ul className="social">

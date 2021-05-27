@@ -2,7 +2,7 @@
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext,useEffect,useState} from 'react'
-import { Form } from 'react-bootstrap'
+import { Form, Card } from 'react-bootstrap'
 import { Button } from 'semantic-ui-react'
 import {Link,useHistory} from 'react-router-dom'
 

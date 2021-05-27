@@ -1,9 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 .App {
   text-align: center;
   height: 100%;
   font-family: poppins
 }
 /* #mapid { height: 280px; } */
+#parkCard {
+  width: 250px;
+  height: 300px;
+}
 #signUpImage{
   width:50%
 }
@@ -12,16 +24,15 @@
   justify-content: center;
 }
 .leaflet-container {
-   width: 1000px;
-   height: 800px;
+   width: 900px;
+   height: 500px;
    border-radius: 20px
 }
 .welcomeImage {
   height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  background: black
+  background-image: url(https://wallpaperaccess.com/full/1098636.jpg);
+  background-size: cover;
 }
 .inputRadius {
   border-radius: 10px;
@@ -39,21 +50,15 @@
   padding: 5em;
 }
 .welcomeImagelogin {
+  background-image: url("https://wallpaperaccess.com/full/1098636.jpg");
+  object-fit: cover;
   height: 100%;
   width: 100%;
-  background: black;
-  display: flex;
-    justify-content: flex-end;
+  /* display: flex;
+  justify-content: flex-end; */
 }
 .signUpPage {
-  display: flex;
-  width: 55%;
-  flex-direction: column;
-  height: 100%;
-  background: white;
-  justify-content: center;
-  padding: 5em;
-  background: #7CDF64;
+
 }
 .App-logo {
   height: 40vmin;
@@ -161,16 +166,12 @@
 }
 
 #file-input{
-  margin: 15px
+  margin: 15px;
+  width: 25px
 }
 
-@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
-*
-{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+#signUpCard{
+  background-color: rgba(255, 255, 255, 0.5) !important;
 }
 #nav
 {
@@ -458,3 +459,29 @@
   margin-top: 20px;
 }
 
+#navbar{
+  display: flex;
+  justify-content: space-between;
+  background: #03a9f4;
+  padding: 10px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+#homeInput{
+  display: flex;
+  margin-left: 600px;
+}
+#homeInputBox{
+  width: 600px;
+}
+.card-title{
+  margin-top: 10px
+}
+
+.signUpPage{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
