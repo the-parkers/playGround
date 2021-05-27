@@ -7,6 +7,7 @@ import CommunityEventModal from './CommunityEventModal'
 import EventCard from './EventCard'
 import LargeEventsCard from './LargeEventsCard'
 import { Rating } from 'semantic-ui-react'
+import {Helmet} from 'react-helmet';
 
 
 function SpecificPark(){
@@ -63,6 +64,9 @@ function SpecificPark(){
 
             return (
                 <div>
+                        <Helmet>
+      <style>{'body { background-color: #FFF5EE; }'}</style>
+    </Helmet>
                     <h1>{currentPark.park_name}</h1>
                     <div className={'firstHolder'}>
                         <div className={'secondHolder'}>

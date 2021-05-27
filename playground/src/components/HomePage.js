@@ -5,11 +5,11 @@ import { useHistory } from 'react-router'
 import { Card, Dropdown } from 'semantic-ui-react'
 import Map from './Map'
 import { Icon } from "leaflet";
-import { Navbar } from 'react-bootstrap';
+import {Helmet} from 'react-helmet';
 
 
 function HomePage(){
-  const basketBallIcon = new Icon({
+const basketBallIcon = new Icon({
     iconUrl: '/basketball.png',
     iconSize: [30,40],
 })
@@ -223,6 +223,9 @@ const dogIcon = new Icon({
   return (
     <>
     <div className='mapdiv'>
+    <Helmet>
+      <style>{'body { background-color: #FFF5EE; }'}</style>
+    </Helmet>
     <Map/>
     </div>
     <h1>Local Parks</h1>

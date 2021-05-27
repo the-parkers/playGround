@@ -18,7 +18,7 @@ function Navbar(){
     .then(data => {
       if(!data.Auth) {
         history.push('/')
-      }else {
+      } else {
         delete data.User.first_name
         delete data.User.last_name
         delete data.User.email
