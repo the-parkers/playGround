@@ -1,6 +1,6 @@
 // import Navbar from './Navbar'
-import { Navbar } from 'react-bootstrap';
-import {Link, Route} from 'react-router-dom';
+
+import {Link} from 'react-router-dom';
 
 
 

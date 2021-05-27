@@ -80,7 +80,7 @@ function SignUpPage() {
                 <br/>
 
                 {/* <span>Already have an account?</span> */}
-                <Link to={'/'}>
+                <Link to={'/login'}>
                 <Button secondary  className="loginButton" onClick={() => {setEmail('');setPassword('')}}>Login</Button>
                 </Link>
             </div>

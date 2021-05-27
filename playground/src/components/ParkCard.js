@@ -2,6 +2,7 @@ import { Icon,Rating } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import {  useEffect, useState } from 'react'
+import CardMap from './CardMap'
 
 
 
@@ -25,8 +26,7 @@ import {  useEffect, useState } from 'react'
 //         fetch('http://localhost:5000/postFavorite', options)
 // import User from './User'
 
-function Parkcard(props){
-    const {Park ,search, userFavs} = props
+function Parkcard({Park ,search, userFavs,icons,type} ){
     const [rating, setRating] = useState([])
     const favs = userFavs.filter(favorite => 
         favorite.park_id === Park.id
@@ -103,7 +103,8 @@ function Parkcard(props){
 &markers=color:red%7Clabel:C%7C40.718217,-73.998284
 &key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ`} /> */}
 {/* <img src={`https://api.mapbox.com/styles/v1/mapbox/light-v10/static/-74.14227319856263,40.54219614399445/500x300?access_token=pk.eyJ1IjoibWFpbjEwMDEiLCJhIjoiY2twNXY3M2M2MDBrNjJ0bnB6bnQwMDFodSJ9.IopWpHMsK0E82qltV8SOew" alt="Map of the Edmund Pettus Bridge in Selma, Alabama, with a black 'L' marker positioned in the middle of the bridge.`}/> */}
-                    <iframe width="250" title='cardMap' height="300" style={{border:0}} loading="quick" allowfullscreen src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ&center=${Park.park_latitude},${Park.park_longitude}&zoom=18&maptype=satellite`}></iframe>
+                    {/* <iframe width="250" title='cardMap' height="300" style={{border:0}} loading="quick" allowfullscreen src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ&center=${Park.park_latitude},${Park.park_longitude}&zoom=18`}></iframe> */}
+                     <CardMap park={Park} type={type}/>
                     <Link to={`/parks/${Park.id}`}>
                     <Card.Title onClick={e => search('')}>{Park.park_name}</Card.Title>
                     </Link>

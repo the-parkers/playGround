@@ -15,7 +15,7 @@ function Maps() {
     const {filteredParks,position} = context
 if(position.lat) {
      return ( 
-    <MapContainer center={[position.lat, position.lon]} zoom={14} key='mapData'>
+    <MapContainer center={[position.lat, position.lon]} zoom={13} key='mapData'>
         <TileLayer 
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />

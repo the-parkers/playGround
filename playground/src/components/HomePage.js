@@ -35,6 +35,7 @@ const dogIcon = new Icon({
   iconUrl: '/dog.png',
   iconSize: [30,40],
 })
+
   const context = useContext(PlayGroundContext)
   const {userFavorites} = context
 
@@ -234,7 +235,7 @@ const dogIcon = new Icon({
       <Card.Group centered>
         {filteredParks.parksData.map((park, i) => {
           return (
-            <Parkcard key={i} Park={park} search={setParkSearch} userFavs={userFavorites}/>
+            <Parkcard key={i} Park={park} search={setParkSearch} userFavs={userFavorites} type={filteredParks.type} />
           )
         })}
         </Card.Group>
