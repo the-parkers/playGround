@@ -7,7 +7,10 @@ import CommunityEventModal from './CommunityEventModal'
 import EventCard from './EventCard'
 import LargeEventsCard from './LargeEventsCard'
 import { Rating } from 'semantic-ui-react'
+import {Helmet} from 'react-helmet';
 
+import SpecificMap from './SpecificMap'
+import { Icon } from "leaflet";
 
 function SpecificPark(){
     let { parkId } = useParams()
@@ -16,11 +19,12 @@ function SpecificPark(){
     const currentPark = playgrounds.find(park => park.id === Number(parkId))
     const context = useContext(PlayGroundContext)
     const {events} = context
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/getUserEvents')
-    //         .then(res => res.json())
-    //         .then(data => console.log(data))
-    // })
+  
+ 
+        const parkIcons =  new Icon({
+          iconUrl: 'https://cdn1.iconfinder.com/data/icons/map-objects/154/map-object-tree-park-forest-point-place-512.png',
+          iconSize: [40,40],
+        })
     useEffect(() => {
         fetch('http://localhost:5000/getEvents')
             .then(res => res.json())
@@ -33,9 +37,9 @@ function SpecificPark(){
         .then(data => setRating(data))
     }, [])
     if(playgrounds.length && rating.length) {
-            const latitude = currentPark.park_latitude
-            const longitude = currentPark.park_longitude
-            const myStyle={width:"600px", height:"450px", style:"border:0", allowfullscreen:"", loading:"lazy"}
+            // const latitude = currentPark.park_latitude
+            // const longitude = currentPark.park_longitude
+            // const myStyle={width:"600px", height:"450px", style:"border:0", allowfullscreen:"", loading:"lazy"}
             const currentParkRating = rating.filter(parks => parks.park_id === currentPark.id)
             const cleanRate = []
             const locaRate = []
@@ -63,6 +67,9 @@ function SpecificPark(){
 
             return (
                 <div>
+                        <Helmet>
+      <style>{'body { background-color: #FFF5EE; }'}</style>
+    </Helmet>
                     <h1>{currentPark.park_name}</h1>
                     <div className={'firstHolder'}>
                         <div className={'secondHolder'}>
@@ -82,7 +89,8 @@ function SpecificPark(){
                             </div>
                         </div>
                         <div>
-                        <iframe title="map" width="600" height="450" style={myStyle} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?q=${latitude}%2C${longitude}&key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ&zoom=19`} ></iframe>
+                        {/* <iframe title="map" width="600" height="450" style={myStyle} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?q=${latitude}%2C${longitude}&key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ&zoom=19`} ></iframe> */}
+                        <SpecificMap park={currentPark} type={parkIcons}/>
                         </div>
                     </div>
                         <br/>

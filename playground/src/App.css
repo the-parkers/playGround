@@ -1,23 +1,30 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
-*
-{
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 .App {
   text-align: center;
   height: 100%;
-  font-family: poppins
+  font-family: 'Poppins', sans-serif;
+  /* background-color: black; */
+  object-fit: cover;
 }
-/* #mapid { height: 280px; } */
+
 #parkCard {
   width: 250px;
   height: 300px;
+  /* font-family: 'Poppins', sans-serif; */
 }
 #signUpImage{
   width:50%
+}
+#specificCard {
+  width: 600px;
+   height: 450px
 }
 .mapdiv {
   display: flex;
@@ -104,6 +111,8 @@
 
 .park_cards{
   margin: 20px;
+  font-family: 'Poppins', sans-serif;
+
 }
 #homeIcon {
   color: black;
@@ -245,6 +254,10 @@
 {
   transition: 0.9s;
   margin-left: 300px;
+}
+
+.all_parks {
+  margin-top: 70px;
 }
 .showcase.active div.text
 {
@@ -496,14 +509,14 @@
 #navbar{
   display: flex;
   justify-content: space-between;
-  background: #03a9f4;
+  background: #6F89AE;
   padding: 10px;
   align-items: center;
   margin-bottom: 15px;
 }
 #homeInput{
   display: flex;
-  margin-left: 600px;
+  justify-content: center
 }
 #homeInputBox{
   width: 600px;
@@ -519,3 +532,8 @@
   align-items: center;
   height: 100%;
 }
+
+.transition {
+  height: 75px;
+}
+
