@@ -15,7 +15,6 @@ function UserPage() {
     const context = useContext(PlayGroundContext)
     const {userFavorites, events} = context
     const [userProfile,setUserProfile] = useState({})
-    console.log(userProfile)
     let history = useHistory()
     useEffect(()=> {
       const user = localStorage.getItem('user')
