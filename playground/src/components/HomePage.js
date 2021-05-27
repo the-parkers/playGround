@@ -3,14 +3,47 @@ import Parkcard from './ParkCard'
 import PlayGroundContext from '../context/PlayGroundContext'
 import { useHistory } from 'react-router'
 import { Card, Dropdown } from 'semantic-ui-react'
+import Map from './Map'
+import { Icon } from "leaflet";
+import { Navbar } from 'react-bootstrap';
+
 
 function HomePage(){
+  const basketBallIcon = new Icon({
+    iconUrl: '/basketball.png',
+    iconSize: [30,40],
+})
+const bbqIcon = new Icon({
+  iconUrl: '/barbecue.png',
+  iconSize: [30,40],
+})
+const handballIcon = new Icon({
+  iconUrl: '/handball.png',
+  iconSize: [30,40],
+})
+const trackIcon = new Icon({
+  iconUrl: '/finish.png',
+  iconSize: [30,40],
+})
+const indoorIcon = new Icon({
+  iconUrl: '/indoor.png',
+  iconSize: [30,40],
+})
+const outdoorIcon = new Icon({
+  iconUrl: '/outdoor.png',
+  iconSize: [30,40],
+})
+const dogIcon = new Icon({
+  iconUrl: '/dog.png',
+  iconSize: [30,40],
+})
+
   const context = useContext(PlayGroundContext)
   const {userFavorites} = context
 
   let history = useHistory()
   let {filteredParks, parkSearch,position, setParkSearch,setPosition,setFilteredParks,originalPark} = useContext(PlayGroundContext)
-  filteredParks.length = 20
+  filteredParks.parksData.length = 30
   // console.log(filteredParks)
   navigator.geolocation.getCurrentPosition((position) => {
     if(position.coords.latitude && position.coords.longitude){
@@ -80,7 +113,7 @@ function HomePage(){
           data.distance = distance(Number(data.park_latitude),Number(data.park_longitude),position.lat,position.lon)
           return data
         })
-        setFilteredParks(data.sort((a,b) => a.distance - b.distance))
+        setFilteredParks((prev) => ({...prev, parksData: data.sort((a,b) => a.distance - b.distance),type: basketBallIcon}))
       })
     }else if(semantic.value === 2) {
       const options = {
@@ -96,7 +129,7 @@ function HomePage(){
           data.distance = distance(Number(data.park_latitude),Number(data.park_longitude),position.lat,position.lon)
           return data
         })
-        setFilteredParks(data.sort((a,b) => a.distance - b.distance))
+        setFilteredParks((prev) => ({...prev, parksData: data.sort((a,b) => a.distance - b.distance),type: bbqIcon}))
       })
     }else if(semantic.value === 3) { 
       const options = {
@@ -113,7 +146,7 @@ function HomePage(){
           data.distance = distance(Number(data.park_latitude),Number(data.park_longitude),position.lat,position.lon)
           return data
         })
-        setFilteredParks(data.sort((a,b) => a.distance - b.distance))
+        setFilteredParks((prev) => ({...prev, parksData: data.sort((a,b) => a.distance - b.distance),type: dogIcon}))
       })
     }else if(semantic.value === 4) {
       const options = {
@@ -130,7 +163,7 @@ function HomePage(){
           data.distance = distance(Number(data.park_latitude),Number(data.park_longitude),position.lat,position.lon)
           return data
         })
-        setFilteredParks(data.sort((a,b) => a.distance - b.distance))
+        setFilteredParks((prev) => ({...prev, parksData: data.sort((a,b) => a.distance - b.distance),type: trackIcon}))
       })
     }else if(semantic.value === 5) {
       const options = {
@@ -147,7 +180,7 @@ function HomePage(){
           data.distance = distance(Number(data.park_latitude),Number(data.park_longitude),position.lat,position.lon)
           return data
         })
-        setFilteredParks(data.sort((a,b) => a.distance - b.distance))
+        setFilteredParks((prev) => ({...prev, parksData: data.sort((a,b) => a.distance - b.distance),type: handballIcon}))
       })
     }else if(semantic.value === 6) {
       const options = {
@@ -164,7 +197,7 @@ function HomePage(){
           data.distance = distance(Number(data.park_latitude),Number(data.park_longitude),position.lat,position.lon)
           return data
         })
-        setFilteredParks(data.sort((a,b) => a.distance - b.distance))
+        setFilteredParks((prev) => ({...prev, parksData: data.sort((a,b) => a.distance - b.distance),type: indoorIcon}))
       })
     }else if(semantic.value === 7) {
       const options = {
@@ -181,7 +214,7 @@ function HomePage(){
           data.distance = distance(Number(data.park_latitude),Number(data.park_longitude),position.lat,position.lon)
           return data
         })
-        setFilteredParks(data.sort((a,b) => a.distance - b.distance))
+        setFilteredParks((prev) => ({...prev, parksData: data.sort((a,b) => a.distance - b.distance),type: outdoorIcon}))
       })
     }else {
       setFilteredParks(originalPark)
@@ -189,18 +222,20 @@ function HomePage(){
   }
   return (
     <>
-    <iframe title="unique" src="https://www.google.com/maps/d/u/0/embed?mid=1dsENHUDTkxHavdRkj32MzivBxLYl9fI3&z=13" width="800" height="480"></iframe>
-    <h1>Local Playgrounds</h1>
-    <div>
-        <input value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
+    <div className='mapdiv'>
+    <Map/>
+    </div>
+    <h1>Local Parks</h1>
+    <div id='homeInput'>
+        <input id="homeInputBox"value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
         <Dropdown clearable options={options} selection onChange={filter}/>
     </div>
       <br/>
       <div className="all_parks">
       <Card.Group centered>
-        {filteredParks.map((park, i) => {
+        {filteredParks.parksData.map((park, i) => {
           return (
-            <Parkcard key={i} Park={park} search={setParkSearch} userFavs={userFavorites}/>
+            <Parkcard key={i} Park={park} search={setParkSearch} userFavs={userFavorites} type={filteredParks.type} />
           )
         })}
         </Card.Group>

@@ -1,7 +1,7 @@
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext, useState} from 'react'
-import { Form } from 'react-bootstrap'
+import { Form, Card } from 'react-bootstrap'
 import {Link,useHistory} from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 
@@ -59,7 +59,8 @@ function SignUpPage() {
     return (
         <div className="welcomeImage">
             <div className="signUpPage">
-              <h1>What are you waitng for? The parks are waiting!</h1>
+              <Card id="signUpCard" style={{ width: '25rem', borderRadius:'20px', padding:'10px' }}>
+              <h1>What are you waiting for? The parks are waiting!</h1>
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                     <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName" label="FirstName" message="FirstName is required"/>
                     <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName" message="LastName is required"/>
@@ -73,20 +74,17 @@ function SignUpPage() {
                         accept="image/*"
                         custom
                     />
-                    {/* <input id="file-input" type="file" name="profileImage" onChange={handleFileUpload}  accept="image/*"/> */}
                     <br/>
-                    <Button primary className="signUpButton">Sign Up</Button>
+                    <Button primary className="loginSignUpButtonPage">Sign Up</Button>
                 </Form>
                 <br/>
-
-                {/* <span>Already have an account?</span> */}
-                <Link to={'/'}>
-                <Button secondary  className="loginButton" onClick={() => {setEmail('');setPassword('')}}>Login</Button>
+                <span>Already have an Account?<Link to={'/login'}> Login 
                 </Link>
+                </span>
+               </Card>  
+               <div className="overlay2"></div>
             </div>
-            <img id="singUpImage" alt="Sorry, something went wrong" src="https://i.pinimg.com/originals/80/b5/ca/80b5caed5b7c02665546ac9827a33698.jpg"/>
-        </div>
-        
+        </div> 
     )
 }
 

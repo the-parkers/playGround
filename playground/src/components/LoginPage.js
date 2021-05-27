@@ -2,7 +2,7 @@
 import UserInput  from "./UserInput"
 import PlayGroundContext from '../context/PlayGroundContext'
 import {useContext,useEffect,useState} from 'react'
-import { Form } from 'react-bootstrap'
+import { Form, Card } from 'react-bootstrap'
 import { Button } from 'semantic-ui-react'
 import {Link,useHistory} from 'react-router-dom'
 
@@ -70,20 +70,21 @@ function LoginPage() {
         }
       },[history])
     return (
-    <div className="welcomeImagelogin">
-      <img alt="Sorry something went wrong" src="https://image.freepik.com/free-vector/playground-logo_129735-143.jpg"/>
-       <div className="loginPage">
+    <div className="welcomeImage">
+       <div className="signUpPage">
+       <Card id="signUpCard" style={{ width: '25rem', borderRadius:'20px', padding:'10px' }}>
             <h1>Lets bring communities back!</h1>
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <UserInput type="email" value={email} setValue={setEmail} id="loginEmail" label="Email" message="invalid credentials"/>
                 <UserInput type="password" value={password} setValue={setPassword} id="loginPassword" label="Password" message="invalid credentials"/>
-                <Button className="loginButtonPage" primary>Login</Button>
+                <Button className="loginSignUpButtonPage" primary>Login</Button>
             </Form>
-            {/* <span>Don't have an account?</span> */}
             <br/>
-            <Link to={`/signUp`}>
-                <Button className="signUpButton" secondary text="Create New Account" onClick={() => {setEmail('');setPassword('')}}>Create New Account</Button>
-            </Link>
+                <span>Don't have an account?<Link to={'/signUp'} onClick={() => {setEmail('');setPassword('')}}> Sign Up 
+                </Link>
+                </span>
+            </Card>  
+
        </div>
     </div>
    )

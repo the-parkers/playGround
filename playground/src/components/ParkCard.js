@@ -2,6 +2,7 @@ import { Icon,Rating } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import {  useEffect, useState } from 'react'
+import CardMap from './CardMap'
 
 
 
@@ -25,8 +26,7 @@ import {  useEffect, useState } from 'react'
 //         fetch('http://localhost:5000/postFavorite', options)
 // import User from './User'
 
-function Parkcard(props){
-    const {Park ,search, userFavs} = props
+function Parkcard({Park ,search, userFavs,icons,type} ){
     const [rating, setRating] = useState([])
     const favs = userFavs.filter(favorite => 
         favorite.park_id === Park.id
@@ -92,14 +92,21 @@ function Parkcard(props){
             e.target.classList.value =  "heart outline link icon"
         }
     }
-    // console.log(rating)
+    //${Park.park_longitude},${Park.park_latitude}
+    // console.log( Park.park_longitude,Park.park_latitude)
     if(rating.length !== 0){
 
         return (
                 <Card onClick={e => search('')} className="park_cards" style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ed/Logo_of_the_New_York_City_Department_of_Parks_%26_Recreation.svg/1200px-Logo_of_the_New_York_City_Department_of_Parks_%26_Recreation.svg.png" />
+                    {/* <Card.Img variant="top" src={`https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
+&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
+&markers=color:red%7Clabel:C%7C40.718217,-73.998284
+&key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ`} /> */}
+{/* <img src={`https://api.mapbox.com/styles/v1/mapbox/light-v10/static/-74.14227319856263,40.54219614399445/500x300?access_token=pk.eyJ1IjoibWFpbjEwMDEiLCJhIjoiY2twNXY3M2M2MDBrNjJ0bnB6bnQwMDFodSJ9.IopWpHMsK0E82qltV8SOew" alt="Map of the Edmund Pettus Bridge in Selma, Alabama, with a black 'L' marker positioned in the middle of the bridge.`}/> */}
+                    {/* <iframe width="250" title='cardMap' height="300" style={{border:0}} loading="quick" allowfullscreen src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ&center=${Park.park_latitude},${Park.park_longitude}&zoom=18`}></iframe> */}
+                     <CardMap park={Park} type={type}/>
                     <Link to={`/parks/${Park.id}`}>
-                    <Card.Title onClick={e => search('')}>{Park.park_name}</Card.Title>
+                    <Card.Title className="cardTitle"onClick={e => search('')} >{Park.park_name}</Card.Title>
                     </Link>
                     <Card.Body>
                         <Card.Text> 

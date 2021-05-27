@@ -42,17 +42,17 @@ function EventCard(props){
     image = `data:image/png;base64,${string64}`
     }
     return (
-    <div style={{ display: 'flex', margin:'10px'}}>
+    <div style={{ display: 'flex', margin:'15px', justifyContent:'center'}}>
         <Card style={{ width: '30rem' }}>
             <div>
-            <h3>{event.title}</h3>
-            <Card.Text>Times: {timeValue} - {timeValues}</Card.Text>
-            <Card.Text>Date: {date}</Card.Text>
-            <Card.Text>Where: {event.location}</Card.Text>
+            <h2>{event.title}</h2>
             <h4>{event.description}</h4>
+            <h5>Date: {date}</h5>
+            <h5>Meeting Spot: {event.location}</h5>
+            <h5>Times: {timeValue} - {timeValues}</h5>
             </div>
         </Card>    
-        <img style={{ height: '15rem'}}src={image} alt=""/>
+        <img style={{ height: '15rem', width:'25rem'}}src={image} alt=""/>
         </div>
     )
 }

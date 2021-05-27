@@ -1,7 +1,12 @@
 import { useEffect, useState} from "react"
 import PlayGroundContext from "./PlayGroundContext"
+import { Icon } from "leaflet";
 
 function PlayGround(props) {
+  const parkIcons =  new Icon({
+    iconUrl: 'https://cdn1.iconfinder.com/data/icons/map-objects/154/map-object-tree-park-forest-point-place-512.png',
+    iconSize: [40,40],
+})
   const [firstName,setFirstName] = useState("")
   const [lastName,setLastName] = useState("")
   const [email,setEmail] = useState("")
@@ -10,7 +15,6 @@ function PlayGround(props) {
   const [parkSearch, setParkSearch] = useState("")
   const [top100Parks,setTop100Parks] = useState([])
   const [position,setPosition] = useState({})
-  // const [favorite, setFavorites] = useState([])
   const [bBallCourt, setBasketBalls] = useState([])
   const [bbqArea, setBbqAreas] = useState([])
   const [dogAreas, setdogAreas] = useState([])
@@ -18,14 +22,15 @@ function PlayGround(props) {
   const [handBallCourt, setHandBallCourt] = useState([])
   const [userFavorites, setUserFavorites] = useState([])
   const [events, setEvents] = useState([])
-  const [filteredParks,setFilteredParks] = useState([])
-  const [originalPark,setOriginalPark] = useState([])
+  const [filteredParks,setFilteredParks] = useState({parksData: [],type: parkIcons})
+  const [originalPark,setOriginalPark] = useState({parksData: [],type: parkIcons})
+  const [parkEvents, setParkEvents] = useState({type: parkIcons})
+
   useEffect(() => {
     fetch('http://localhost:5000/getUserEvents')
         .then(res => res.json())
         .then(data => setEvents(data))
 },[])
-
 
   useEffect(() => {
     fetch('http://localhost:5000/getBballCourt')
@@ -109,9 +114,11 @@ function PlayGround(props) {
    
    useEffect(() => {
     const parksFiltered = top100Parks.filter(park => park.park_location !== null && park.park_name !== null && park.park_name.toLowerCase().includes(parkSearch.toLowerCase()))
-    setFilteredParks(parksFiltered)
-    setOriginalPark(parksFiltered)
+    setFilteredParks((prev) => ({...prev, parksData: parksFiltered,type: parkIcons}))
+    setOriginalPark((prev) => ({...prev, parksData: parksFiltered,type: parkIcons}))
    }, [parkSearch,top100Parks])
+ 
+
    const value = {
     firstName,
     setFirstName,
@@ -140,7 +147,9 @@ function PlayGround(props) {
     setUserFavorites,
     events,
     setEvents,
-    originalPark
+    originalPark,
+    parkEvents,
+    setParkEvents
    }
     return(
         <PlayGroundContext.Provider value={value}>

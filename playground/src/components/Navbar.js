@@ -36,7 +36,7 @@ function Navbar(){
       <>
         <nav id="navbar">
           <Link to={"/parks"}>
-              <h3 id="homeIcon">Home</h3>
+              <h3 id="homeIcon">Playground</h3>
               </Link>
               <Link to={`/users/${userProfile.id}`}>
               <Image src={userProfile.user_image} size='mini' alt={"oh no"} circular/>
