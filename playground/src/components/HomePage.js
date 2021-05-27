@@ -230,8 +230,8 @@ const dogIcon = new Icon({
     </div>
     <h1>Local Parks</h1>
     <div id='homeInput'>
-        <input id="homeInputBox" value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
-        <Dropdown clearable options={options} selection onChange={filter}/>
+        <input id="homeInputBox"value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
+        <Dropdown clearable options={options} selection onChange={filter} size={3}/>
     </div>
       <br/>
       <div className="all_parks">
