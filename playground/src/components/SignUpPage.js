@@ -60,7 +60,7 @@ function SignUpPage() {
         <div className="welcomeImage">
             <div className="signUpPage">
               <Card id="signUpCard" style={{ width: '25rem', borderRadius:'20px', padding:'10px' }}>
-              <h1>What are you waitng for? The parks are waiting!</h1>
+              <h1>What are you waiting for? The parks are waiting!</h1>
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
                     <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName" label="FirstName" message="FirstName is required"/>
                     <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName" message="LastName is required"/>
@@ -75,7 +75,7 @@ function SignUpPage() {
                         custom
                     />
                     <br/>
-                    <Button primary className="signUpButton">Sign Up</Button>
+                    <Button primary className="loginSignUpButtonPage">Sign Up</Button>
                 </Form>
                 <br/>
                 <span>Already have an Account?<Link to={'/login'}> Login 

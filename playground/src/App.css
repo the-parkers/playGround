@@ -173,8 +173,18 @@
 }
 
 #file-input{
-  margin: 15px;
-  width: 25px
+  margin: 15px
+}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  /* margin: 15px;
+  width: 25px */
 }
 
 #signUpCard{
@@ -325,6 +335,32 @@
   letter-spacing: 6px;
   text-decoration: none;
 }
+
+
+.loginSignUpButtonPage
+{
+  display: inline-block;
+  font-size: 1em;
+  background: #fff;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #111;
+  letter-spacing: 2px;
+  transition: 0.2s;
+}
+.loginSignUpButtonPage:hover
+{
+  letter-spacing: 6px;
+  text-decoration: none;
+}
+
+
+
+
+
 .social
 {
   position: absolute;
@@ -496,6 +532,8 @@
   align-items: center;
   height: 100%;
 }
+
 .transition {
   height: 75px;
 }
+
