@@ -111,6 +111,7 @@
 }
 #homeIcon {
   color: black;
+  font-family: 'Poppins', sans-serif;
 }
 
 .all_parks{
@@ -468,6 +469,7 @@
   padding: 10px;
   align-items: center;
   margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
 }
 #homeInput{
   display: flex;

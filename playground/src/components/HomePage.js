@@ -224,13 +224,13 @@ const dogIcon = new Icon({
     <>
     <div className='mapdiv'>
     <Helmet>
-      <style>{'body { background-color: #FFF5EE; }'}</style>
+      <style>{'body { background-color: #FFF5EE; font-family: "Poppins", sans-serif; }'}</style>
     </Helmet>
     <Map/>
     </div>
     <h1>Local Parks</h1>
     <div id='homeInput'>
-        <input id="homeInputBox"value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
+        <input id="homeInputBox" value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
         <Dropdown clearable options={options} selection onChange={filter}/>
     </div>
       <br/>
