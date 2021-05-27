@@ -24,7 +24,7 @@ function PlayGround(props) {
   const [events, setEvents] = useState([])
   const [filteredParks,setFilteredParks] = useState({parksData: [],type: parkIcons})
   const [originalPark,setOriginalPark] = useState({parksData: [],type: parkIcons})
-  const [parkEvents, setParkEvents] = useState({type: parkIcons})
+  const [parkEvents, setParkEvents] = useState([])
 
   useEffect(() => {
     fetch('http://localhost:5000/getUserEvents')

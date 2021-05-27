@@ -51,7 +51,7 @@ function CommunityEventModal(props){
         <Modal show={modalShow} onHide={()=>{setModalShow(!modalShow)}}>
             <Modal.Header closeButton>{props.currentPark.park_name}</Modal.Header>
             <form onSubmit={eventSubmit}>
-            <Modal.Body>
+            <Modal.Body style={{display:'flex', flexDirection:"column"}}>
                 <h4 htmlFor="title">Name of your Event</h4>
                 <input type="text" name="title" value={title} onChange={(e) => {settitle(e.target.value)}} required/>
                 <h4 htmlFor="description">Description of the Event</h4>

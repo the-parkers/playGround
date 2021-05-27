@@ -5,6 +5,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 .App {
   text-align: center;
   height: 100%;
@@ -21,6 +22,10 @@
 #signUpImage{
   width:50%
 }
+#specificCard {
+  width: 600px;
+   height: 450px
+}
 .mapdiv {
   display: flex;
   justify-content: center;
@@ -35,6 +40,16 @@
   width: 100%;
   background-image: url(https://wallpaperaccess.com/full/1098636.jpg);
   background-size: cover;
+}
+.homePage {
+  /* height: 100%; */
+  /* width: 100%; */
+  background-image: url(https://www.teahub.io/photos/full/63-636781_wallpaper-leaves-branch-dark-green-glossy-plant-dark.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  /* background-size: cover; */
+  font-family: 'Poppins', sans-serif;
 }
 .inputRadius {
   border-radius: 10px;
@@ -104,13 +119,24 @@
   margin-bottom: 40px;
 } */
 
-.park_cards{
-  margin: 20px;
+.park_cards {
   font-family: 'Poppins', sans-serif;
-
+  background-color: black;
+  padding: 50px;
+  transform: scale(1);
+  /* transition: 5s; */
+}
+.park_cards:hover {
+  transform: scale(1.2);
+  background-color: #fff !important;
+}
+.card{
+  margin:30px;
+  display: flex
 }
 #homeIcon {
   color: black;
+  font-family: 'Poppins', sans-serif;
 }
 
 .all_parks{
@@ -168,8 +194,18 @@
 }
 
 #file-input{
-  margin: 15px;
-  width: 25px
+  margin: 15px
+}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  /* margin: 15px;
+  width: 25px */
 }
 
 #signUpCard{
@@ -239,6 +275,10 @@
 {
   transition: 0.9s;
   margin-left: 300px;
+}
+
+.all_parks {
+  margin-top: 70px;
 }
 .showcase.active div.text
 {
@@ -316,6 +356,32 @@
   letter-spacing: 6px;
   text-decoration: none;
 }
+
+
+.loginSignUpButtonPage
+{
+  display: inline-block;
+  font-size: 1em;
+  background: #fff;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #111;
+  letter-spacing: 2px;
+  transition: 0.2s;
+}
+.loginSignUpButtonPage:hover
+{
+  letter-spacing: 6px;
+  text-decoration: none;
+}
+
+
+
+
+
 .social
 {
   position: absolute;
@@ -467,11 +533,12 @@
   background: #6F89AE;
   padding: 10px;
   align-items: center;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
+  font-family: 'Poppins', sans-serif;
 }
 #homeInput{
   display: flex;
-  margin-left: 600px;
+  justify-content: center
 }
 #homeInputBox{
   width: 600px;
@@ -487,3 +554,8 @@
   align-items: center;
   height: 100%;
 }
+
+.transition {
+  height: 75px;
+}
+

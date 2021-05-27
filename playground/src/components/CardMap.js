@@ -2,8 +2,7 @@ import { MapContainer, TileLayer, Marker,Popup } from 'react-leaflet';
 
 
 
-function CardMap({park,icons,type}) {
-console.log(type)
+function CardMap({park,type}) {
      return ( 
     <MapContainer id='parkCard' center={[park.park_latitude, park.park_longitude]} key={park.id} zoom={12} scrollWheelZoom={false} zoomControl={false}>
         <TileLayer 
