@@ -42,8 +42,8 @@ function EventCard(props){
     image = `data:image/png;base64,${string64}`
     }
     return (
-    <div style={{ display: 'flex', margin:'15px', justifyContent:'center'}}>
-        <Card style={{ width: '30rem' }}>
+    <div  style={{ display: 'flex', margin:'15px', justifyContent:'center'}}>
+        <Card className="eventCard" style={{ fontFamily: "Poppins, sans-serif", width: '30rem', margin: '0px' }}>
             <div>
             <h2>{event.title}</h2>
             <h4>{event.description}</h4>

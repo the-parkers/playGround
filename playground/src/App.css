@@ -41,6 +41,16 @@
   background-image: url(https://wallpaperaccess.com/full/1098636.jpg);
   background-size: cover;
 }
+.homePage {
+  /* height: 100%; */
+  /* width: 100%; */
+  background-image: url(https://www.teahub.io/photos/full/63-636781_wallpaper-leaves-branch-dark-green-glossy-plant-dark.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  /* background-size: cover; */
+  font-family: 'Poppins', sans-serif;
+}
 .inputRadius {
   border-radius: 10px;
 }
@@ -109,10 +119,13 @@
   margin-bottom: 40px;
 } */
 
-.park_cards{
-  margin: 20px;
+.park_cards {
   font-family: 'Poppins', sans-serif;
-
+  background-color: black
+}
+.card{
+  margin:30px;
+  display: flex
 }
 #homeIcon {
   color: black;
@@ -513,7 +526,7 @@
   background: #6F89AE;
   padding: 10px;
   align-items: center;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   font-family: 'Poppins', sans-serif;
 }
 #homeInput{

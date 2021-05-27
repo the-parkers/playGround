@@ -97,7 +97,7 @@ function Parkcard({Park ,search, userFavs,icons,type} ){
     if(rating.length !== 0){
 
         return (
-                <Card onClick={e => search('')} className="park_cards" style={{ width: '18rem' }}>
+                <Card onClick={e => search('')} className="park_cards" style={{ width: '18rem', fontFamily: "Poppins, sans-serif", margin: '70px', backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
                     {/* <Card.Img variant="top" src={`https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
 &markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
 &markers=color:red%7Clabel:C%7C40.718217,-73.998284
@@ -106,7 +106,7 @@ function Parkcard({Park ,search, userFavs,icons,type} ){
                     {/* <iframe width="250" title='cardMap' height="300" style={{border:0}} loading="quick" allowfullscreen src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ&center=${Park.park_latitude},${Park.park_longitude}&zoom=18`}></iframe> */}
                      <CardMap park={Park} type={type}/>
                     <Link to={`/parks/${Park.id}`}>
-                    <Card.Title className="cardTitle"onClick={e => search('')} >{Park.park_name}</Card.Title>
+                    <Card.Title style={{fontFamily: "Poppins, sans-serif", color: "black"}} className="cardTitle"onClick={e => search('')} >{Park.park_name}</Card.Title>
                     </Link>
                     <Card.Body>
                         <Card.Text> 

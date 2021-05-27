@@ -56,7 +56,7 @@ function UserPage() {
       <br/>
             <Card.Group centered>
             {userFavorites.map((favs) => {
-               return  <Card key= {favs.id}>
+               return  <Card style={{ fontFamily: "Poppins, sans-serif", width: '20rem', margin: '20px'}} key={favs.id}>
                  <Card.Content header= {favs.park_name}  
                  description={favs.park_location}
                  meta={favs.park_borough}

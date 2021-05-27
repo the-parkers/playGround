@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 function LargeEventsCard(props){
     return (
         <div style={{ display: 'flex', margin:'15px', justifyContent:'center'}}>
-            <Card style={{ width: '30rem' }}>
+            <Card className="eventCard" style={{ fontFamily: "Poppins, sans-serif", width: '30rem', margin: '0px'}}>
                 <div>
                     <h2>{props.event.title}</h2>
                     <h5>Date: {props.event.startdate}</h5>

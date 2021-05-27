@@ -43,7 +43,7 @@ const dogIcon = new Icon({
 
   let history = useHistory()
   let {filteredParks, parkSearch,position, setParkSearch,setPosition,setFilteredParks,originalPark} = useContext(PlayGroundContext)
-  filteredParks.parksData.length = 30
+  filteredParks.parksData.length = 12
   // console.log(filteredParks)
   navigator.geolocation.getCurrentPosition((position) => {
     if(position.coords.latitude && position.coords.longitude){
@@ -221,21 +221,22 @@ const dogIcon = new Icon({
     }
   }
   return (
-    <>
+    <div className="homePage">
+    <h1 style={{fontFamily: "Poppins, sans-serif", color: "white"}}>Connecting you with the outside again</h1>      
     <div className='mapdiv'>
     <Helmet>
-      <style>{'body { background-color: #FFF5EE; font-family: "Poppins", sans-serif; }'}</style>
+      <style>{'body { font-family: "Poppins", sans-serif; }'}</style>
     </Helmet>
     <Map/>
     </div>
-    <h1>Local Parks</h1>
+    <h1 style={{fontFamily: "Poppins, sans-serif", color: "white"}}>Search for any Park</h1>
     <div id='homeInput'>
-        <input id="homeInputBox"value={parkSearch} onChange={(e)=> {setParkSearch(e.target.value)}}></input>
+        <input id="homeInputBox"value={parkSearch} placeHolder="Search..." onChange={(e)=> {setParkSearch(e.target.value)}}></input>
         <Dropdown clearable options={options} selection onChange={filter} size={3}/>
     </div>
       <br/>
       <div className="all_parks">
-      <Card.Group centered>
+      <Card.Group centered className="test">
         {filteredParks.parksData.map((park, i) => {
           return (
             <Parkcard key={i} Park={park} search={setParkSearch} userFavs={userFavorites} type={filteredParks.type} />
@@ -243,7 +244,7 @@ const dogIcon = new Icon({
         })}
         </Card.Group>
       </div>  
-    </>
+    </div>
   )
 }
 
