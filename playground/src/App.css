@@ -5,6 +5,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 .App {
   text-align: center;
   height: 100%;
@@ -20,6 +21,10 @@
 }
 #signUpImage{
   width:50%
+}
+#specificCard {
+  width: 600px;
+   height: 450px
 }
 .mapdiv {
   display: flex;
@@ -239,6 +244,10 @@
 {
   transition: 0.9s;
   margin-left: 300px;
+}
+
+.all_parks {
+  margin-top: 70px;
 }
 .showcase.active div.text
 {
@@ -471,7 +480,7 @@
 }
 #homeInput{
   display: flex;
-  margin-left: 600px;
+  justify-content: center
 }
 #homeInputBox{
   width: 600px;
@@ -486,4 +495,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+}
+.transition {
+  height: 75px;
 }
