@@ -89,7 +89,6 @@ function SpecificPark(){
                             </div>
                         </div>
                         <div>
-                        {/* <iframe title="map" width="600" height="450" style={myStyle} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?q=${latitude}%2C${longitude}&key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ&zoom=19`} ></iframe> */}
                         <SpecificMap park={currentPark} type={parkIcons}/>
                         </div>
                     </div>
@@ -100,7 +99,7 @@ function SpecificPark(){
                             {filteredEvents.length === 0 ? (
                                 <h3>Sorry, No Community Events for this park right now</h3>
                             ) : (
-                            filteredEvents.map((event, i) => <EventCard filteredEvents={filteredEvents}key={i} event={event}/>
+                            filteredEvents.map((event, i) => <EventCard filteredEvents={filteredEvents}key={i} event={event} currentPark={currentPark}/>
                             )
                         )}
                         </Tab>

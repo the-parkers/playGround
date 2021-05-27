@@ -1,8 +1,9 @@
-// import { Image } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import Card from 'react-bootstrap/Card'
+import EditEventModal from './EditEventModal'
 
 function EventCard(props){
-    const {event} = props
+    const {event,currentPark} = props
     console.log(event)
     const {starttime, endtime} = event
         let time = starttime.split(":")
@@ -50,6 +51,8 @@ function EventCard(props){
             <h5>Date: {date}</h5>
             <h5>Meeting Spot: {event.location}</h5>
             <h5>Times: {timeValue} - {timeValues}</h5>
+            <EditEventModal events={event} currentPark={currentPark}/>
+            {/* <Button onClick={() => {}}>Edit</Button> */}
             </div>
         </Card>    
         <img style={{ height: '15rem', width:'25rem'}}src={image} alt=""/>
