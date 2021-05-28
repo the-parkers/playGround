@@ -22,7 +22,7 @@ module.exports = {
     client: 'postgresql',
     // connection: process.env.DATABASE_URL,
     connection: process.env.DATABASE_URL, 
-     ssl: {rejectUnauthorized: false},
+    ssl: true,
     // connection: {
     //   database: 'my_db',
     //   user:     'username',
@@ -33,7 +33,6 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: './migrations',
       tableName: 'knex_migrations'
     }
   }
