@@ -94,19 +94,19 @@ function Parkcard({Park ,search, userFavs,icons,type}){
                     <Card.Title style={{fontFamily: "Poppins, sans-serif", color: "black"}} className="cardTitle"onClick={e => search('')} >{Park.park_name}</Card.Title>
                     </Link>
                     <Card.Body>
-                        <Card.Text> 
+                        <Card.Text style={{fontFamily: "Poppins, sans-serif"}}> 
                            {Park.location ?  Park.location : Park.park_location}
                         </Card.Text>
-                        <Card.Subtitle>
+                        <Card.Subtitle >
                             {Park.subcategory} {`${Park.distance.toFixed(1)} KM`}
                             {Park.dogruns_type ? ` DogRunType: ${Park.dogruns_type}` : Park.track_type ? ` TrackType: ${Park.track_type} TrackSize: ${Park.size}` : Park.court_count ? ` CourtCount: ${Park.court_count}`: Park.pool_size ? ` PoolSize: ${Park.pool_size} PoolType: ${Park.pool_type}` : null}
                             <hr/>
                              {/* <Icon link name='heart outline' onClick={postFavorite}/> */}
                             {/* <Icon link name='heart outline' onClick={}/> */}
-                            <h4>Cleanliness: <Rating  size='small' defaultRating={overAllClean} maxRating={5} disabled /></h4>
-                            <h4>Location: <Rating   size='small' defaultRating={overAllLoca} maxRating={5} disabled /></h4>
-                            <h4>Amenities: <Rating  size='small' defaultRating={overAllAmen} maxRating={5} disabled /></h4>
-                            <Icon link name = {(iconHeart ? 'heart': 'heart outline')} onClick={test}  />
+                            <h4 style={{fontFamily: "Poppins, sans-serif"}}>Cleanliness: <Rating  size='small' defaultRating={overAllClean} maxRating={5} disabled /></h4>
+                            <h4 style={{fontFamily: "Poppins, sans-serif"}}>Location: <Rating   size='small' defaultRating={overAllLoca} maxRating={5} disabled /></h4>
+                            <h4 style={{fontFamily: "Poppins, sans-serif"}}>Amenities: <Rating  size='small' defaultRating={overAllAmen} maxRating={5} disabled /></h4>
+                            <Icon link style={{fontSize: "25px"}} name = {(iconHeart ? 'heart': 'heart outline')} onClick={test}  />
                         </Card.Subtitle>
                     </Card.Body>
                 </Card>  

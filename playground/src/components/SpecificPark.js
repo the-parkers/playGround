@@ -85,7 +85,7 @@ function SpecificPark(){
 
             return (
                 <div className='specificPark'>
-                    <h1>{currentPark.park_name}</h1>
+                    <h1 style={{paddingTop:'65px'}}>{currentPark.park_name}</h1>
                     <div className={'firstHolder'}>
                         <div className={'secondHolder'}>
                             <div className={'amenities'}>
@@ -110,7 +110,7 @@ function SpecificPark(){
                         <br/>
                         <CommunityEventModal events={events} currentPark={currentPark}/>
                         <Tabs className={"tabs"} defaultActiveKey={"Community Events"} transition={false} id={"noanim-tab-example"}>
-                        <Tab eventKey={"Community Events"} title={"Community Events"} >
+                        <Tab style={{paddingBottom:'80px'}}eventKey={"Community Events"} title={"Community Events"} >
                             {filteredEvents.length === 0 ? (
                                 <h3 style={{paddingBottom: '290px'}}>Sorry, No Community Events for this park right now</h3>
                             ) : (
@@ -118,7 +118,7 @@ function SpecificPark(){
                             )
                         )}
                         </Tab>
-                        <Tab eventKey={"NYC Parks EVents"} title={"NYC Parks Events"}>
+                        <Tab style={{paddingBottom:'80px'}}eventKey={"NYC Parks EVents"} title={"NYC Parks Events"}>
                             {officialEvents.length === 0 ? (
                             <h3 style={{paddingBottom: '290px'}}>Sorry, No NYC Parks Events for this park right now</h3>
                             ) : (

@@ -62,8 +62,8 @@ function SignUpPage() {
               <Card id="signUpCard" style={{ width: '25rem', borderRadius:'20px', padding:'10px' }}>
               <h1>What are you waiting for? The parks are waiting!</h1>
                 <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                    <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName" label="FirstName" message="FirstName is required"/>
-                    <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="LastName" message="LastName is required"/>
+                    <UserInput type="text" value={firstName} setValue={setFirstName} id="FirstName" label="First name" message="FirstName is required"/>
+                    <UserInput type="text" value={lastName} setValue={setLastName} id="LastName" label="Last name" message="LastName is required"/>
                     <UserInput type="email" value={email} setValue={setEmail} id="Email" label="Email" message="Duplicate Email. Your clone was here before you"/>
                     <UserInput type="password" value={password} setValue={setPassword} id="Password" label="Password" message="Password Needed"/>
                     <Form.File 
