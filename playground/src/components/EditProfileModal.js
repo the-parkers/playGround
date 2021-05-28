@@ -1,7 +1,8 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect} from 'react'
 import UserInput  from "./UserInput"
 import {Button, Modal, Form} from 'react-bootstrap'
 import { useHistory } from 'react-router';
+
 
 function EditProfileModal(){
     const [validated, setValidated] = useState(false);

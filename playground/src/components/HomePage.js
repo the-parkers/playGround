@@ -228,7 +228,7 @@ const dogIcon = new Icon({
     <Helmet>
       <style>{'body { font-family: "Poppins", sans-serif; }'}</style>
     </Helmet>
-    <Map/>
+    <Map />
     </div>
     <h1 style={{fontFamily: "Poppins, sans-serif", color: "white", paddingTop: "90px"}}>Search nearby parks</h1>
     <div id='homeInput'>
