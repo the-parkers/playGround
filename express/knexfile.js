@@ -25,7 +25,7 @@ module.exports = {
       database: process.env.DB_DATABASE,
       password: process.env.DB_PASSWORD,
       host: process.env.DB_HOSTNAME,
-      port: 5433
+      port: 5432
     }, 
     migrations: {
       tableName: 'knex_migrations'
