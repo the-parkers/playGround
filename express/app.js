@@ -4,7 +4,11 @@ const fileUpload = require('express-fileupload');
 const cors = require("cors");
 const request = require('./routes/request')
 
-
+process.on('unhandledRejection', (reason, promise) => {
+  console.log('Unhandled Rejection at:', reason.stack || reason)
+  // Recommended: send the information to sentry.io
+  // or whatever crash reporting service you use
+})
 app.use(fileUpload({
   createParentPath: true
 }));
