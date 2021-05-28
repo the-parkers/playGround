@@ -56,7 +56,7 @@ function User({src,text}) {
         }
       },[history])
     return (
-        <div className="profileInfo">
+        <div className="profileInfo" style={{margin: '25px', display: 'flex',justifyContent: 'flex-start'}}>
             <div className="image-upload">
             <label htmlFor="file-input" className="fluid">
                <Image src={userProfile.user_image} size='small' alt={"oh no"} circular id='profileImage' className="left floated"/>

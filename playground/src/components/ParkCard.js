@@ -1,32 +1,14 @@
 import { Icon,Rating } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
-import {  useEffect, useState } from 'react'
+import {  useEffect, useState, useContext } from 'react'
 import CardMap from './CardMap'
+import PlayGroundContext from '../context/PlayGroundContext'
 
 
-
-// function Parkcard(props){
-//     const {Park ,search} = props
-    
-//     function postFavorite(e){
-//         const user = JSON.parse(localStorage.getItem('user'))
-//         const formData = {
-//             park_id: Park.id,
-//             user_id: user.Token
-//         }
-//         e.target.classList.value = 'heart link icon'
-//         const options = {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(formData)
-//         }
-//         fetch('http://localhost:5000/postFavorite', options)
-// import User from './User'
-
-function Parkcard({Park ,search, userFavs,icons,type} ){
+function Parkcard({Park ,search, userFavs,icons,type}){
+    const context = useContext(PlayGroundContext)
+    const {userFavorites, setUserFavorites} = context
     const [rating, setRating] = useState([])
     const favs = userFavs.filter(favorite => 
         favorite.park_id === Park.id
@@ -86,9 +68,12 @@ function Parkcard({Park ,search, userFavs,icons,type} ){
     function test(e){
         if(e.target.classList.value === "heart outline link icon"){
                 postFavorite()
+                setUserFavorites((prev) => [...prev, Park])
                 e.target.classList.value = "heart link icon"
         } else {
             deleteFavorite(favs)
+            const newFavorite = userFavorites.filter(item => item.id !== Park.id)
+            setUserFavorites(newFavorite)
             e.target.classList.value =  "heart outline link icon"
         }
     }

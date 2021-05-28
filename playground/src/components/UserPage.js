@@ -15,7 +15,6 @@ function UserPage() {
     const context = useContext(PlayGroundContext)
     const {userFavorites, events} = context
     const [userProfile,setUserProfile] = useState({})
-    console.log(userProfile)
     let history = useHistory()
     useEffect(()=> {
       const user = localStorage.getItem('user')
@@ -47,41 +46,44 @@ function UserPage() {
     const currentUserEvents = events.filter(event => event.user_id === userProfile.id)
     return (
         <div>
-              <Helmet>
-      <style>{'body { background-color: #FFF5EE; }'}</style>
-    </Helmet>
+            <Helmet>
+              <style>{'body { background-color: #FFF5EE; }'}</style>
+            </Helmet>
+            <div>
             <User src="https://semantic-ui.com/images/avatar/small/jenny.jpg" text="Test User"/>
-        <Tabs className="tabs" defaultActiveKey="Favorited Parks" id="uncontrolled-tab-example">
-  <Tab className="favoriteTab" eventKey="Favorited Parks" title="Favorited Parks">
-      <br/>
-            <Card.Group centered>
-            {userFavorites.map((favs) => {
-               return  <Card style={{ fontFamily: "Poppins, sans-serif", width: '20rem', margin: '20px'}} key={favs.id}>
-                 <Card.Content header= {favs.park_name}  
-                 description={favs.park_location}
-                 meta={favs.park_borough}
-                  />
-
-                 <Card.Content extra>
-                     {favs.park_zipcode}
-                     <hr/> {favs.subcategory}
-                   {/* <Icon name='user' />4 Friends */}
-                 </Card.Content>
-               </Card>
-                           })}
-                           </Card.Group>
-  </Tab>
-  <Tab className="userEventsTab" eventKey="Your Events" title="Your Events">
-  <>
-            <Card.Group centered>
-            {currentUserEvents.map((event, i) => {
-            return <EventCard key={i} event={event}/> 
-            }       
-            )}
-            </Card.Group>
-            </>
-  </Tab>
-</Tabs>
+            <div>
+            <Tabs className="tabs" defaultActiveKey="Favorited Parks" id="uncontrolled-tab-example" style={{display: 'flex',aligntems: 'center',marginTop: '40px'}}>
+              <Tab className="favoriteTab" eventKey="Favorited Parks" title="Favorited Parks" style={{width: '1000px', display: 'flex', position: 'absolute',marginLeft: '448px',marginTop: '25px'}}>
+                <br/>
+                <Card.Group centered>
+                {userFavorites.map((favs) => {
+                return  <Card style={{ fontFamily: "Poppins, sans-serif", width: '20rem', margin: '20px'}} key={favs.id}>
+                  <Card.Content header= {favs.park_name}  
+                  description={favs.park_location}
+                  meta={favs.park_borough}
+                    />
+                  <Card.Content extra>
+                      {favs.park_zipcode}
+                      <hr/> {favs.subcategory}
+                    {/* <Icon name='user' />4 Friends */}
+                  </Card.Content>
+                </Card>
+                })}
+                </Card.Group>
+              </Tab>
+              <Tab className="userEventsTab" eventKey="Your Events" title="Your Events">
+                <>
+                <Card.Group centered>
+              {currentUserEvents.map((event, i) => {
+                return <EventCard key={i} event={event}/> 
+                }       
+                )}
+                </Card.Group>
+                </>
+              </Tab>
+            </Tabs>
+          </div>
+          </div>
         </div>
     )
 }

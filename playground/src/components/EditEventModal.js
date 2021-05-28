@@ -1,24 +1,33 @@
 import { useState } from 'react'
 import {Button, Modal} from 'react-bootstrap'
 import { useContext } from 'react'
+import { Icon } from 'semantic-ui-react'
 import PlayGroundContext from '../context/PlayGroundContext'
 
-function CommunityEventModal(props){
- 
+function EditEventModal(props){
+    const {events:parkEventData} = props
     const [modalShow, setModalShow] = useState(false);
-    let { setEvents } = useContext(PlayGroundContext)
-    const [title, settitle] = useState("")
-    const [description, setDescription] = useState("")
-    const [location, setEventLoco] = useState("")
-    const [starttime, setStartTime] = useState("")
-    const [endtime, setEndTime] = useState("")
-    const [startdate, setDate] = useState("")
-    const [buffer, setBuffer] = useState([])
-    const handleBufferUpload = (e) => {
-        let {files} = e.target
-        files = files[0]
-        setBuffer(files)
+    let {events, setEvents } = useContext(PlayGroundContext)
+    const [title, settitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [location, setEventLoco] = useState('')
+    const [starttime, setStartTime] = useState('')
+    const [endtime, setEndTime] = useState('')
+    const [startdate, setDate] = useState('')
+    function updateState() {
+        settitle(parkEventData.title)
+        setDescription(parkEventData.description)
+        setEventLoco(parkEventData.location)
+        setStartTime(parkEventData.starttime)
+        setEndTime(parkEventData.endtime)
+        setDate(parkEventData.startdate)
     }
+    // const [buffer, setBuffer] = useState([])
+    // const handleBufferUpload = (e) => {
+    //     let {files} = e.target
+    //     files = files[0]
+    //     setBuffer(files)
+    // }
     function eventSubmit(e){
         e.preventDefault()
         
@@ -33,26 +42,34 @@ function CommunityEventModal(props){
             location,
             starttime,
             endtime,
-            startdate
+            startdate,
+            eventId: parkEventData.id
         }
         const formImgData = new FormData();
-        formImgData.append('imageUpload', buffer)
+        const buffer = parkEventData.image
+        formImgData.append('imageUpload', JSON.stringify(buffer))
         formImgData.append('formData', JSON.stringify(formData))
         const options = {
+
             mode:'cors',
             method: 'POST',
             body: formImgData
         }
-        fetch("http://localhost:5000/eventSubmit", options)
+        fetch("http://localhost:5000/eventUpdate", options)
         .then(res => res.json())
-        .then(data => {setEvents((prev) => [...prev, data[0]])})}
+        .then(data => {
+            const UpdateEvents = events.filter(item => item.id !== data[0].id)
+            UpdateEvents.push(data[0])
+            setEvents(UpdateEvents)
+        })
+    }
     return (
         <div>
-        <Button onClick={()=>setModalShow(!modalShow)}>New Community Event!</Button>
-        <Modal show={modalShow} onHide={()=>{setModalShow(!modalShow)}}>
+        <Icon name='edit outline' onClick={()=>{setModalShow(!modalShow) ;updateState()}}/>
+        <Modal show={modalShow} onHide={()=>{setModalShow(!modalShow)}} centered>
             <Modal.Header closeButton>{props.currentPark.park_name}</Modal.Header>
             <form onSubmit={eventSubmit}>
-            <Modal.Body style={{display:'flex', flexDirection:"column"}}>
+            <Modal.Body>
                 <h4 htmlFor="title">Name of your Event</h4>
                 <input type="text" name="title" value={title} onChange={(e) => {settitle(e.target.value)}} required/>
                 <h4 htmlFor="description">Description of the Event</h4>
@@ -65,14 +82,12 @@ function CommunityEventModal(props){
                 <input type="time" name="endtime" value={endtime} onChange={(e) => {setEndTime(e.target.value)}} required/>
                 <h4 htmlFor="startdate">Day of The Event</h4>
                 <input type="date"name="startdate" value={startdate} onChange={(e) => {setDate(e.target.value)}} required/>
-                <h4 htmlFor="image">Post an Image</h4>
-                <input type="file" name="image" onChange={handleBufferUpload} accept="image/*"/>
                 <h5>*If you expect for there to be more than 20 people at an event then a permit will be required, you can apply for a permit with the link below</h5>
                 <a href="https://nyceventpermits.nyc.gov/parks/Login.aspx?ReturnUrl=%2fParks%2f" target="_blank" rel="noopener noreferrer">Permit Link</a>
             </Modal.Body>
                 <Modal.Footer>
                     <span>All Good?</span>
-                <Button type={"submit"}>Publish New Event</Button>
+                <Button type={"submit"}>Update Event</Button>
                 </Modal.Footer>
             </form>
         </Modal>
@@ -80,4 +95,4 @@ function CommunityEventModal(props){
     )
 }
 
-export default CommunityEventModal
+export default EditEventModal

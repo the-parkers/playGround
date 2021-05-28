@@ -5,7 +5,10 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-
+.eventUpdate {
+  display: flex;
+  justify-content: center;
+}
 .App {
   text-align: center;
   height: 100%;
@@ -33,7 +36,8 @@
 .leaflet-container {
    width: 900px;
    height: 500px;
-   border-radius: 20px
+   border-radius: 20px;
+   /* background-image: url('https://i.redd.it/70lukmwilsx51.jpg'); */
 }
 .welcomeImage {
   height: 100%;
@@ -121,6 +125,16 @@
 
 .park_cards {
   font-family: 'Poppins', sans-serif;
+  background-color: black;
+  padding: 50px;
+  transform: scale(1);
+  /* transition: 5s; */
+}
+.park_cards:hover {
+  transform: scale(1.2);
+  background-color: #fff !important;
+}
+.leaflet-container {
   background-color: black
 }
 .card{
@@ -146,6 +160,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-top: 76px;
 }
 
 .editProfile {
@@ -170,14 +185,10 @@
 }
 
 .userProfileName{
-  background-color: lightgrey;
   width: 300px;
   height: 45px;
-  border-radius: 12px;
   font-weight: 500;
   margin-right: 300px;
-  border-style: solid;
-  border-width: thin;
   margin-bottom: 10px;
   text-align:center;
   padding: 9px;
@@ -487,7 +498,15 @@
   filter: drop-shadow(0 0 0.2rem black);
 
 }
+.specificPark{
+  background-image: url(https://wallpaperaccess.com/full/245018.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  height: auto;
+}
 .firstHolder{
+  margin-top: 80px;
   margin-left: 415px;
     display: flex
 }
@@ -528,6 +547,11 @@
   align-items: center;
   /* margin-bottom: 15px; */
   font-family: 'Poppins', sans-serif;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 #homeInput{
   display: flex;

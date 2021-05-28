@@ -26,10 +26,12 @@ function PlayGround(props) {
   const [originalPark,setOriginalPark] = useState({parksData: [],type: parkIcons})
   const [parkEvents, setParkEvents] = useState([])
 
+
   useEffect(() => {
     fetch('http://localhost:5000/getUserEvents')
         .then(res => res.json())
         .then(data => setEvents(data))
+  fetch('http://localhost:5000/parkevents')
 },[])
 
   useEffect(() => {
@@ -136,8 +138,6 @@ function PlayGround(props) {
     position,
     setPosition,
     top100Parks,
-    // favorite,
-    // setFavorites,
     bBallCourt,
     bbqArea,
     dogAreas,

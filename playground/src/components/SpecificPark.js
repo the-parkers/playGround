@@ -7,8 +7,7 @@ import CommunityEventModal from './CommunityEventModal'
 import EventCard from './EventCard'
 import LargeEventsCard from './LargeEventsCard'
 import { Rating } from 'semantic-ui-react'
-import {Helmet} from 'react-helmet';
-
+import {useHistory} from 'react-router';
 import SpecificMap from './SpecificMap'
 import { Icon } from "leaflet";
 
@@ -19,8 +18,27 @@ function SpecificPark(){
     const currentPark = playgrounds.find(park => park.id === Number(parkId))
     const context = useContext(PlayGroundContext)
     const {events} = context
+    let history = useHistory()
   
- 
+    useEffect(()=> {
+        const user = localStorage.getItem('user')
+        if(user) {
+        const options = {
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: user
+        }
+        fetch('http://localhost:5000/verifySession',options)
+        .then(response => response.json())
+        .then(data => {
+          if(!data.Auth) {
+            history.push('/')
+          }
+        })
+        }else {
+          history.push('/')
+        }
+      },[history])
         const parkIcons =  new Icon({
           iconUrl: 'https://cdn1.iconfinder.com/data/icons/map-objects/154/map-object-tree-park-forest-point-place-512.png',
           iconSize: [40,40],
@@ -66,10 +84,7 @@ function SpecificPark(){
             const handBallCheck = handBallCourt.filter(park => park.name.includes(currentPark.park_name)).length === 0 ? "X" : "✓"
 
             return (
-                <div>
-                        <Helmet>
-      <style>{'body { background-color: #FFF5EE; }'}</style>
-    </Helmet>
+                <div className='specificPark'>
                     <h1>{currentPark.park_name}</h1>
                     <div className={'firstHolder'}>
                         <div className={'secondHolder'}>
@@ -89,7 +104,6 @@ function SpecificPark(){
                             </div>
                         </div>
                         <div>
-                        {/* <iframe title="map" width="600" height="450" style={myStyle} loading="lazy" allowFullScreen src={`https://www.google.com/maps/embed/v1/place?q=${latitude}%2C${longitude}&key=AIzaSyCHfmO773ZfgPu3ZQ5_-1bgQO2N4GCGFjQ&zoom=19`} ></iframe> */}
                         <SpecificMap park={currentPark} type={parkIcons}/>
                         </div>
                     </div>
@@ -98,15 +112,15 @@ function SpecificPark(){
                         <Tabs className={"tabs"} defaultActiveKey={"Community Events"} transition={false} id={"noanim-tab-example"}>
                         <Tab eventKey={"Community Events"} title={"Community Events"} >
                             {filteredEvents.length === 0 ? (
-                                <h3>Sorry, No Community Events for this park right now</h3>
+                                <h3 style={{paddingBottom: '290px'}}>Sorry, No Community Events for this park right now</h3>
                             ) : (
-                            filteredEvents.map((event, i) => <EventCard filteredEvents={filteredEvents}key={i} event={event}/>
+                            filteredEvents.map((event, i) => <EventCard filteredEvents={filteredEvents}key={i} event={event} currentPark={currentPark} />
                             )
                         )}
                         </Tab>
                         <Tab eventKey={"NYC Parks EVents"} title={"NYC Parks Events"}>
                             {officialEvents.length === 0 ? (
-                            <h3>Sorry, No NYC Parks Events for this park right now</h3>
+                            <h3 style={{paddingBottom: '290px'}}>Sorry, No NYC Parks Events for this park right now</h3>
                             ) : (
                                 officialEvents.map((event, i) => <LargeEventsCard key={i} event={event}/> )
                             )}

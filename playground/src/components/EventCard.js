@@ -1,9 +1,53 @@
-// import { Image } from 'semantic-ui-react'
-import Card from 'react-bootstrap/Card'
+import {useHistory} from 'react-router';
+import {useContext, useEffect, useState} from 'react'
+import {Card} from 'react-bootstrap'
+import EditEventModal from './EditEventModal'
+import { Icon } from 'semantic-ui-react'
+import PlayGroundContext from '../context/PlayGroundContext'
 
 function EventCard(props){
-    const {event} = props
-    console.log(event)
+    const {events: eventArray, setEvents } = useContext(PlayGroundContext)
+    const {event,currentPark} = props
+    const [currentUser, setCurrentUser] = useState(0)
+    let history = useHistory()
+  
+    useEffect(()=> {
+        const user = localStorage.getItem('user')
+        if(user) {
+        const options = {
+          method: 'post',
+          headers: {'Content-Type': 'application/json'},
+          body: user
+        }
+        fetch('http://localhost:5000/verifySession',options)
+        .then(response => response.json())
+        .then(data => {
+            setCurrentUser(data.User.id)
+          console.log(event)
+          if(!data.Auth) {
+            history.push('/')
+          }
+        })
+        }else {
+          history.push('/')
+        }
+      },[history])
+      
+    function deleteEvent() {
+        const options = {
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            method: 'DELETE',
+            body: JSON.stringify({eventId:event.id})
+        }
+        fetch("http://localhost:5000/eventDelete", options)
+        .then(res => res.json())
+        .then(data => {
+            const UpdateEvents = eventArray.filter(item => item.id !== data[0].id)
+            setEvents(UpdateEvents)
+        })}
+    
     const {starttime, endtime} = event
         let time = starttime.split(":")
         let hours = Number(time[0])
@@ -43,13 +87,19 @@ function EventCard(props){
     }
     return (
     <div  style={{ display: 'flex', margin:'15px', justifyContent:'center'}}>
-        <Card className="eventCard" style={{ fontFamily: "Poppins, sans-serif", width: '30rem', margin: '0px' }}>
+        <Card className="eventCard" style={{ fontFamily: "Poppins, sans-serif", width: '30rem', margin: '0px' ,display: 'flex',justifyContent: 'center'}}>
             <div>
             <h2>{event.title}</h2>
             <h4>{event.description}</h4>
             <h5>Date: {date}</h5>
             <h5>Meeting Spot: {event.location}</h5>
             <h5>Times: {timeValue} - {timeValues}</h5>
+            {currentUser === event.user_id ? 
+            <div className="eventUpdate">
+            { currentPark ? <EditEventModal events={event} currentPark={currentPark}/> : <Icon name='edit outline'/>}
+            <Icon name='delete' onClick={deleteEvent}/>
+            </div>
+            : null }
             </div>
         </Card>    
         <img style={{ height: '15rem', width:'25rem'}}src={image} alt=""/>

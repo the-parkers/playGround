@@ -6,6 +6,7 @@ import { Card, Dropdown } from 'semantic-ui-react'
 import Map from './Map'
 import { Icon } from "leaflet";
 import {Helmet} from 'react-helmet';
+import Navbar from './Navbar'
 
 
 function HomePage(){
@@ -222,14 +223,14 @@ const dogIcon = new Icon({
   }
   return (
     <div className="homePage">
-    <h1 style={{fontFamily: "Poppins, sans-serif", color: "white"}}>Connecting you with the outside again</h1>      
+    <h1 style={{fontFamily: "Poppins, sans-serif", color: "white", fontWeight: 400, paddingTop: "100px", fontSize: "23px"}}>CONNECTING YOU WITH THE OUTSIDE AGAIN</h1>      
     <div className='mapdiv'>
     <Helmet>
       <style>{'body { font-family: "Poppins", sans-serif; }'}</style>
     </Helmet>
-    <Map/>
+    <Map />
     </div>
-    <h1 style={{fontFamily: "Poppins, sans-serif", color: "white"}}>Search for any Park</h1>
+    <h1 style={{fontFamily: "Poppins, sans-serif", color: "white", paddingTop: "90px"}}>Search nearby parks</h1>
     <div id='homeInput'>
         <input id="homeInputBox"value={parkSearch} placeHolder="Search..." onChange={(e)=> {setParkSearch(e.target.value)}}></input>
         <Dropdown clearable options={options} selection onChange={filter} size={3}/>

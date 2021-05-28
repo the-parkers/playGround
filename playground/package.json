@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.6.0",
+    "heroku": "^7.54.0",
     "knex": "^0.95.4",
     "leaflet": "^1.7.1",
     "pg": "^8.6.0",

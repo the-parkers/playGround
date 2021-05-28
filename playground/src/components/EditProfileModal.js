@@ -1,7 +1,8 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect} from 'react'
 import UserInput  from "./UserInput"
 import {Button, Modal, Form} from 'react-bootstrap'
 import { useHistory } from 'react-router';
+
 
 function EditProfileModal(){
     const [validated, setValidated] = useState(false);
@@ -90,7 +91,7 @@ if(email !== '' && firstName !== '' && lastName !== '' && password !== '') {
     }
     return (
         <div>
-        <Button className="editProfile" onClick={() => setModalShow(!modalShow)}>Edit Profile</Button>
+        <Button style={{backgroundColor:"#0892A5", borderRadius:'25px'}}className="editProfile" onClick={() => setModalShow(!modalShow)}>Edit Profile</Button>
         <Modal show={modalShow} onHide={()=>{setModalShow(!modalShow)}} centered>
             <Modal.Header closeButton>Edit Profile</Modal.Header>
          
