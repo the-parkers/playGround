@@ -4,6 +4,7 @@ const fileUpload = require('express-fileupload');
 const cors = require("cors");
 const request = require('./routes/request')
 
+process.on('unhandledRejection', e => { throw e; });
 app.use(fileUpload({
   createParentPath: true
 }));
