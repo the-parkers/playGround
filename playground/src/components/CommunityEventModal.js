@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import PlayGroundContext from '../context/PlayGroundContext'
 
 function CommunityEventModal(props){
+ 
     const [modalShow, setModalShow] = useState(false);
     let { setEvents } = useContext(PlayGroundContext)
     const [title, settitle] = useState("")

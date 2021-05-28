@@ -88,21 +88,7 @@ const favorites = (req,res) => {
     }
 })
 }
-// res.status(200).json({response, user: decoded.id}
-// const favorites = (req, res) => {  
-    // console.log(req)
-    // db.query('favorites','email',req.body.email)
-    // .then(async user => {
-    //     const match = await bcrypt.compare(req.body.password, user[0].encrypted_password);
-    //     if(match) {
-    //         const id = user[0].id
-    //         const token = jwt.sign({id}, keys.key);
-    //         res.status(202).json({Auth:match,Token: token})
-    //     }else {
-    //         res.status(404).json(match)
-    //     }
-    // })
-    // }
+
 const updateProfile = (req,res) => {
   const {firstName:first_name,lastName:last_name,email,password,user} = req.body
   db.query('users','email',user)
@@ -133,6 +119,26 @@ const filter = (req,res) => {
   db.filterJoin(req.headers.filter)
   .then(result => res.status(200).json(result))
 }
+const eventUpdate = (req,res) => {
+  const file = JSON.parse(req.body.imageUpload)
+  const user = JSON.parse(req.body.formData)
+  jwt.verify(user.user_id, keys.key, function(err, decoded) {
+    if(decoded){
+      req.body.user_id = decoded.id
+      user.image = file.data
+      const eventId = user.eventId
+      delete user.eventId
+      delete user.image
+      user.user_id = decoded.id
+  db.update('events',eventId,user)
+  .then(response => res.status(200).json(response))
+}
+  })
+}
+const eventDelete = (req,res) => {
+  db.deleteEvent(req.body.eventId)
+  .then(result => res.status(200).json(result))
+}
 module.exports = {
     imageUpload,
     postFavorite,
@@ -140,5 +146,7 @@ module.exports = {
     updateProfile,
     favorites,
     deleteFavorite,
-    filter
+    filter,
+    eventUpdate,
+    eventDelete
 }

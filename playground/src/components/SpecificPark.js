@@ -99,7 +99,7 @@ function SpecificPark(){
                             {filteredEvents.length === 0 ? (
                                 <h3>Sorry, No Community Events for this park right now</h3>
                             ) : (
-                            filteredEvents.map((event, i) => <EventCard filteredEvents={filteredEvents}key={i} event={event} currentPark={currentPark}/>
+                            filteredEvents.map((event, i) => <EventCard filteredEvents={filteredEvents}key={i} event={event} currentPark={currentPark} />
                             )
                         )}
                         </Tab>

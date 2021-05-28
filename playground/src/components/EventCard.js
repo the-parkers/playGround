@@ -1,10 +1,27 @@
-import { Button } from 'semantic-ui-react'
-import Card from 'react-bootstrap/Card'
+import  {useContext} from 'react'
+import {Card} from 'react-bootstrap'
 import EditEventModal from './EditEventModal'
+import { Icon } from 'semantic-ui-react'
+import PlayGroundContext from '../context/PlayGroundContext'
 
 function EventCard(props){
+    const {events: eventArray, setEvents } = useContext(PlayGroundContext)
     const {event,currentPark} = props
-    console.log(event)
+    function deleteEvent() {
+        const options = {
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            method: 'DELETE',
+            body: JSON.stringify({eventId:event.id})
+        }
+        fetch("http://localhost:5000/eventDelete", options)
+        .then(res => res.json())
+        .then(data => {
+            const UpdateEvents = eventArray.filter(item => item.id !== data[0].id)
+            setEvents(UpdateEvents)
+        })}
+    
     const {starttime, endtime} = event
         let time = starttime.split(":")
         let hours = Number(time[0])
@@ -44,15 +61,17 @@ function EventCard(props){
     }
     return (
     <div  style={{ display: 'flex', margin:'15px', justifyContent:'center'}}>
-        <Card className="eventCard" style={{ fontFamily: "Poppins, sans-serif", width: '30rem', margin: '0px' }}>
+        <Card className="eventCard" style={{ fontFamily: "Poppins, sans-serif", width: '30rem', margin: '0px' ,display: 'flex',justifyContent: 'center'}}>
             <div>
             <h2>{event.title}</h2>
             <h4>{event.description}</h4>
             <h5>Date: {date}</h5>
             <h5>Meeting Spot: {event.location}</h5>
             <h5>Times: {timeValue} - {timeValues}</h5>
-            <EditEventModal events={event} currentPark={currentPark}/>
-            {/* <Button onClick={() => {}}>Edit</Button> */}
+            <div className="eventUpdate">
+            { currentPark ? <EditEventModal events={event} currentPark={currentPark}/> :<Icon name='edit outline'/>}
+            <Icon name='delete' onClick={deleteEvent}/>
+            </div>
             </div>
         </Card>    
         <img style={{ height: '15rem', width:'25rem'}}src={image} alt=""/>

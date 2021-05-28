@@ -36,6 +36,10 @@ async function deleteFav(obj) {
     const data = await db("favorites").where('park_id' , obj.park_id).del()
     return data
 }
+async function deleteEvent(Id) {
+    const data = await db("events").where('id' , Id).returning('*').del()
+    return data
+}
 async function filterJoin(tableName) {
     const data = await db(tableName)
     .join('parks', `${tableName}.park_name`, '=', `parks.park_name`)
@@ -52,5 +56,6 @@ module.exports = {
     update,
     updateTo,
     deleteFav,
-    filterJoin
+    filterJoin,
+    deleteEvent
 }

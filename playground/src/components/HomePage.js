@@ -231,7 +231,7 @@ const dogIcon = new Icon({
     </div>
     <h1 style={{fontFamily: "Poppins, sans-serif", color: "white"}}>Search for any Park</h1>
     <div id='homeInput'>
-        <input id="homeInputBox"value={parkSearch} placeHolder="Search..." onChange={(e)=> {setParkSearch(e.target.value)}}></input>
+        <input id="homeInputBox"value={parkSearch} placeholder="Search..." onChange={(e)=> {setParkSearch(e.target.value)}}></input>
         <Dropdown clearable options={options} selection onChange={filter} size={3}/>
     </div>
       <br/>
