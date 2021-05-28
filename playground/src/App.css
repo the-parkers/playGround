@@ -130,6 +130,9 @@
   transform: scale(1.2);
   background-color: #fff !important;
 }
+.leaflet-container {
+  box-shadow: 9x 7x 12px 5px green;
+}
 .card{
   margin:30px;
   display: flex
@@ -535,6 +538,11 @@
   align-items: center;
   /* margin-bottom: 15px; */
   font-family: 'Poppins', sans-serif;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 #homeInput{
   display: flex;
